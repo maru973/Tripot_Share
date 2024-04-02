@@ -60,3 +60,6 @@
 - マルチ検索・オートコンプリート機能の導入（スポット検索の住所入力）
 - リアルタイム編集機能の実現（action cable）
 - 非同期処理(Hotwire)
+
+## 画面遷移図
+https://www.figma.com/file/lBu251dgQyLeiJrADJ3aS6/Untitled?type=design&node-id=0-1&mode=design&t=X9p84atC6EmjmI3p-0
