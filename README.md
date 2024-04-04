@@ -63,3 +63,7 @@
 
 ## 画面遷移図
 https://www.figma.com/file/lBu251dgQyLeiJrADJ3aS6/Untitled?type=design&node-id=0-1&mode=design&t=X9p84atC6EmjmI3p-0
+
+## ER図
+![ER図 drawio](https://github.com/maru973/Tripot_Share/assets/148407473/9c75ff10-082c-4812-987d-356072249fbd)
+
