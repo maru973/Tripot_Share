@@ -1,0 +1,43 @@
+# fly.toml app configuration file generated for tripot-share on 2024-04-12T08:55:47+09:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'tripot-share'
+primary_region = 'nrt'
+console_command = '/rails/bin/rails console'
+
+[build]
+
+[deploy]
+  release_command = './bin/rails db:prepare'
+
+[http_service]
+  internal_port = 3000
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ['app']
+
+[checks]
+  [checks.status]
+    port = 3000
+    type = 'http'
+    interval = '10s'
+    timeout = '2s'
+    grace_period = '5s'
+    method = 'GET'
+    path = '/up'
+    protocol = 'http'
+    tls_skip_verify = false
+
+    [checks.status.headers]
+      X-Forwarded-Proto = 'https'
+
+[[vm]]
+  size = 'shared-cpu-1x'
+
+[[statics]]
+  guest_path = '/rails/public'
+  url_prefix = '/'
