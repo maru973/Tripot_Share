@@ -1,44 +1,44 @@
 <article class="flex justify-center items-center min-h-screen">
-<div class="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100 mt-2">
-  <h2 class="text-2xl font-bold mt-4 text-center"><%= t('.sign_up') %></h2>
-  
-  <div class="card-body">
-    <!-- LINE認証 -->
-    <div class="form-control mt-1">
-      <%= link_to "LINEで登録", "#", class: "btn btn-success" %>
+  <div class="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100 mt-2">
+    <h2 class="text-2xl font-bold mt-4 text-center"><%= t('.sign_up') %></h2>
+
+    <div class="card-body">
+      <!-- LINE認証 -->
+      <div class="form-control mt-1">
+        <%= link_to "LINEで登録", "#", class: "btn btn-success" %>
+      </div>
+
+      <div class="my-4 border-b text-center">
+        <div class="leading-none px-2 inline-block text-sm text-gray-600 tracking-wide font-medium bg-white transform translate-y-1/2">
+          または Eメールで登録する
+        </div>
+      </div>
+
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
+
+        <div class="form-control mb-4">
+          <%= f.label :email %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input input-bordered mt-2", placeholder: "Eメールを入力してください" %>
+        </div>
+
+        <div class="form-control my-4">
+          <%= f.label :password %>
+          <% if @minimum_password_length %>
+          <p><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></p>
+          <% end %>
+          <%= f.password_field :password, autocomplete: "new-password", class: "input input-bordered mt-2", placeholder: "パスワードを入力してください" %>
+        </div>
+
+        <div class="form-control my-4">
+          <%= f.label :password_confirmation %>
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "input input-bordered mt-2", placeholder: "もう一度パスワードを入力してください" %>
+        </div>
+
+        <div class="actions form-control mt-6">
+          <%= f.submit t('.sign_up'), class: "btn btn-accent" %>
+        </div>
+      <% end %>
     </div>
-
-    <div class="my-4 border-b text-center">
-      <div class="leading-none px-2 inline-block text-sm text-gray-600 tracking-wide font-medium bg-white transform translate-y-1/2">
-        または Emailで登録する
-      </div>
-    </div>
-
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-      <%= render "devise/shared/error_messages", resource: resource %>
-
-      <div class="form-control mb-4">
-        <%= f.label :email %>
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input input-bordered mt-2", placeholder: "Eメールを入力してください" %>
-      </div>
-
-      <div class="form-control my-4">
-        <%= f.label :password %>
-        <% if @minimum_password_length %>
-        <p><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></p>
-        <% end %>
-        <%= f.password_field :password, autocomplete: "new-password", class: "input input-bordered mt-2", placeholder: "パスワードを入力してください" %>
-      </div>
-
-      <div class="form-control my-4">
-        <%= f.label :password_confirmation %>
-        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "input input-bordered mt-2", placeholder: "もう一度パスワードを入力してください" %>
-      </div>
-
-      <div class="actions form-control mt-6">
-        <%= f.submit t('.sign_up'), class: "btn btn-accent" %>
-      </div>
-    <% end %>
   </div>
-</div>
 </article>
