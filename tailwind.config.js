@@ -23,9 +23,6 @@ module.exports = {
   },
 
   daisyui: {
-    themes: ["cupcake"],
-  },
-  daisyui: {
     themes: [
       {
         mytheme: {
@@ -40,6 +37,7 @@ module.exports = {
           "info": "#9EE1FB",
         },
       },
+      "cupcake",
     ],
   },
 }
