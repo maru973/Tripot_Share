@@ -17,22 +17,22 @@
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
 
-      <div class="form-control">
+      <div class="form-control mb-4">
         <%= f.label :email %>
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input input-bordered", placeholder: "Emailを入力してください" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input input-bordered mt-2", placeholder: "Eメールを入力してください" %>
       </div>
 
-      <div class="form-control">
+      <div class="form-control my-4">
         <%= f.label :password %>
         <% if @minimum_password_length %>
-        <em><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></em>
+        <p><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></p>
         <% end %>
-        <%= f.password_field :password, autocomplete: "new-password", class: "input input-bordered", placeholder: "パスワードを入力してください" %>
+        <%= f.password_field :password, autocomplete: "new-password", class: "input input-bordered mt-2", placeholder: "パスワードを入力してください" %>
       </div>
 
-      <div class="form-control">
+      <div class="form-control my-4">
         <%= f.label :password_confirmation %>
-        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "input input-bordered", placeholder: "もう一度パスワードを入力してください" %>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "input input-bordered mt-2", placeholder: "もう一度パスワードを入力してください" %>
       </div>
 
       <div class="actions form-control mt-6">
