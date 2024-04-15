@@ -29,7 +29,7 @@ module.exports = {
     themes: [
       {
         mytheme: {
-          "base-content": "#021921",
+          "base-content": "#043141",
           "neutral": "#F6F6E9",
           "primary": "#0CB4F4",
           "secondary": "#7ED7F9",
