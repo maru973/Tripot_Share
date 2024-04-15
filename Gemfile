@@ -62,5 +62,6 @@ end
 
 gem 'cssbundling-rails'
 gem 'jsbundling-rails'
+gem 'devise'
 
 gem "dockerfile-rails", ">= 1.6", :group => :development
