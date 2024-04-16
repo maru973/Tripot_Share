@@ -1,3 +1,26 @@
-<header class="bg-white rounded shadow-sm">
-  <%= image_tag "Tripot Share1.png", alt:"Image Description", style: "height: 80px; width: 100px;" %>
+<header class="bg-base-100 shadow-sm flex justify-between p-2">
+  <div class="flex flex-col items-center space-x-3 mb-4 sm:mb-0 mt-2">
+    <h2 class=" text-3xl">
+      TripotShare
+    </h2>
+    <p class="text-xs">いきたいスポット共有サービス</p>
+  </div>
+  <div>
+    <ul class="menu menu-horizontal px-1">
+        <li><%= link_to "リスト一覧", "#" %></li>
+        <li>
+          <details>
+            <summary>
+              マイメニュー
+            </summary>
+            <ul class="bg-base-100 rounded-t-none w-40">
+              <li><%= link_to "マイリスト", "#" %></li>
+              <li><%= link_to "新規リスト作成", "#" %></li>
+              <li><%= link_to "プロフィール", "#" %></li>
+              <li><%= link_to "ログアウト", "#" %></li>
+            </ul>
+          </details>
+        </li>
+      </ul>
+  </div>
 </header>
