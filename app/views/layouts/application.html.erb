@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="bg-neutral">
+<html>
   <head>
     <title>App</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -8,11 +8,19 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+    <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru&family=Zen+Antique+Soft&display=swap" rel="stylesheet">
+
   </head>
 
-  <body class="font-main">
-    <%= render "shared/header" %>
+  <body class="min-h-screen bg-neutral relative font-main">
+    <% if signed_in? %>
+      <%= render 'shared/header' %>
+    <% else %>
+      <%= render 'shared/before_login_header' %>
+    <% end %>
+    <div class="pb-72">
     <%= yield %>
+    </div>
     <%= render "shared/footer" %>
   </body>
 </html>
