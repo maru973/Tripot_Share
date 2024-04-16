@@ -9,6 +9,9 @@ module.exports = {
     require('daisyui')
   ],
   theme: {
+    screens: {
+      'sm': '410px',
+    },
     extend: {
       fontFamily: {
         main: ['Kiwi Maru', 'serif'],
