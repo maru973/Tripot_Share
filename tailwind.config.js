@@ -20,11 +20,11 @@ module.exports = {
     themes: [
       {
         mytheme: {
-          "base-content": "#3E3E1A",
-          "neutral": "#F6F6E9",
-          "primary": "#BFBF65",
-          "secondary": "#D3D395",
-          "accent": "#F68712",
+          "base-content": "#12291f",
+          "neutral": "#e3f4fb",
+          "primary": "#56BEE9", 
+          "secondary": "#7bcbec",
+          "accent": "#FFC42B",
           "success": "8be17f",
           "error": "#f46262",
           "warning": "#f1e747",
