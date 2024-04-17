@@ -2,7 +2,7 @@
   <div class="card shrink-0 max-w-xs md:w-full md:max-w-sm shadow-2xl bg-base-100">
 
     <div class="card-body">
-      <h2 class="text-xl md:text-2xl font-bold md:mb-2 underline text-center"><%= t('.sign_up') %></h2>
+      <h2 class="text-xl md:text-2xl font-bold mb-1 md:mb-2 underline text-center"><%= t('.sign_up') %></h2>
       <!-- LINE認証 -->
       <div class="flex justify-center">
         <%= link_to "LINEで登録", "#", class: "btn btn-success" %>
@@ -41,7 +41,7 @@
         </div>
 
         <div class="flex justify-center mt-3">
-          <%= f.submit t('.sign_up'), class: "btn btn-sm md:btn-md btn-primary" %>
+          <%= f.submit t('.sign_up'), class: "btn btn-sm md:btn-md btn-accent" %>
         </div>
       <% end %>
 
