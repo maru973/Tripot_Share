@@ -63,6 +63,8 @@ end
 gem 'cssbundling-rails'
 gem 'jsbundling-rails'
 gem 'devise'
+gem 'omniauth-line'
+gem 'omniauth-rails_csrf_protection'
 gem 'devise-i18n'
 gem 'dotenv-rails'
 
