@@ -5,6 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: %i[line]
 
+  validates :name, presence: true
+
   def set_values(omniauth)
     return if provider.to_s != omniauth["provider"].to_s || uid != omniauth["uid"]
     credentials = omniauth["credentials"]
