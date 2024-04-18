@@ -7,9 +7,9 @@ Rails.application.routes.draw do
 
   root "staticpages#top"
 
-  get '/privacy_policy', to: 'static_pages#privacy_policy'
-  get '/terms_of_service', to: 'static_pages#terms_of_service'
-  get '/contact_us', to: 'static_pages#contact_us'
+  get '/privacy_policy', to: 'staticpages#privacy_policy'
+  get '/terms_of_service', to: 'staticpages#terms_of_service'
+  get '/contact_us', to: 'staticpages#contact_us'
 
   resources :lists
 
