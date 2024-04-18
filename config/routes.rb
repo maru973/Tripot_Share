@@ -2,12 +2,29 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     omniauth_callbacks: "omniauth_callbacks"
   }
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
+  
   get "up" => "rails/health#show", as: :rails_health_check
 
-  # Defines the root path route ("/")
   root "staticpages#top"
+
+  get '/privacy_policy', to: 'staticpages#privacy_policy'
+  get '/terms_of_service', to: 'staticpages#terms_of_service'
+  get '/contact_us', to: 'staticpages#contact_us'
+
+  resources :plans do
+    member do
+      get 'course'
+      
+      #今後必要があれば
+      # get 'courses'
+    end
+  end
+
+  resources :courses
+
+  namespace :mypage do
+    resources :plans, only: [:index]
+    resources :courses, only: [:index]
+    resource :settings, only: %i[show update destroy]
+  end
 end

@@ -2,20 +2,18 @@
   <div class="max-w-screen-xl mx-auto md:py-3">
     <div class="flex items-center justify-between">
       <div class="flex flex-col items-center space-x-3 m-3">
-        <h2 class="text-2xl">
-          Tripot Share
-        </h2>
+        <%= link_to "Tripot Share", root_path, class:"text-xl md:text-2xl" %>
         <p class="text-xs mt-1">旅行計画共有サービス</p>
       </div>
       <ul class="flex flex-col text-sm items-center pt-2 md-:pt-3 mr-3 font-medium gap-2">
         <li>
-          <%= link_to "利用規約", "#" %>
+          <%= link_to "利用規約", terms_of_service_path %>
         </li>
         <li>
-          <%= link_to "プライバシーポリシー", "#" %>
+          <%= link_to "プライバシーポリシー", privacy_policy_path %>
         </li>
         <li>
-          <%= link_to "お問い合わせ", "#" %>
+          <%= link_to "お問い合わせ", contact_us_path %>
         </li>
       </ul>
     </div>
