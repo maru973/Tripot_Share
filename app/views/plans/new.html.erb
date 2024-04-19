@@ -1,30 +1,319 @@
-<div class="flex flex-col justify-center">
-  <h2 class="mx-auto text-3xl">スポット登録</h2>
-  <!-- 地図の表示 -->
-  <div id="map" class="border w-full h-[200px] md:h-[400px]"></div>
-</div>
+<article>
+  <div class="flex flex-col justify-center">
+    <h2 class="mx-auto text-3xl">スポット登録</h2>
+    <!-- 地図の表示 -->
+    <div id="map" class="border w-full h-[200px] md:h-[400px]">ここに地図を表示します</div>
+  </div>
 
+  <!-- 登録フォーム -->
   <div class="flex justify-center mx-auto mb-5">
     <input type="text" id="name" name="name" class="rounded border">
     <button class="btn btn-sm md:btn-md btn-secondary">登録</button>
   </div>
 
-
+  <!-- 登録済みリスト -->
+  <div class="border overflow-auto rounded-md h-[400px] w-[360px] mx-auto">
+    <table class="table table-sm md:table-md table-pin-rows table-pin-cols">
+      <!-- head -->
+      <thead>
+        <tr>
+          <th></th>
+          <th>スポット名</th>
+          <th>登録者</th>
+          <th>
+            <label>
+              <input type="checkbox" class="checkbox" />
+            </label>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- row 1 -->
+        <tr>
+          <th>1</th>
+          <td>
+            <%= link_to "#", class:"link link-hover" do %>
+              <div class="text-md md:text-lg">京都駅</div>
+              <div class="text-xs md:text-sm opacity-50">京都府京都市京都駅１−２</div>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to "#", class:"hover:brightness-75" do %>
+              <div class="avatar">
+                  <div class="rounded-full mx-2 md:mx-auto w-7 h-7 md:w-12 md:h-12">
+                    <%= image_tag "sample.jpg", alt:"Avatar" %>
+                  </div>
+              </div>
+            <% end %>
+          </td>
+          <th>
+            <label>
+              <input type="checkbox" class="checkbox" />
+            </label>
+          </th>
+        </tr>
+        <!-- row 2 -->
+        <tr>
+          <th>1</th>
+          <td>
+            <%= link_to "#", class:"link link-hover" do %>
+              <div class="text-md md:text-lg">京都駅</div>
+              <div class="text-xs md:text-sm opacity-50">京都府京都市京都駅１−２</div>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to "#", class:"hover:brightness-75" do %>
+              <div class="avatar">
+                  <div class="rounded-full mx-2 md:mx-auto w-7 h-7 md:w-12 md:h-12">
+                    <%= image_tag "sample.jpg", alt:"Avatar" %>
+                  </div>
+              </div>
+            <% end %>
+          </td>
+          <th>
+            <label>
+              <input type="checkbox" class="checkbox" />
+            </label>
+          </th>
+        </tr>
+        <!-- row 3 -->
+        <tr>
+          <th>1</th>
+          <td>
+            <%= link_to "#", class:"link link-hover" do %>
+              <div class="text-md md:text-lg">京都駅</div>
+              <div class="text-xs md:text-sm opacity-50">京都府京都市京都駅１−２</div>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to "#", class:"hover:brightness-75" do %>
+              <div class="avatar">
+                  <div class="rounded-full mx-2 md:mx-auto w-7 h-7 md:w-12 md:h-12">
+                    <%= image_tag "sample.jpg", alt:"Avatar" %>
+                  </div>
+              </div>
+            <% end %>
+          </td>
+          <th>
+            <label>
+              <input type="checkbox" class="checkbox" />
+            </label>
+          </th>
+        </tr>
+        <!-- row 4 -->
+        <tr>
+          <th>1</th>
+          <td>
+            <%= link_to "#", class:"link link-hover" do %>
+              <div class="text-md md:text-lg">京都駅</div>
+              <div class="text-xs md:text-sm opacity-50">京都府京都市京都駅１−２</div>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to "#", class:"hover:brightness-75" do %>
+              <div class="avatar">
+                  <div class="rounded-full mx-2 md:mx-auto w-7 h-7 md:w-12 md:h-12">
+                    <%= image_tag "sample.jpg", alt:"Avatar" %>
+                  </div>
+              </div>
+            <% end %>
+          </td>
+          <th>
+            <label>
+              <input type="checkbox" class="checkbox" />
+            </label>
+          </th>
+        </tr>
+        <!-- row 5 -->
+        <tr>
+          <th>1</th>
+          <td>
+            <%= link_to "#", class:"link link-hover" do %>
+              <div class="text-md md:text-lg">京都駅</div>
+              <div class="text-xs md:text-sm opacity-50">京都府京都市京都駅１−２</div>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to "#", class:"hover:brightness-75" do %>
+              <div class="avatar">
+                  <div class="rounded-full mx-2 md:mx-auto w-7 h-7 md:w-12 md:h-12">
+                    <%= image_tag "sample.jpg", alt:"Avatar" %>
+                  </div>
+              </div>
+            <% end %>
+          </td>
+          <th>
+            <label>
+              <input type="checkbox" class="checkbox" />
+            </label>
+          </th>
+        </tr>
+        <tr>
+          <th>1</th>
+          <td>
+            <%= link_to "#", class:"link link-hover" do %>
+              <div class="text-md md:text-lg">京都駅</div>
+              <div class="text-xs md:text-sm opacity-50">京都府京都市京都駅１−２</div>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to "#", class:"hover:brightness-75" do %>
+              <div class="avatar">
+                  <div class="rounded-full mx-2 md:mx-auto w-7 h-7 md:w-12 md:h-12">
+                    <%= image_tag "sample.jpg", alt:"Avatar" %>
+                  </div>
+              </div>
+            <% end %>
+          </td>
+          <th>
+            <label>
+              <input type="checkbox" class="checkbox" />
+            </label>
+          </th>
+        </tr>
+        <tr>
+          <th>1</th>
+          <td>
+            <%= link_to "#", class:"link link-hover" do %>
+              <div class="text-md md:text-lg">京都駅</div>
+              <div class="text-xs md:text-sm opacity-50">京都府京都市京都駅１−２</div>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to "#", class:"hover:brightness-75" do %>
+              <div class="avatar">
+                  <div class="rounded-full mx-2 md:mx-auto w-7 h-7 md:w-12 md:h-12">
+                    <%= image_tag "sample.jpg", alt:"Avatar" %>
+                  </div>
+              </div>
+            <% end %>
+          </td>
+          <th>
+            <label>
+              <input type="checkbox" class="checkbox" />
+            </label>
+          </th>
+        </tr>
+        <tr>
+          <th>1</th>
+          <td>
+            <%= link_to "#", class:"link link-hover" do %>
+              <div class="text-md md:text-lg">京都駅</div>
+              <div class="text-xs md:text-sm opacity-50">京都府京都市京都駅１−２</div>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to "#", class:"hover:brightness-75" do %>
+              <div class="avatar">
+                  <div class="rounded-full mx-2 md:mx-auto w-7 h-7 md:w-12 md:h-12">
+                    <%= image_tag "sample.jpg", alt:"Avatar" %>
+                  </div>
+              </div>
+            <% end %>
+          </td>
+          <th>
+            <label>
+              <input type="checkbox" class="checkbox" />
+            </label>
+          </th>
+        </tr>
+        <tr>
+          <th>1</th>
+          <td>
+            <%= link_to "#", class:"link link-hover" do %>
+              <div class="text-md md:text-lg">京都駅</div>
+              <div class="text-xs md:text-sm opacity-50">京都府京都市京都駅１−２</div>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to "#", class:"hover:brightness-75" do %>
+              <div class="avatar">
+                  <div class="rounded-full mx-2 md:mx-auto w-7 h-7 md:w-12 md:h-12">
+                    <%= image_tag "sample.jpg", alt:"Avatar" %>
+                  </div>
+              </div>
+            <% end %>
+          </td>
+          <th>
+            <label>
+              <input type="checkbox" class="checkbox" />
+            </label>
+          </th>
+        </tr>
+        <tr>
+          <th>1</th>
+          <td>
+            <%= link_to "#", class:"link link-hover" do %>
+              <div class="text-md md:text-lg">京都駅</div>
+              <div class="text-xs md:text-sm opacity-50">京都府京都市京都駅１−２</div>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to "#", class:"hover:brightness-75" do %>
+              <div class="avatar">
+                  <div class="rounded-full mx-2 md:mx-auto w-7 h-7 md:w-12 md:h-12">
+                    <%= image_tag "sample.jpg", alt:"Avatar" %>
+                  </div>
+              </div>
+            <% end %>
+          </td>
+          <th>
+            <label>
+              <input type="checkbox" class="checkbox" />
+            </label>
+          </th>
+        </tr>
+        <tr>
+          <th>1</th>
+          <td>
+            <%= link_to "#", class:"link link-hover" do %>
+              <div class="text-md md:text-lg">京都駅</div>
+              <div class="text-xs md:text-sm opacity-50">京都府京都市京都駅１−２</div>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to "#", class:"hover:brightness-75" do %>
+              <div class="avatar">
+                  <div class="rounded-full mx-2 md:mx-auto w-7 h-7 md:w-12 md:h-12">
+                    <%= image_tag "sample.jpg", alt:"Avatar" %>
+                  </div>
+              </div>
+            <% end %>
+          </td>
+          <th>
+            <label>
+              <input type="checkbox" class="checkbox" />
+            </label>
+          </th>
+        </tr>
+      </tbody>
+      <!-- foot -->
+      <tfoot>
+        <tr>
+          <th></th>
+          <th>スポット名</th>
+          <th>登録者</th>
+          <th></th>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</article>
 
 
 
 <script>
   // マップの初期化設定
-  function initMap() {
-    const map = new google.maps.Map(document.getElementById("map"), {
-      zoom: 5,
-      center:  { lat: 37.148, lng: 138.234 },
-      disableDefaultUI: true,
-      keyboardShortcuts: false
-    });
-  }
+  // function initMap() {
+  //   const map = new google.maps.Map(document.getElementById("map"), {
+  //     zoom: 5,
+  //     center:  { lat: 37.148, lng: 138.234 },
+  //     disableDefaultUI: true,
+  //     keyboardShortcuts: false
+  //   });
+  // }
 
 </script>
     <!-- google mapのスクリプト -->
-<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLEMAPS_API_KEY']%>&callback=initMap&libraries=places&v=weekly" defer></script>
+<!--<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLEMAPS_API_KEY']%>&callback=initMap&libraries=places&v=weekly" defer></script>
 
