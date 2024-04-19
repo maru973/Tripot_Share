@@ -1,26 +1,25 @@
-<article class="pb-4">
-  <div class="flex flex-col justify-center">
-    <h2 class="mx-auto text-3xl">スポット登録</h2>
-    <!-- 地図の表示 -->
-    <div id="map" class="border w-full h-[200px] md:h-[400px]">ここに地図を表示します</div>
-  </div>
+<article class="pb-4 flex flex-col justify-center">
+  <h2 class="text-xl md:text-2xl font-bold underline my-1 md:my-2 text-center">スポット登録</h2>
+  
+  <!-- 地図の表示 -->
+  <div id="map" class="border w-full h-[250px] md:h-[400px] mt-1">ここに地図を表示します</div>
 
   <!-- 登録フォーム -->
-  <div class="flex justify-center mx-auto mb-5">
-    <input type="text" id="name" name="name" class="rounded border">
-    <button class="btn btn-sm md:btn-md btn-secondary">登録</button>
+  <div class="flex mx-auto md:mx-20 my-3 border rounded-lg">
+    <input type="text" class="input input-sm md:input-lg w-full max-w-xs md:max-w-full rounded-none rounded-l-lg" placeholder="スポット名を入力してね" />
+    <button class="btn btn-secondary btn-sm md:btn-lg rounded-none rounded-r-lg">登録</button>
   </div>
 
   <!-- 登録済みリスト -->
-  <div class="border overflow-auto rounded-md h-[360px] w-[360px] mx-auto">
+  <div class="bg-white border overflow-auto rounded-md h-[400px] w-[360px] md:w-[1300px] mx-auto">
     <table class="table table-sm md:table-md table-pin-rows table-pin-cols">
       <!-- head -->
       <thead>
         <tr>
-          <th></th>
+          <th class="md:w-[100px]"></th>
           <th>スポット名</th>
-          <th>登録者</th>
-          <th>
+          <th class="md:w-[100px]">登録者</th>
+          <th class="md:w-[100px]">
             <label>
               <input type="checkbox" class="checkbox" />
             </label>
@@ -297,6 +296,9 @@
         </tr>
       </tfoot>
     </table>
+  </div>
+  <div class="flex justify-center mt-3">
+    <button class="btn btn-accent btn-sm md:btn-lg">一時保存</button>
   </div>
 </article>
 
