@@ -1,0 +1,30 @@
+<div class="flex flex-col justify-center">
+  <h2 class="mx-auto text-3xl">スポット登録</h2>
+  <!-- 地図の表示 -->
+  <div id="map" class="border w-full h-[200px] md:h-[400px]"></div>
+</div>
+
+  <div class="flex justify-center mx-auto mb-5">
+    <input type="text" id="name" name="name" class="rounded border">
+    <button class="btn btn-sm md:btn-md btn-secondary">登録</button>
+  </div>
+
+
+
+
+
+<script>
+  // マップの初期化設定
+  function initMap() {
+    const map = new google.maps.Map(document.getElementById("map"), {
+      zoom: 5,
+      center:  { lat: 37.148, lng: 138.234 },
+      disableDefaultUI: true,
+      keyboardShortcuts: false
+    });
+  }
+
+</script>
+    <!-- google mapのスクリプト -->
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLEMAPS_API_KEY']%>&callback=initMap&libraries=places&v=weekly" defer></script>
+
