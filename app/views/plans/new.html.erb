@@ -2,7 +2,7 @@
   <h2 class="text-xl md:text-2xl font-bold underline my-1 md:my-2 text-center">スポット登録</h2>
   
   <!-- 地図の表示 -->
-  <div id="map" class="border w-full h-[250px] md:h-[400px] mt-1">ここに地図を表示します</div>
+  <div id="map" class="border w-full h-[250px] md:h-[400px] mt-1"></div>
 
   <!-- 登録フォーム -->
   <div class="flex mx-auto md:mx-20 my-3 border rounded-lg">
@@ -304,18 +304,18 @@
 
 
 
-<!--<script>
-  // マップの初期化設定
-  // function initMap() {
-  //   const map = new google.maps.Map(document.getElementById("map"), {
-  //     zoom: 5,
-  //     center:  { lat: 37.148, lng: 138.234 },
-  //     disableDefaultUI: true,
-  //     keyboardShortcuts: false
-  //   });
-  // }
+<script>
+  マップの初期化設定
+  function initMap() {
+    const map = new google.maps.Map(document.getElementById("map"), {
+      zoom: 5,
+      center:  { lat: 37.148, lng: 138.234 },
+      disableDefaultUI: true,
+      keyboardShortcuts: false
+    });
+  }
 
-</script>-->
-    <!-- google mapのスクリプト -->
-<!--<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLEMAPS_API_KEY']%>&callback=initMap&libraries=places&v=weekly" defer></script>-->
+</script>
+<!-- google mapのスクリプト -->
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLEMAPS_API_KEY']%>&callback=initMap&libraries=places&v=weekly" defer></script>
 
