@@ -1,2 +1,8 @@
-<input type="text" class="input input-sm md:input-lg w-full max-w-xs md:max-w-full rounded-none rounded-l-lg" placeholder="スポット名を入力してね" />
-    <button class="btn btn-secondary btn-sm md:btn-lg rounded-none rounded-r-lg">登録</button>
+<div id="spot-form">
+  <%= form_with model: @spot, url: spots_path do |f|%>
+    <div class="flex mx-auto md:mx-20 my-3 border rounded-lg"> 
+      <%= f.text_field :name, class:"input input-sm md:input-lg w-full max-w-xs md:max-w-full rounded-none rounded-l-lg", placeholder:"スポット名を入力してね" %>
+      <%= f.submit "登録", class:"btn btn-secondary btn-sm md:btn-lg rounded-none rounded-r-lg" %>
+    </div>
+  <% end %>
+</div>
