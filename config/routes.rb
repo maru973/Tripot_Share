@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get '/contact_us', to: 'staticpages#contact_us'
 
   resources :plans do
+    resources :spots, only: %i[create destroy], shallow: true
     member do
       get 'course'
       
@@ -21,6 +22,7 @@ Rails.application.routes.draw do
   end
 
   resources :courses
+  resources :spots, only: %i[create destroy]
 
   namespace :mypage do
     resources :plans, only: [:index]

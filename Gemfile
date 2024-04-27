@@ -67,5 +67,6 @@ gem 'omniauth-line'
 gem 'omniauth-rails_csrf_protection'
 gem 'devise-i18n'
 gem 'dotenv-rails'
+gem 'geocoder'
 
 gem "dockerfile-rails", ">= 1.6", :group => :development
