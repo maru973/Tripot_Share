@@ -5,10 +5,10 @@
   <div id="map" class="border w-full h-[250px] md:h-[400px] mt-1"></div>
 
   <!-- 登録フォーム -->
-  <%= form_with url: "#", method: :get do |f|%>
+  <%= form_with url: spots_path, data: { turbo_stream: true } do |f|%>
     <div class="flex mx-auto md:mx-20 my-3 border rounded-lg"> 
-      <%= f.text_field :name, class:"input input-sm md:input-lg w-full max-w-xs md:max-w-full rounded-none rounded-l-lg", placeholder:"スポット名を入力してね" %>
-      <%= f.submit "登録", class:"btn btn-secondary btn-sm md:btn-lg rounded-none rounded-r-lg" %>
+      <%= f.text_field :address, class:"input input-sm md:input-lg w-full max-w-xs md:max-w-full rounded-none rounded-l-lg", placeholder:"スポット名を入力してね" %>
+      <%= f.submit "登録", class:"btn btn-secondary btn-sm md:btn-lg rounded-none rounded-r-lg", onclick:"codeAddress()" %>
     </div>
   <% end %>
   <!--<%= render "spots/form" %>-->
@@ -351,23 +351,43 @@
 
 
 <script>
-  let spot = { lat: 35.681401752876155, lng: 139.76710333798164 };
-
+  
+  let geocoder
 
   // マップの初期化設定
   function initMap() {
-    const map = new google.maps.Map(document.getElementById("map"), {
+    geocoder = new google.maps.Geocoder()
+
+    map = new google.maps.Map(document.getElementById("map"), {
       zoom: 5,
       center:  { lat: 37.148, lng: 138.234 }, // 地図の中心を指定
       // ストリートビューなど地図右下に表示されていたオプションを削除
       disableDefaultUI: true,
       keyboardShortcuts: false
     });
-    const marker = new google.maps.Marker({
-      map: map,
-      position: spot,
-    });
+    // const marker = new google.maps.Marker({
+    //   map: map,
+    //   position: spot,
+    // });
   }
+  function codeAddress(){
+  // 入力を取得
+  let inputAddress = document.getElementById('address').value;
+
+  // geocodingしたあとmapを移動
+  geocoder.geocode( { 'address': inputAddress}, function(results, status) {
+    if (status == 'OK') {
+    // google.maps.MarkerでGoogleMap上の指定位置にマーカが立つ
+      var marker = new google.maps.Marker({
+          map: map,
+          position: results[0].geometry.location
+      });
+    } else {
+      alert('Geocode was not successful for the following reason: ' + status);
+    }
+  });
+  }
+  
 
 </script>
 <!-- google mapのスクリプト -->
