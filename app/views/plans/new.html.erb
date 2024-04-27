@@ -345,9 +345,6 @@
 
 
 <script>
-  
-  let geocoder
-
   // マップの初期化設定
   function initMap() {
     geocoder = new google.maps.Geocoder()
@@ -359,29 +356,7 @@
       disableDefaultUI: true,
       keyboardShortcuts: false
     });
-    // const marker = new google.maps.Marker({
-    //   map: map,
-    //   position: spot,
-    // });
-  }
-  // function codeAddress(){
-  // // 入力を取得
-  // let inputAddress = document.getElementById('address').value;
-
-  // geocoder.geocode( { 'address': inputAddress}, function(results, status) {
-  //   if (status == 'OK') {
-  //   // google.maps.MarkerでGoogleMap上の指定位置にマーカが立つ
-  //     var marker = new google.maps.Marker({
-  //         map: map,
-  //         position: results[0].geometry.location
-  //     });
-  //   } else {
-  //     alert('Geocode was not successful for the following reason: ' + status);
-  //   }
-  // });
-  // }
-  
-
+  } 
 </script>
 <!-- google mapのスクリプト -->
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLEMAPS_API_KEY']%>&callback=initMap&libraries=places&v=weekly" defer></script>
