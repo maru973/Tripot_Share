@@ -5,7 +5,13 @@
   <div id="map" class="border w-full h-[250px] md:h-[400px] mt-1"></div>
 
   <!-- 登録フォーム -->
-  <%= render "spots/form" %>
+  <%= form_with url: spot_entry_path, method: :get do |f|%>
+    <div class="flex mx-auto md:mx-20 my-3 border rounded-lg"> 
+      <%= f.text_field :name, class:"input input-sm md:input-lg w-full max-w-xs md:max-w-full rounded-none rounded-l-lg", placeholder:"スポット名を入力してね" %>
+      <%= f.submit "登録", class:"btn btn-secondary btn-sm md:btn-lg rounded-none rounded-r-lg" %>
+    </div>
+  <% end %>
+  <!--<%= render "spots/form" %>-->
 
   <!-- 登録済みリスト -->
   <div role="tablist" class="tabs tabs-lifted tabs-xs md:tabs-lg mx-auto">

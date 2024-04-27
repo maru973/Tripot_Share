@@ -24,6 +24,9 @@ Rails.application.routes.draw do
   resources :courses
   resources :spots, only: %i[create destroy]
 
+  # 指定場所にマーカーをつけるための仮パス
+  get '/spot_entry', to: 'plans#spot', as: 'spot_entry'
+
   namespace :mypage do
     resources :plans, only: [:index]
     resources :courses, only: [:index]
