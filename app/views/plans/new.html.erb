@@ -370,23 +370,22 @@
     //   position: spot,
     // });
   }
-  function codeAddress(){
-  // 入力を取得
-  let inputAddress = document.getElementById('address').value;
+  // function codeAddress(){
+  // // 入力を取得
+  // let inputAddress = document.getElementById('address').value;
 
-  // geocodingしたあとmapを移動
-  geocoder.geocode( { 'address': inputAddress}, function(results, status) {
-    if (status == 'OK') {
-    // google.maps.MarkerでGoogleMap上の指定位置にマーカが立つ
-      var marker = new google.maps.Marker({
-          map: map,
-          position: results[0].geometry.location
-      });
-    } else {
-      alert('Geocode was not successful for the following reason: ' + status);
-    }
-  });
-  }
+  // geocoder.geocode( { 'address': inputAddress}, function(results, status) {
+  //   if (status == 'OK') {
+  //   // google.maps.MarkerでGoogleMap上の指定位置にマーカが立つ
+  //     var marker = new google.maps.Marker({
+  //         map: map,
+  //         position: results[0].geometry.location
+  //     });
+  //   } else {
+  //     alert('Geocode was not successful for the following reason: ' + status);
+  //   }
+  // });
+  // }
   
 
 </script>
