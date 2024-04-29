@@ -345,9 +345,12 @@
 
 
 <script>
+  // 他のファイルでも使用できるようにfunctionの外側で定義
+  let map
+
   // マップの初期化設定
   function initMap() {
-    const map = new google.maps.Map(document.getElementById("map"), {
+    map = new google.maps.Map(document.getElementById("map"), {
       zoom: 5,
       center:  { lat: 37.148, lng: 138.234 }, // 地図の中心を指定
       // ストリートビューなど地図右下に表示されていたオプションを削除
