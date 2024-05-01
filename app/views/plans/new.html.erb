@@ -1,1 +1,29 @@
-<p>しょう</p>
+<article class="flex justify-center items-center pt-3">
+  <div class="card shrink-0 max-w-xs md:w-full md:max-w-sm shadow-2xl bg-base-100">
+
+    <div class="card-body">
+      <h2 class="text-lg md:text-2xl font-bold mb-1 md:mb-2 underline text-center">プラン作成</h2>
+
+      <%= form_with model: @plan do |f|%>
+        <div class="form-control my-1">
+          <%= f.label :name, "プラン名", class:"text-sm" %>
+          <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "input input-sm md:input-md input-bordered", placeholder: "例：卒業旅行 in 京都" %>
+        </div>
+
+        <div class="form-control my-1">
+          <%= f.label :start_date, "旅行開始日", class:"text-sm" %>
+          <%= f.date_field :start_date, autocomplete: "new-password", class: "input input-sm md:input-md input-bordered", placeholder: "パスワードを入力してね" %>
+        </div>
+
+        <div class="form-control my-1">
+          <%= f.label :end_date, "旅行終了日", class:"text-sm" %>
+          <%= f.date_field :end_date, autocomplete: "new-password", class: "input input-sm md:input-md input-bordered", placeholder: "パスワードを入力してね" %>
+        </div>
+
+        <div class="flex justify-center mt-3">
+          <%= f.submit "次へ", class: "btn btn-sm md:btn-md btn-accent" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</article>

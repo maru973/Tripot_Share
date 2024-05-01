@@ -16,6 +16,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_01_081322) do
 
   create_table "plans", force: :cascade do |t|
     t.string "name", null: false
+    t.date "start_date", null: false
+    t.date "end_date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
