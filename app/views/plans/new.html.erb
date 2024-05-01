@@ -5,7 +5,7 @@
   <div id="map" class="border w-full h-[250px] md:h-[400px] mt-1"></div>
 
   <!-- 登録フォーム -->
-  <%= render "spots/form" %>
+  <%= render "spots/form", spot: @spot %>
 
   <!-- 登録済みリスト -->
   <div role="tablist" class="tabs tabs-lifted tabs-xs md:tabs-lg mx-auto">
@@ -347,6 +347,9 @@
 <script>
   // 他のファイルでも使用できるようにfunctionの外側で定義
   let map
+
+  // 配列にマーカーの情報を追加する
+  let markers = [];
 
   // マップの初期化設定
   function initMap() {

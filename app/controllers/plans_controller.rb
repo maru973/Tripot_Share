@@ -1,3 +1,5 @@
 class PlansController < ApplicationController
-  def new; end
+  def new
+    @spot = Spot.new
+  end
 end
