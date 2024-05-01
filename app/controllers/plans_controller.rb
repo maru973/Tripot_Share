@@ -11,7 +11,7 @@ class PlansController < ApplicationController
       render :new
     end
   end
-  
+
   def new2
     @spot = Spot.new
   end
