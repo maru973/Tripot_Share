@@ -1,4 +1,4 @@
-<%= turbo_stream.append "map", partial: "marker", spot: @spot %>
+<%= turbo_stream.append "map", partial: "marker", spot: @spot.latitude, longitude: @spot.longitude %>
 <%= turbo_stream.replace "spot-form" do %>
   <%= render "form", spot: Spot.new %>
 <% end %>

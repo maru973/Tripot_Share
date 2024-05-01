@@ -1,11 +1,6 @@
 <script>
-  let spot = new google.maps.LatLng(
-   <%= @latlng[0] %>, //latitude
-   <%= @latlng[1] %>  //longitude
-  );
-
   let marker = new google.maps.Marker({
     map: map,
-    position: spot
+    position: {lat: latitude, lng: longitude}
   });
 </script>
