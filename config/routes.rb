@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   get '/privacy_policy', to: 'staticpages#privacy_policy'
   get '/terms_of_service', to: 'staticpages#terms_of_service'
   get '/contact_us', to: 'staticpages#contact_us'
+  
+  get '/plans/new2', to: 'plans#new2'
 
   resources :plans do
     resources :spots, only: %i[create destroy], shallow: true
@@ -20,6 +22,7 @@ Rails.application.routes.draw do
       # get 'courses'
     end
   end
+
 
   resources :courses
   resources :spots, only: %i[create destroy]
