@@ -5,7 +5,7 @@ class SpotsController < ApplicationController
     @latlng = results.first.coordinates
     @spot.latitude = @latlng[0]
     @spot.longitude = @latlng[1]
-    @spot.address = results.first.address # ここで住所をセット
+    @spot.address = results.first.address
     @spot.save
   end
 
