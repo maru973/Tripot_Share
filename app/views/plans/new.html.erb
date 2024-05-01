@@ -348,6 +348,9 @@
   // 他のファイルでも使用できるようにfunctionの外側で定義
   let map
 
+  // 配列にマーカーの情報を追加する
+  let markers = [];
+
   // マップの初期化設定
   function initMap() {
     map = new google.maps.Map(document.getElementById("map"), {

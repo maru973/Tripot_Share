@@ -1,6 +1,12 @@
 <script>
-  let marker = new google.maps.Marker({
+  // let marker = new google.maps.Marker({
+  //   map: map,
+  //   position: {lat: <%=  @spot.latitude %>, lng: <%=  @spot.longitude %>}
+  // });
+
+  // マーカーを作成して配列に追加する
+  markers.push(new google.maps.Marker({
     map: map,
-    position: {lat: latitude, lng: longitude}
-  });
+    position: {lat: <%= @spot.latitude %>, lng: <%= @spot.longitude %>}
+  }));
 </script>
