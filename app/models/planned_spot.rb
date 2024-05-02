@@ -1,0 +1,2 @@
+class PlannedSpot < ApplicationRecord
+end
