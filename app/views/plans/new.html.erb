@@ -16,12 +16,18 @@
         </div>-->
 
         <div class="form-control my-3">
-          <%= f.label :start_date, "旅行開始日" %>
+          <div class="flex">
+            <%= f.label :start_date, "旅行開始日" %>
+            <span>（未定の場合は空欄可）</span>
+          </div>
           <%= f.date_field :start_date, class: "input input-sm md:input-md input-bordered" %>
         </div>
 
         <div class="form-control my-3">
-          <%= f.label :end_date, "旅行終了日" %>
+          <div class="flex">
+            <%= f.label :end_date, "旅行終了日" %>
+            <span>（未定の場合は空欄可）</span>
+          </div>
           <%= f.date_field :end_date, class: "input input-sm md:input-md input-bordered" %>
         </div>
 
