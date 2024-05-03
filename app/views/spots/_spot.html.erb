@@ -1,0 +1,23 @@
+<tr id="spot-<%= spot.id %>">
+  <td>1</td>
+  <td>
+    <%= link_to "#", class:"link link-hover" do %>
+      <div class="text-md md:text-lg"><%= spot.name %></div>
+      <div class="text-xs md:text-sm opacity-50 truncate"><%= spot.address %></div>
+    <% end %>
+  </td>
+  <td>
+    <%= link_to "#", class:"hover:brightness-75" do %>
+      <div class="avatar">
+          <div class="rounded-full mx-2 md:mx-auto w-7 h-7 md:w-12 md:h-12">
+            <%= image_tag "sample.jpg", alt:"Avatar" %>
+          </div>
+      </div>
+    <% end %>
+  </td>
+  <th>
+    <label>
+      <input type="checkbox" class="checkbox" />
+    </label>
+  </th>
+</tr>
