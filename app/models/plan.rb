@@ -1,4 +1,7 @@
 class Plan < ApplicationRecord
+  has_many :planned_spots, dependent: :destroy
+  has_many :spots, through: :planned_spots
+
   validates :name, presence: true, length: { maximum: 255 }
 
   validate :start_date_before_end_date, if: -> { start_date.present? && end_date.present? } 

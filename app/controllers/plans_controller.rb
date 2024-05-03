@@ -6,13 +6,14 @@ class PlansController < ApplicationController
   def create
     @plan = Plan.build(plan_params)
     if @plan.save
-      redirect_to plans_new2_path
+      redirect_to plans_new2_path(@plan)
     else
       render :new
     end
   end
 
   def new2
+    @plan = Plan.find(params[:id])
     @spot = Spot.new
   end
 
