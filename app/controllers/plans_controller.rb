@@ -15,6 +15,7 @@ class PlansController < ApplicationController
   def new2
     @plan = Plan.find(params[:id])
     @spot = Spot.new
+    @spots = @plan.spots
   end
 
   private

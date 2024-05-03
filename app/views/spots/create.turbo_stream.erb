@@ -2,6 +2,6 @@
 <%= turbo_stream.replace "spot-form" do %>
   <%= render "form", spot: Spot.new, plan: @planned_spot.plan %>
 <% end %>
-<%= turbo_stream.append "list-table" do %>
-  <%= render "list", spot: @spot %>
+<%= turbo_stream.append "spot-table" do %>
+  <%= render "spot", spot: @spot %>
 <% end %>
