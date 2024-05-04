@@ -104,6 +104,7 @@
       keyboardShortcuts: false
     });
     
+    // ページリロードしても登録したマーカーが消えない設定
     <% @spots.each do |spot| %>
       (() => {
         let marker = new google.maps.Marker({
