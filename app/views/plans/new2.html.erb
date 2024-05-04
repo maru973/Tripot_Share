@@ -103,7 +103,17 @@
       disableDefaultUI: true,
       keyboardShortcuts: false
     });
+    
+    <% @spots.each do |spot| %>
+      (() => {
+        let marker = new google.maps.Marker({
+          map: map,
+          position: {lat: <%= spot.latitude %>, lng: <%= spot.longitude %>}
+        });
+      })();
+    <% end %>
   } 
+
 </script>
 <!-- google mapのスクリプト -->
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLEMAPS_API_KEY']%>&callback=initMap&libraries=places&v=weekly" defer></script>
