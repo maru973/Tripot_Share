@@ -9,7 +9,10 @@ class SpotsController < ApplicationController
       @spot.address = results.first.address
       @spot.save
     end
-    @planned_spot = PlannedSpot.create(plan_id: params[:plan_id], spot_id: @spot.id)
+    @planned_spot = PlannedSpot.find_or_initialize_by(plan_id: params[:plan_id], spot_id: @spot.id)
+    if @planned_spot.new_record?
+      @planned_spot.save
+    end
   end
 
   private
