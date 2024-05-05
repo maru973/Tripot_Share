@@ -9,7 +9,7 @@ class PlansController < ApplicationController
       redirect_to plans_new2_path(@plan), notice: "プランを作成しました"
     else
       flash.now[:alert] = "プランの作成に失敗しました"
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
