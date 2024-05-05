@@ -6,8 +6,9 @@ class PlansController < ApplicationController
   def create
     @plan = Plan.build(plan_params)
     if @plan.save
-      redirect_to plans_new2_path(@plan)
+      redirect_to plans_new2_path(@plan), notice: "プランを作成しました"
     else
+      flash.now[:alert] = "プランの作成に失敗しました"
       render :new
     end
   end
