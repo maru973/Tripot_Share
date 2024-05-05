@@ -5,6 +5,7 @@
       <h2 class="text-lg md:text-2xl font-bold mb-1 md:mb-2 underline text-center">プラン作成</h2>
 
       <%= form_with model: @plan do |f|%>
+        <%= render 'shared/error_messages', object: f.object %>
         <div class="form-control my-3">
           <%= f.label :name, "プラン名" %>
           <%= f.text_field :name, autofocus: true, class: "input input-sm md:input-md input-bordered", placeholder: "例：卒業旅行 in 京都" %>
