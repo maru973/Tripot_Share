@@ -1,0 +1,9 @@
+<% if object.errors.any? %>
+  <div id="error_explanation" class="bg-warning text-base-content px-4 py-2 rounded-xl mb-4">
+    <ul class="mb-0">
+      <% object.errors.each do |error| %>
+        <li><%= error.full_message %></li>          
+      <% end %>
+    </ul>
+  </div>
+<% end %>
