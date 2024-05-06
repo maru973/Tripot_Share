@@ -1,15 +1,40 @@
 <article class="pb-4 flex flex-col justify-center">
-  <h2 class="text-xl md:text-2xl font-bold underline my-1 md:my-2 text-center"><%= @plan.name %></h2>
-  
+  <div class="flex items-center">
+    <h2 class="grow text-xl md:text-2xl font-bold underline my-1 md:my-2 text-center ps-7 md:ps-5"><%= @plan.name %></h2>
+
+      <!-- 追加メニュー -->
+      <div class="flex-none dropdown dropdown-end">
+        <div tabindex="0" role="button" class="pt-1 md:pr-5">
+          <div class="material-symbols-outlined">
+            add_box
+          </div>
+        </div>
+        <ul tabindex="0" class="border dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-40 md:w-52">
+          <li class="text-xs md:text-lg">
+            <a>
+              <span class="material-symbols-outlined" style="font-size: 20px;">
+                add_location_alt
+              </span>
+              スポット追加
+            </a>
+          </li>
+          <li class="text-xs md:text-lg">
+            <a>
+              <span class="material-symbols-outlined" style="font-size: 20px;">
+                person_add
+              </span>
+              メンバー招待
+            </a>
+          </li>
+        </ul>
+      </div>
+  </div>
+
   <!-- 地図の表示 -->
   <div id="map" class="border w-full h-[250px] md:h-[400px] mt-1"></div>
 
-  <div class="flex flex-row-reverse">
-  </div>
-
-
   <!-- 登録済みリスト -->
-  <div role="tablist" class="tabs tabs-lifted tabs-xs md:tabs-lg mx-auto pt-4">
+  <div role="tablist" class="tabs tabs-lifted tabs-xs md:tabs-lg mx-auto mt-3">
     <!-- タブ１ -->
     <input type="radio" name="my_tabs_2" role="tab" class="tab" aria-label="あやか" checked />
     <!-- タブの中身 -->
@@ -77,38 +102,15 @@
         </table>
       </div>
     </div>
-    
-    <div class="dropdown dropdown-bottom md:dropdown-end">
-      <div tabindex="0" role="button" class="tab">
-        <div class="material-symbols-outlined text-sm">
-          add_box
-        </div>
-      </div>
-      <ul tabindex="0" class="border dropdown-content z-[1] menu md:p-2 shadow bg-base-100 rounded-box w-40 md:w-52">
-        <li class="text-xs md:text-lg">
-          <a>
-            <span class="material-symbols-outlined" style="font-size: 20px;">
-              add_location_alt
-            </span>
-            スポット追加
-          </a>
-        </li>
-        <li class="text-xs md:text-lg">
-          <a>
-            <span class="material-symbols-outlined" style="font-size: 20px;">
-              person_add
-            </span>
-            メンバー招待
-          </a>
-        </li>
-      </ul>
-    </div>
   </div>
 
-  <!-- シェアボタン　-->
+  <!-- シェアボタン　--> 
   <div class="flex justify-center mt-3">
-    <%= link_to "メンバーにシェア", "#", class:"btn btn-accent btn-sm md:btn-lg" %>
-  </div>  
+    <%= link_to "#", class: "btn btn-accent btn-sm md:btn-lg flex items-center space-x-2" do %>
+      <span class="material-symbols-outlined">person_add</span>
+      <span>一覧ページに戻る</span>
+    <% end %>
+  </div>
 </article>
 
 
