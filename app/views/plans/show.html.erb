@@ -1,6 +1,6 @@
 <article class="pb-4 flex flex-col justify-center">
   <div class="flex items-center">
-    <h2 class="grow text-xl md:text-2xl font-bold underline my-1 md:my-2 text-center ps-7 md:ps-5"><%= @plan.name %></h2>
+    <h2 class="grow text-xl md:text-2xl font-bold underline my-1 md:my-2 text-center ps-7"><%= @plan.name %></h2>
 
       <!-- 追加メニュー -->
       <div class="flex-none dropdown dropdown-end">
@@ -11,20 +11,20 @@
         </div>
         <ul tabindex="0" class="border dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-40 md:w-52">
           <li class="text-xs md:text-lg">
-            <a>
-              <span class="material-symbols-outlined" style="font-size: 20px;">
+            <%= link_to "#" do %>
+              <span class= "material-symbols-outlined" style= "font-size: 20px;">
                 add_location_alt
               </span>
               スポット追加
-            </a>
+            <% end %>
           </li>
           <li class="text-xs md:text-lg">
-            <a>
-              <span class="material-symbols-outlined" style="font-size: 20px;">
+            <%= link_to "#" do %>
+              <span class= "material-symbols-outlined" style= "font-size: 20px;">
                 person_add
               </span>
               メンバー招待
-            </a>
+            <% end %>
           </li>
         </ul>
       </div>
@@ -106,10 +106,7 @@
 
   <!-- シェアボタン　--> 
   <div class="flex justify-center mt-3">
-    <%= link_to "#", class: "btn btn-accent btn-sm md:btn-lg flex items-center space-x-2" do %>
-      <span class="material-symbols-outlined">person_add</span>
-      <span>一覧ページに戻る</span>
-    <% end %>
+    <%= link_to "一覧ページへ戻る", "#", class:"btn btn-accent btn-sm md:btn-lg" %>
   </div>
 </article>
 
