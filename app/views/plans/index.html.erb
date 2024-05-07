@@ -1,0 +1,23 @@
+<article class="grid justify-center items-center pt-6">
+<div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-10">
+  <% @plans.each do |plan| %>
+    <div class="card w-36 md:w-80 bg-base-100 shadow-xl">
+      <div class="card-body items-center text-center">
+        <h2 class="card-title text-sm truncate md:text-xl"><%= plan.name %></h2>
+        <% if plan.start_date.present? || plan.end_date.present? %>
+          <p class="text-xs md:text-sm">
+            <%= plan.start_date %> 
+            <br/>〜<br/>
+            <%= plan.end_date %>
+          </p>
+        <% else %>
+          <p class="text-xs md:text-sm">旅行日未定</p>
+        <% end %>
+      </div>
+        <div class="card-actions justify-center md:justify-end mb-2 md:mr-3">
+          <%= link_to "詳細", plan_path(plan), class:"btn btn-sm md:btn-md btn-info" %>
+        </div>
+    </div>
+  <% end %>
+</div>
+</article>
