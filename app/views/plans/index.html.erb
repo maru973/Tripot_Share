@@ -1,33 +1,6 @@
 <article class="grid justify-center items-center">
   <h2 class="text-xl md:text-2xl font-bold underline my-1 md:my-2 text-center">プラン一覧</h2>
   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-10 mt-3">
-    <% @plans.each do |plan| %>
-      <div class="card w-[350px] h-[180px] md:w-[500px] md:h-[300px] shadow-xl overflow-hidden hover:shadow-2xl group rounded-xl transition-all duration-500 transform">
-        <%= image_tag "bgcard.jpg", alt: "bg-image", class: "absolute inset-0 h-full w-full object-cover z-0" %>
-        <div class="card-body items-center text-center z-10 bg-opacity-0 md:pt-28">
-          <h2 class="card-title text-sm truncate md:text-xl">
-            <%= plan.name %>
-            <%= link_to "#" do %>
-              <span class="material-symbols-outlined pt-2 md:pt-3" style= "font-size: 16px;">
-                edit_square
-              </span>
-            <% end %>
-          </h2>
-          <% if plan.start_date.present? || plan.end_date.present? %>
-            <p class="text-xs md:text-lg">
-              <%= plan.start_date %> 
-              <br class="md:hidden"/>〜<br class="md:hidden"/>
-              <%= plan.end_date %>
-            </p>
-          <% else %>
-            <p class="text-xs md:text-lg">旅行日未定</p>
-          <% end %>
-        </div>
-          <div class="card-actions justify-end mb-2 mr-3 group-hover:opacity-100 md:opacity-0 transform transition-all delay-300 duration-500">
-            <%= link_to "詳細→", plan_path(plan) %>
-          </div>
-      </div>
-    <% end %>
+    <%= render @plans %>
   </div>
-
 </article>
