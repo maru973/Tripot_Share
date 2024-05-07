@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   get '/terms_of_service', to: 'staticpages#terms_of_service'
   get '/contact_us', to: 'staticpages#contact_us'
   
-  get '/plans/:id/new2', to: 'plans#new2', as: 'plans_new2'
+  get '/plans/:id/new_spots', to: 'plans#new_spots', as: 'new_spots'
 
   resources :plans do
     resources :spots, only: %i[create destroy], shallow: true
