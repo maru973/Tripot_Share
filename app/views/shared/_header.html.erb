@@ -8,21 +8,34 @@
       <li class="hidden md:block link link-hover"><%= link_to "みんなのプランをみる", "#" %></li>
       <li class="hidden md:block link link-hover"><%= link_to "旅行プランをつくる", "#" %></li>
       <li>
-        <details>
-          <summary>
-            <p class="hidden md:block">マイメニュー</p>
-            <p class="md:hidden">　　メニュー</p>
-          </summary>
-          <ul class="bg-base-100 rounded-t-none w-38">
+        <div class="dropdown dropdown-bottom dropdown-end">
+          <div tabindex="0" role="button">
+            <div class="hidden md:block">
+              <div class="flex">
+                マイメニュー
+                <span class="material-symbols-outlined">
+                  expand_more
+                </span>
+              </div>
+            </div>
+
+            <!-- スマホ画面ではハンバーガーメニュー -->
+            <div class="md:hidden">
+              <span class="material-symbols-outlined">
+                menu
+              </span>
+            </div>
+
+          </div>
+          <ul tabindex="0" class="border dropdown-content z-[1] menu mt-2 md:mt-4 shadow bg-base-100 rounded-box w-40 md:w-52">
             <li class="md:hidden"><%= link_to "プラン計画", "#" %></li>
             <li><%= link_to "マイプラン", "#" %></li>
             <li class="md:hidden"><%= link_to "皆のプラン", "#" %></li>
             <li><%= link_to "マイページ", "#" %></li>
             <li><%= link_to "ログアウト", destroy_user_session_path, data: {turbo_method: :delete} %></li>
           </ul>
-        </details>
+        </div>
       </li>
     </ul>
   </div>
-
 </header>
