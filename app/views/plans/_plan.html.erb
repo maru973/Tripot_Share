@@ -1,4 +1,4 @@
-<div class="card w-[350px] h-[180px] md:w-[500px] md:h-[300px] shadow-xl overflow-hidden hover:shadow-2xl group rounded-xl transition-all duration-500 transform">
+<div class="card w-[350px] h-[180px] md:w-[500px] md:h-[300px] shadow-xl overflow-hidden hover:shadow-2xl group rounded-xl transition-all duration-300 transform">
   <%= image_tag "bgcard.jpg", alt: "bg-image", class: "absolute inset-0 h-full w-full object-cover z-0" %>
   <div class="card-body items-center text-center z-10 bg-opacity-0 pt-9 md:pt-28">
     <h2 class="card-title text-sm truncate md:text-xl">
@@ -19,7 +19,7 @@
       <p class="text-xs md:text-lg">旅行日未定</p>
     <% end %>
   </div>
-  <div class="card-actions justify-end mb-2 mr-3 group-hover:opacity-100 md:opacity-0 transform transition-all delay-300 duration-500">
-    <%= link_to "詳細→", plan_path(plan) %>
+  <div class="card-actions justify-end mb-2 mr-3 group-hover:opacity-100 md:opacity-0 transform transition-all delay-200 duration-300">
+    <%= link_to "詳細 →", plan_path(plan) %>
   </div>
 </div>
