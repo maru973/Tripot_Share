@@ -1,0 +1,27 @@
+<div class="card bg-base-100 w-[350px] h-[130px] md:w-[500px] md:h-[300px] shadow-xl overflow-hidden hover:shadow-2xl group rounded-xl transition-all duration-300 transform">
+  <%= image_tag "bgcard.jpg", alt: "bg-image", class: "md:block absolute inset-0 h-full w-full object-cover z-0" %>
+  <%= image_tag "bgcard-sm.jpg", alt: "bg-image", class: "md:hidden absolute inset-0 h-full w-full object-cover z-0" %>
+  <div class="card-body ms-4 mt-2 md:m-0 md:items-center md:text-center z-10 bg-opacity-0 md:pt-28">
+    <h2 class="card-title text-base truncate md:text-xl">
+      <%= plan.name %>
+      <%= link_to "#" do %>
+        <span class="material-symbols-outlined pt-2 md:pt-3" style= "font-size: 16px;">
+          edit_square
+        </span>
+      <% end %>
+    </h2>
+    <% if plan.start_date.present? || plan.end_date.present? %>
+      <p class="text-xs md:text-lg">
+        <%= plan.start_date %>〜<%= plan.end_date %>
+      </p>
+    <% else %>
+      <p class="text-xs md:text-lg">旅行日未定</p>
+    <% end %>
+    <div class="card-actions justify-end md:hidden">
+      <%= link_to "詳細 →", plan_path(plan), class:"link" %>
+    </div>
+  </div>
+  <div class="card-actions justify-end mb-3 mr-3 group-hover:opacity-100 md:opacity-0 transform transition-all delay-200 duration-300">
+    <%= link_to "詳細 →", plan_path(plan), class:"link" %>
+  </div>
+</div>
