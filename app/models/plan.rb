@@ -5,13 +5,24 @@ class Plan < ApplicationRecord
 
   validates :name, presence: true, length: { maximum: 255 }
 
-  validate :start_date_before_end_date, if: -> { start_date.present? && end_date.present? } 
+  validate :dates_check
 
   private
 
-  def start_date_before_end_date
-    if start_date >= end_date
-      errors.add(:start_date, '旅行終了日より前の日付に設定してください。')
+  def dates_check
+    if start_date.present? && end_date.present?
+      if start_date > end_date
+        errors.add(:start_date, '旅行終了日より前の日付に設定してください')
+        return # ここで返却、以下の処理をスキップする。
+      end
+    end
+
+    if start_date.present? && start_date < Date.today
+      errors.add(:start_date, '今日以降の日付に設定してください')
+    end
+
+    if end_date.present? && end_date < Date.today
+      errors.add(:end_date, '今日以降の日付に設定してください')
     end
   end
 end
