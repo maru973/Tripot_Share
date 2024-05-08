@@ -1,4 +1,4 @@
-<% if @planned_spot.new_record? && @planned_spot.save %>
+<% if @planned_spot.save %>
   <%= turbo_stream.append "map", partial: "marker" %>
   <%= turbo_stream.append "spot-table" do %>
     <%= render "spot", spot: @spot %>
