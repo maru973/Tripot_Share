@@ -8,7 +8,8 @@ class PlansController < ApplicationController
   end
 
   def create
-    @plan = Plan.build(plan_params)
+    @plan = current_user.plans.build(plan_params)
+    @plan.owner_id = current_user.id
     if @plan.save
       redirect_to new_spots_path(@plan), notice: "プランを作成しました"
     else
@@ -31,6 +32,6 @@ class PlansController < ApplicationController
   private
 
   def plan_params
-    params.require(:plan).permit(:name, :start_date, :end_date)
+    params.require(:plan).permit(:name, :start_date, :end_date, :user_id)
   end
 end
