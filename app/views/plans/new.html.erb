@@ -2,7 +2,7 @@
   <div class="card shrink-0 max-w-xs md:w-full md:max-w-sm shadow-2xl bg-base-100">
 
     <div class="card-body">
-      <h2 class="text-lg md:text-2xl font-bold mb-1 md:mb-2 underline text-center">プラン作成</h2>
+      <h2 class="text-lg md:text-2xl font-bold mb-1 md:mb-2 underline text-center"><%= t('.title') %></h2>
 
       <%= form_with model: @plan do |f|%>
         <%= render 'shared/error_messages', object: f.object %>
@@ -19,7 +19,7 @@
         <div class="form-control my-3">
           <div class="flex">
             <%= f.label :start_date %>
-            <span>（未定の場合は空欄可）</span>
+            <span><%= t('.null_permission') %></span>
           </div>
           <%= f.date_field :start_date, class: "input input-sm md:input-md input-bordered" %>
         </div>
@@ -27,7 +27,7 @@
         <div class="form-control my-3">
           <div class="flex">
             <%= f.label :end_date %>
-            <span>（未定の場合は空欄可）</span>
+            <span><%= t('.null_permission') %></span>
           </div>
           <%= f.date_field :end_date, class: "input input-sm md:input-md input-bordered" %>
         </div>
