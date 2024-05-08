@@ -24,7 +24,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
       sign_in(:user, @profile)
   
       flash[:notice] = "ログインしました"
-      redirect_to root_path
+      redirect_to plans_path
 
     else
       flash[:alert] = '認証に失敗しました'
