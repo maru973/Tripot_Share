@@ -1,6 +1,6 @@
 class PlansController < ApplicationController
   def index
-    @plans = Plan.all.page(params[:page])
+    @plans = current_user.plans.page(params[:page])
   end
 
   def new
