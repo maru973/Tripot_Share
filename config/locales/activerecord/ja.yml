@@ -1,0 +1,14 @@
+ja:
+  activerecord:
+    models:
+      plan: プラン
+      spot: スポット
+    attributes:
+      plan:
+        name: プラン名
+        start_date: 旅行開始日
+        end_date: 旅行終了日
+      spot:
+        name: スポット名
+        address: 住所
+      
