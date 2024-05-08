@@ -1,6 +1,6 @@
 class PlansController < ApplicationController
   def index
-    @plans = Plan.all.page(params[:page])
+    @plans = current_user.plans.page(params[:page])
   end
 
   def new
@@ -8,7 +8,8 @@ class PlansController < ApplicationController
   end
 
   def create
-    @plan = Plan.build(plan_params)
+    @plan = current_user.plans.build(plan_params)
+    @plan.owner_id = current_user.id
     if @plan.save
       redirect_to new_spots_path(@plan), notice: "プランを作成しました"
     else

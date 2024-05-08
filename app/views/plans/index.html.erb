@@ -1,9 +1,13 @@
 <article>
   <div class="grid justify-center items-center">
     <h2 class="text-xl md:text-2xl font-bold underline my-1 md:my-2 text-center">プラン一覧</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-10 mt-3">
-      <%= render @plans %>
-    </div>
+    <% if @plans.present? %>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-10 mt-3">
+        <%= render @plans %>
+      </div>
+    <% else %>
+      <p>プランはありません</p>
+    <% end %>
   </div>
   <%= paginate @plans %>
 </article>

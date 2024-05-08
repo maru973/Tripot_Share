@@ -1,6 +1,7 @@
 class Plan < ApplicationRecord
   has_many :planned_spots, dependent: :destroy
   has_many :spots, through: :planned_spots
+  belongs_to :owner, class_name: 'User', foreign_key: 'owner_id'
 
   validates :name, presence: true, length: { maximum: 255 }
 
