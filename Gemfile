@@ -69,5 +69,6 @@ gem 'devise-i18n'
 gem 'dotenv-rails'
 gem 'geocoder'
 gem 'kaminari'
+gem 'rails-i18n'
 
 gem "dockerfile-rails", ">= 1.6", :group => :development

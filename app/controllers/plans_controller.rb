@@ -11,9 +11,9 @@ class PlansController < ApplicationController
     @plan = current_user.plans.build(plan_params)
     @plan.owner_id = current_user.id
     if @plan.save
-      redirect_to new_spots_path(@plan), notice: "プランを作成しました"
+      redirect_to new_spots_path(@plan), notice: t('defaults.flash_message.created', item: Plan.model_name.human)
     else
-      flash.now[:alert] = "プランの作成に失敗しました"
+      flash.now[:alert] = t('defaults.flash_message.not_created', item: Plan.model_name.human)
       render :new, status: :unprocessable_entity
     end
   end
