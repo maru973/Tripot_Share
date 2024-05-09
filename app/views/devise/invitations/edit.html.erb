@@ -1,22 +1,54 @@
-<h2><%= t "devise.invitations.edit.header" %></h2>
+<article class="flex justify-center items-center pt-3">
+  <div class="card shrink-0 max-w-xs md:w-full md:max-w-sm shadow-2xl bg-base-100">
 
-<%= form_for(resource, as: resource_name, url: invitation_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-  <%= f.hidden_field :invitation_token, readonly: true %>
+    <div class="card-body">
+      <h2 class="text-xl md:text-2xl font-bold mb-1 md:mb-2 underline text-center"><%= t "devise.invitations.edit.header" %></h2>
+      <div class="flex">
+        <p class="text-xs md:text-sm text-center">会員登録をお願いします</p>
+        <div class="dropdown dropdown-end">
+          <div tabindex="0" role="button" class="btn btn-circle btn-ghost btn-xs">
+            <svg tabindex="0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="w-4 h-4 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          </div>
+          <div tabindex="0" class="card compact dropdown-content z-[1] shadow bg-secondary rounded-box w-56 md:w-64">
+            <div tabindex="0" class="card-body">
+              <div class="text-xs md:text-sm">
+                <p>会員登録後、プランを確認できます</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-  <% if f.object.class.require_password_on_accepting %>
-    <div class="field">
-      <%= f.label :password %><br />
-      <%= f.password_field :password %>
+      <%= form_for(resource, as: resource_name, url: invitation_path(resource_name), html: { method: :put }) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
+        <%= f.hidden_field :invitation_token, readonly: true %>
+
+        <% if f.object.class.require_password_on_accepting %>
+          <div class="form-control my-1">
+            <%= f.label :name, class:"text-sm" %>
+            <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "input input-sm md:input-md input-bordered", placeholder: "名前を入力してね" %>
+          </div>
+
+          <div class="form-control my-1">
+            <%= f.label :email, class:"text-sm" %>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input input-sm md:input-md input-bordered", placeholder: "メールアドレスを入力してね" %>
+          </div>
+
+          <div class="form-control my-1">
+            <%= f.label :password, class:"text-sm" %>
+            <%= f.password_field :password, autofocus: true, autocomplete: "password", class: "input input-sm md:input-md input-bordered", placeholder: "パスワードを入力してね" %>
+          </div>
+
+          <div class="form-control my-1">
+            <%= f.label :password_confirmation, class:"text-sm" %>
+            <%= f.password_field :password_confirmation, autofocus: true, autocomplete: "password", class: "input input-sm md:input-md input-bordered", placeholder: "再度パスワードを入力してね" %>
+          </div>
+        <% end %>
+
+        <div class="flex justify-center mt-3">
+          <%= f.submit t("devise.invitations.edit.submit_button"), class: "btn btn-sm md:btn-md btn-accent" %>
+        </div>
+      <% end %>
     </div>
-
-    <div class="field">
-      <%= f.label :password_confirmation %><br />
-      <%= f.password_field :password_confirmation %>
-    </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit t("devise.invitations.edit.submit_button") %>
   </div>
-<% end %>
+</article>

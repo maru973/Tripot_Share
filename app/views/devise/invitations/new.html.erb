@@ -7,6 +7,8 @@
     <div class="field">
       <%= f.label field %><br />
       <%= f.text_field field %>
+      <!-- plan_idも一緒に設定 -->
+      <%= f.hidden_field :plan_id, value: params[:id] %>
     </div>
   <% end -%>
 

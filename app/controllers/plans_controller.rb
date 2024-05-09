@@ -11,6 +11,7 @@ class PlansController < ApplicationController
     @plan = current_user.plans.build(plan_params)
     @plan.owner_id = current_user.id
     if @plan.save
+      @plan.users << current_user
       redirect_to new_spots_path(@plan), notice: t('defaults.flash_message.created', item: Plan.model_name.human)
     else
       flash.now[:alert] = t('defaults.flash_message.not_created', item: Plan.model_name.human)
