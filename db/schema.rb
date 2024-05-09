@@ -49,9 +49,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_09_014941) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "provider"
-    t.string "uid"
-    t.string "name", null: false
     t.string "invitation_token"
     t.datetime "invitation_created_at"
     t.datetime "invitation_sent_at"
@@ -60,6 +57,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_09_014941) do
     t.string "invited_by_type"
     t.bigint "invited_by_id"
     t.integer "invitations_count", default: 0
+    t.string "provider"
+    t.string "uid"
+    t.string "name", default: "", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
     t.index ["invited_by_id"], name: "index_users_on_invited_by_id"
