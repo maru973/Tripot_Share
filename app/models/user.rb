@@ -3,11 +3,11 @@ class User < ApplicationRecord
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: %i[line]
 
-  validates :name, presence: true
+  validates :name, presence: true, length: { minimum: 2 }
 
   def set_values(omniauth)
     return if provider.to_s != omniauth["provider"].to_s || uid != omniauth["uid"]

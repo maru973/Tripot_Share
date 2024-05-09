@@ -58,6 +58,7 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
+  gem 'letter_opener_web'
 end
 
 gem 'cssbundling-rails'
@@ -70,5 +71,6 @@ gem 'dotenv-rails'
 gem 'geocoder'
 gem 'kaminari'
 gem 'rails-i18n'
+gem 'devise_invitable'
 
 gem "dockerfile-rails", ">= 1.6", :group => :development
