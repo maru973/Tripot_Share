@@ -1,5 +1,7 @@
 class User < ApplicationRecord
   has_many :plans, foreign_key: 'owner_id'
+  has_many :members, dependent: :destroy
+  has_many :plans, through: :members
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
