@@ -1,22 +1,27 @@
 class Users::InvitationsController < Devise::InvitationsController
   def create
+    @name = current_user.name
     @user =User.new
     user_email = params[:user][:email]
     plan_id = params[:user][:plan_id]
-    if User.find_by(email: user_email.downcase).present? #　既存ユーザーの処理
+
+     # 既存ユーザーの処理
+    if User.find_by(email: user_email.downcase).present?
       user_id = User.find_by(email: user_email.downcase).id
       user = User.find(user_id)
+
+      # すでに招待される側がプランを持っているか確認
       if user.plan_ids.include?(plan_id.to_i)
-        redirect_to root_path, alert: "このリストは登録済みです。"
+        redirect_to plan_path(plan_id), alert: t('devise.invitations.already_registered_plan', email: user_email)
       else
         user.invite!(current_user)
-        #Memberテーブルに招待したいユーザーのidとリストのidを入れる。
+        # invited_plan_idに一時的にplan_idを保存
         user.invited_plan_id = plan_id
         user.save
-        redirect_to root_path, notice: t('devise.invitations.send_instructions', email: user_email)
+        redirect_to plan_path(plan_id), notice: t('devise.invitations.send_instructions', email: user_email)
       end
     elsif User.invite!(email: user_email, invited_plan_id: plan_id).valid? # 新規ユーザーの処理
-      redirect_to plans_path(current_user), notice: t('devise.invitations.send_instructions', email: user_email)
+      redirect_to plan_path(plan_id), notice: t('devise.invitations.send_instructions', email: user_email)
     else
       flash[:notice] = t('devise.invitations.failure')
       render 'new', locals: { plan: plan_id }
