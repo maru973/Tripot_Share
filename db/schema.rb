@@ -10,9 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_09_014941) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_09_080625) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "members", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "plan_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["plan_id"], name: "index_members_on_plan_id"
+    t.index ["user_id"], name: "index_members_on_user_id"
+  end
 
   create_table "planned_spots", force: :cascade do |t|
     t.bigint "plan_id", null: false
@@ -60,6 +69,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_09_014941) do
     t.string "provider"
     t.string "uid"
     t.string "name", default: "", null: false
+    t.integer "invited_plan_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
     t.index ["invited_by_id"], name: "index_users_on_invited_by_id"
@@ -67,6 +77,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_09_014941) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "members", "plans"
+  add_foreign_key "members", "users"
   add_foreign_key "planned_spots", "plans"
   add_foreign_key "planned_spots", "spots"
   add_foreign_key "plans", "users", column: "owner_id"

@@ -1,12 +1,14 @@
 <h2><%= t "devise.invitations.new.header" %></h2>
 
-<%= form_for(resource, as: resource_name, url: invitation_path(resource_name), html: { method: :post }) do |f| %>
+<%= form_for(@user, as: resource_name, url: invitation_path(resource_name), html: { method: :post }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <% resource.class.invite_key_fields.each do |field| -%>
     <div class="field">
       <%= f.label field %><br />
       <%= f.text_field field %>
+      <!-- plan_idも一緒に設定 -->
+      <%= f.hidden_field :plan_id, value: params[:id] %>
     </div>
   <% end -%>
 
