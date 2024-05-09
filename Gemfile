@@ -71,5 +71,6 @@ gem 'dotenv-rails'
 gem 'geocoder'
 gem 'kaminari'
 gem 'rails-i18n'
+gem 'devise_invitable'
 
 gem "dockerfile-rails", ">= 1.6", :group => :development

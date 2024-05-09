@@ -102,6 +102,9 @@ GEM
       warden (~> 1.2.3)
     devise-i18n (1.12.0)
       devise (>= 4.9.0)
+    devise_invitable (2.0.9)
+      actionmailer (>= 5.0)
+      devise (>= 4.6)
     dockerfile-rails (1.6.8)
       rails (>= 3.0.0)
     dotenv (3.1.0)
@@ -313,6 +316,7 @@ DEPENDENCIES
   debug
   devise
   devise-i18n
+  devise_invitable
   dockerfile-rails (>= 1.6)
   dotenv-rails
   geocoder
