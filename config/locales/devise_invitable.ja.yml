@@ -12,8 +12,8 @@ ja:
       no_invitations_remaining: 'これ以上招待できません'
       invitation_removed: '招待を取り消しました'
       new:
-        header: '招待する'
-        submit_button: '招待メールを送る'
+        header: 'プランに招待'
+        submit_button: '送信'
       edit:
         header: '会員登録'
         submit_button: '登録'
