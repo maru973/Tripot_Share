@@ -1,18 +1,34 @@
-<h2><%= t "devise.invitations.new.header" %></h2>
+<%= turbo_frame_tag 'modal' do %>
 
-<%= form_for(@user, as: resource_name, url: invitation_path(resource_name), html: { method: :post }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+    <dialog data-modal-target="dialog" class="p-8 rounded-lg backdrop:bg-black/50 text-base-content">
+      <div class="flex justify-end">
+        <button autofocus data-action="modal#close">
+          <span class="material-symbols-outlined">
+            close
+          </span>
+        </button>
+      </div>
+      <h2 class="text-lg md:text-xl font-bold mb-1 md:mb-4 underline text-center"><%= t "devise.invitations.new.header" %></h2>
+      <%= form_for(@user, as: @resource_name, url: user_invitation_path, html: { method: :post }) do |f| %>
+        <%= render "devise/shared/error_messages", resource: @user %>
 
-  <% resource.class.invite_key_fields.each do |field| -%>
-    <div class="field">
-      <%= f.label field %><br />
-      <%= f.text_field field %>
-      <!-- plan_idも一緒に設定 -->
-      <%= f.hidden_field :plan_id, value: params[:id] %>
-    </div>
-  <% end -%>
+        <% @user.class.invite_key_fields.each do |field| -%>
+          <% f.label field, class:"text-md" %>
+          <p class="text-xs md:text-sm text-center">招待メールを送る場合は下記フォームに<br />招待したいメンバーのメールアドレスを<br class="md:hidden" />入力してください</p>
+          <div class="flex mx-auto md:mx-20 my-3 border rounded-lg"> 
+            <%= f.email_field field, class: "input input-sm md:input-md w-full max-w-xs md:max-w-full rounded-none rounded-l-lg", placeholder: "example@example.com" %>
+            <!-- plan_idも一緒に設定 -->
+            <%= f.hidden_field :plan_id, value: params[:id] %>
 
-  <div class="actions">
-    <%= f.submit t("devise.invitations.new.submit_button") %>
-  </div>
+            <div class="actions">
+              <%= f.submit t("devise.invitations.new.submit_button"), class: "btn btn-sm md:btn-md btn-accent rounded-none rounded-r-lg" %>
+            </div>
+          </div>
+        <% end -%>
+
+      <% end %>
+    </dialog>
+
+ 
+  
 <% end %>

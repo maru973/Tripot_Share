@@ -1,7 +1,5 @@
 class Users::InvitationsController < Devise::InvitationsController
   def create
-    @name = current_user.name
-    @user =User.new
     user_email = params[:user][:email]
     plan_id = params[:user][:plan_id]
 

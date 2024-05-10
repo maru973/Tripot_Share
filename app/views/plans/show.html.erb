@@ -18,13 +18,17 @@
               スポット追加
             <% end %>
           </li>
+
           <li class="text-xs md:text-lg">
-            <%= link_to new_user_invitation_path(id: @plan.id) do %>
-              <span class= "material-symbols-outlined" style= "font-size: 20px;">
-                person_add
-              </span>
-              メンバー招待
-            <% end %>
+            <div data-controller="modal">
+              <%= render template: 'devise/invitations/new' %>
+              <%= link_to new_user_invitation_path(id: @plan.id), data: { action: "click->modal#open", turbo_frame: "modal" } do %>
+                <span class= "material-symbols-outlined" style= "font-size: 20px;">
+                  person_add
+                </span>
+                メンバー招待
+              <% end %>
+            </div>
           </li>
         </ul>
       </div>

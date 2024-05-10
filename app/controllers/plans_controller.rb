@@ -28,6 +28,8 @@ class PlansController < ApplicationController
   def show
     @plan = Plan.find(params[:id])
     @spots = @plan.spots
+    @user = User.new
+    @resource_name = @user.class.name.underscore
   end
 
   private
