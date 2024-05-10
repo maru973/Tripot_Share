@@ -22,6 +22,7 @@
     <% end %>
     <%= render 'shared/flash_message' %>
     <div class="pb-36 md:pb-48">
+      <%= turbo_frame_tag 'modal' %>
       <%= yield %>
     </div>
     <%= render 'shared/footer' %>

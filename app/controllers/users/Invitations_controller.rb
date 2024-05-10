@@ -1,9 +1,8 @@
 class Users::InvitationsController < Devise::InvitationsController
   def create
-    @name = current_user.name
     @user =User.new
-    user_email = params[:user][:email]
-    plan_id = params[:user][:plan_id]
+    user_email = params[:email]
+    plan_id = params[:plan_id]
 
      # 既存ユーザーの処理
     if User.find_by(email: user_email.downcase).present?
