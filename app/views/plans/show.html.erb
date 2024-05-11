@@ -111,19 +111,8 @@
   <!-- シェアボタン　--> 
   <div class="flex justify-center mt-3">
     <%= link_to "一覧ページへ戻る", "#", class:"btn btn-accent btn-sm md:btn-lg" %>
-  </div>
-  <% if @invite_link.present? %>
-          <div class="flex flex-col sm:flex-row justify-center items-center space-x-4 mx-auto">
-            <div data-clipboard-target='link' class="text-gray-500 text-sm sm:text-base underline mb-2 sm:mb-0 overflow-wrap break-words overflow-x-auto w-full max-w-screen-sm">
-              <%= @invite_link %>
-            </div>
-            <button data-action="clipboard#copyToClipboard" class="btn btn-xs text-xs sm:text-sm">
-              リンクをコピーする
-            </button>
-          </div>
-        <% end %>
-        
-
+  </div>       
+  <%= render 'plans/invitation_url_button' %>
 </article>
 
 
