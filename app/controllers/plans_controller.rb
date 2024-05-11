@@ -31,7 +31,7 @@ class PlansController < ApplicationController
     @spots = @plan.spots
     @user = User.new
     @resource_name = @user.class.name.underscore
-    @invite_url = accept_plan_url(invitation_token: @plan.invitation_token) if @plan.invitation_token.present?
+    @invite_link = accept_plan_url(invitation_token: @plan.invitation_token) if @plan.invitation_token.present?
   end
 
   def invitation

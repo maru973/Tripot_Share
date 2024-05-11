@@ -27,8 +27,9 @@
         <% end -%>
 
       <% end %>
-
-      <%= link_to "リンクを生成", invitation_plan_path(params[:id]), class:"btn btn-accent btn-sm md:btn-lg", data: {turbo_method: :post} %>
+      <turbo-frame id="invite_link">
+        <%= link_to "リンクを生成", invitation_plan_path(params[:id]), class:"btn btn-accent btn-sm md:btn-lg", data: {turbo_method: :post, turbo_frame: "invite_link"} %>
+      </turbo-frame>
     </dialog>
 
  
