@@ -1,0 +1,13 @@
+
+
+<%= link_to "リンクを生成", onclick="my_modal_2.showModal()", invitation_plan_path, class:"btn btn-accent btn-sm md:btn-lg", data: {turbo_method: :post} %>
+<dialog id="my_modal_2" class="modal">
+  <div class="modal-box">
+    <% if @invite_link.present? %>
+      <%= @invite_link %>
+    <%end%>
+  </div>
+  <form method="dialog" class="modal-backdrop">
+    <button>close</button>
+  </form>
+</dialog>
