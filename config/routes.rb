@@ -20,6 +20,8 @@ Rails.application.routes.draw do
     resources :spots, only: %i[create destroy], shallow: true
     member do
       get 'course'
+      post 'invitation'
+      get 'invitation/accept/:invitation_token', to: 'plans#accept', as: 'accept'
       
       #今後必要があれば
       # get 'courses'

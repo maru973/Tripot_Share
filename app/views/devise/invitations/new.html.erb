@@ -1,6 +1,6 @@
 <%= turbo_frame_tag 'modal' do %>
 
-    <dialog data-modal-target="dialog" class="p-8 rounded-lg backdrop:bg-black/50 text-base-content">
+    <dialog data-modal-target="dialog" class="p-6 rounded-lg backdrop:bg-black/50 text-base-content">
       <div class="flex justify-end">
         <button autofocus data-action="modal#close">
           <span class="material-symbols-outlined">
@@ -21,11 +21,17 @@
             <%= f.hidden_field :plan_id, value: params[:id] %>
 
             <div class="actions">
-              <%= f.submit t("devise.invitations.new.submit_button"), class: "btn btn-sm md:btn-md btn-accent rounded-none rounded-r-lg" %>
+              <%= f.submit t("devise.invitations.new.submit_button"), class: "btn btn-sm md:btn-md btn-secondary rounded-none rounded-r-lg" %>
             </div>
           </div>
         <% end -%>
 
+      <% end %>
+      <%= turbo_frame_tag 'invite_link' do %>
+        <%= render 'plans/invitation_url_button' %>
+        <div class="flex justify-center">
+          <%= link_to "リンクを生成", invitation_plan_path(params[:id]), class:"btn btn-accent btn-sm md:btn-md", data: {turbo_method: :post, turbo_frame: "invite_link"} %>
+        </div>
       <% end %>
     </dialog>
 

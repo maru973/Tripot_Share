@@ -21,6 +21,7 @@ class PlansController < ApplicationController
 
   def new_spots
     @plan = Plan.find(params[:id])
+    @plna.generate_token
     @spot = Spot.new
     @spots = @plan.spots
   end
@@ -30,11 +31,20 @@ class PlansController < ApplicationController
     @spots = @plan.spots
     @user = User.new
     @resource_name = @user.class.name.underscore
+    @invite_link = accept_plan_url(invitation_token: @plan.invitation_token) if @plan.invitation_token.present?
+  end
+
+  def invitation
+    @plan = Plan.find(params[:id])
+    @plan.generate_token
+  end
+
+  def accept
   end
 
   private
 
   def plan_params
-    params.require(:plan).permit(:name, :start_date, :end_date)
+    params.require(:plan).permit(:name, :start_date, :end_date, :invitation_token)
   end
 end

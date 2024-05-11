@@ -9,6 +9,12 @@ class Plan < ApplicationRecord
 
   validate :dates_check
 
+   # トークン生成のためのメソッド
+  def generate_token
+   self.invitation_token = Devise.friendly_token
+   save
+  end
+
   private
 
   def dates_check
