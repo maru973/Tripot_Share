@@ -27,4 +27,10 @@ class Plan < ApplicationRecord
       errors.add(:end_date, '今日以降の日付に設定してください')
     end
   end
+
+  # トークン生成のためのメソッド
+  def generate_token
+    self.invitation_token = Devise.friendly_token
+    save
+  end
 end

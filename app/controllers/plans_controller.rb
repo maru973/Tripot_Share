@@ -21,6 +21,7 @@ class PlansController < ApplicationController
 
   def new_spots
     @plan = Plan.find(params[:id])
+    @plna.generate_token
     @spot = Spot.new
     @spots = @plan.spots
   end
@@ -36,12 +37,5 @@ class PlansController < ApplicationController
 
   def plan_params
     params.require(:plan).permit(:name, :start_date, :end_date, :invite_token)
-  end
-
-  def generate_token
-    invitation_token = Devise.friendly_token
-    plan.update(invitation_token: invitation_token )
-
-    redirect_to plan_path(plan), notice: "#{plan.name}の招待リンクを作成しました リンクをコピーして招待したい人にURLを送りましょう"
   end
 end
