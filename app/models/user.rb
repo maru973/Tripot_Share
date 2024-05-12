@@ -24,4 +24,9 @@ class User < ApplicationRecord
     credentials = credentials.to_json
     name = info["name"]
   end
+
+  # planのメンバーかどうかを判断するメソッド
+  def member?(plan_id)
+    self.plans.find_by(id: plan_id).present?
+  end
 end
