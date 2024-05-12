@@ -2,6 +2,7 @@
   <div class="flex items-center">
     <h2 class="grow text-xl md:text-2xl font-bold underline my-1 md:my-2 text-center ps-7"><%= @plan.name %></h2>
 
+    <% if current_user.member?(@plan.id) %>
      <!-- 追加メニュー -->
       <div class="flex-none dropdown dropdown-end">
         <div tabindex="0" role="button" class="pt-1 md:pr-5">
@@ -32,6 +33,7 @@
           </li>
         </ul>
       </div>
+    <% end %>
   </div>
 
   <!-- 地図の表示 -->

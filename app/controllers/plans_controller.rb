@@ -21,7 +21,7 @@ class PlansController < ApplicationController
 
   def new_spots
     @plan = Plan.find(params[:id])
-    if Member.find_by(plan_id: @plan.id, user_id: current_user.id).present?
+    if current_user.member?(@plan.id)
       @spot = Spot.new
       @spots = @plan.spots
     else
@@ -48,14 +48,14 @@ class PlansController < ApplicationController
     if @plan.present?
       
       session[:plan_id] = @plan.id
-      if user_signed_in? && !Member.find_by(plan_id: @plan.id, user_id: current_user.id).present?
+      if user_signed_in? && !current_user.member?(@plan.id)
         @plan.users << current_user
         session[:plan_id] = nil
         @plan.update(invitation_token: nil)
 
         redirect_to plan_path(@plan), notice: t('defaults.flash_message.added', item: @plan.name)
 
-      elsif user_signed_in? && Member.find_by(plan_id: @plan.id, user_id: current_user.id).present?
+      elsif user_signed_in? && current_user.member?(@plan.id)
         session[:plan_id] = nil
         @plan.update(invitation_token: nil)
 
