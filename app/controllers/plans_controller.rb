@@ -12,7 +12,7 @@ class PlansController < ApplicationController
     @plan.owner_id = current_user.id
     if @plan.save
       @plan.users << current_user
-      redirect_to new_spots_path(@plan), notice: t('defaults.flash_message.created', item: Plan.model_name.human)
+      redirect_to new_spots_path(@plan), notice: t('defaults.flash_message.created', item: @plan.name)
     else
       flash.now[:alert] = t('defaults.flash_message.not_created', item: Plan.model_name.human)
       render :new, status: :unprocessable_entity
@@ -40,6 +40,28 @@ class PlansController < ApplicationController
   end
 
   def accept
+    @plan = Plan.find_by(invitation_token: params[:invitation_token])
+    
+    if @plan.present?
+      
+      session[:plan_id] = @plan.id
+      if user_signed_in? && !Member.find_by(plan_id: @plan.id, user_id: current_user.id).present?
+        @plan.users << current_user
+        session[:plan_id] = nil
+        @plan.update(invitation_token: nil)
+
+        redirect_to plan_path(@plan), notice: t('defaults.flash_message.added', item: @plan.name)
+
+      elsif user_signed_in? && Member.find_by(plan_id: @plan.id, user_id: current_user.id).present?
+        session[:plan_id] = nil
+        @plan.update(invitation_token: nil)
+
+        redirect_to plan_path(@plan), notice:t('defaults.flash_message.already_registered_plan', item: @plan.name)
+      end
+
+    else
+      redirect_to root_path, alert: t('defaults.flash_message.invitation_token_invalid')
+    end
   end
 
   private
