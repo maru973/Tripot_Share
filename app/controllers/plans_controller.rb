@@ -40,6 +40,22 @@ class PlansController < ApplicationController
   end
 
   def accept
+    @plan = Plan.find_by(invitation_token: params[:invitation_token])
+    session[:plan_id] = @plan.id
+
+    if user_signed_in? && !Member.find_by(plan_id: @plan.id, user_id: current_user.id).present?
+      @plan.users << current_user
+      session[:plan_id] = nil
+      @plan.update(invitation_token: nil)
+
+      redirect_to plans_path, notice: "#{@plan.name}に追加されました"
+    elsif user_signed_in? && Member.find_by(plan_id: @plan.id, user_id: current_user.id).present?
+      session[:plan_id] = nil
+      @plan.update(invitation_token: nil)
+      redirect_to plan_path(@plan), notice: "#{@plan.name}はすでに登録しています"
+    else
+      redirect_to new_user_registration_path
+    end
   end
 
   private
