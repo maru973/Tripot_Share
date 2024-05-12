@@ -12,7 +12,7 @@ class PlansController < ApplicationController
     @plan.owner_id = current_user.id
     if @plan.save
       @plan.users << current_user
-      redirect_to new_spots_path(@plan), notice: t('defaults.flash_message.created', item: @plan.name)
+      redirect_to new_spots_plan_path(@plan), notice: t('defaults.flash_message.created', item: @plan.name)
     else
       flash.now[:alert] = t('defaults.flash_message.not_created', item: Plan.model_name.human)
       render :new, status: :unprocessable_entity

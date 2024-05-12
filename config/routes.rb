@@ -14,11 +14,11 @@ Rails.application.routes.draw do
   get '/terms_of_service', to: 'staticpages#terms_of_service'
   get '/contact_us', to: 'staticpages#contact_us'
   
-  get '/plans/:id/new_spots', to: 'plans#new_spots', as: 'new_spots'
-
+  
   resources :plans do
     resources :spots, only: %i[create destroy], shallow: true
     member do
+      get 'new_spots'
       get 'course'
       post 'invitation'
       get 'invitation/accept/:invitation_token', to: 'plans#accept', as: 'accept'
