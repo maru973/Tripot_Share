@@ -21,9 +21,12 @@ class PlansController < ApplicationController
 
   def new_spots
     @plan = Plan.find(params[:id])
-    @plna.generate_token
-    @spot = Spot.new
-    @spots = @plan.spots
+    if Member.find_by(plan_id: @plan.id, user_id: current_user.id).present?
+      @spot = Spot.new
+      @spots = @plan.spots
+    else
+      redirect_to plan_path(@plan), alert: "あなたはこのプランのメンバーではないため、スポットの登録はできません"
+    end
   end
 
   def show
