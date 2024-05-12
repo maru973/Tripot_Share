@@ -8,6 +8,10 @@ ja:
     flash_message:
       created: "%{item}を作成しました"
       not_created: "%{item}を作成出来ませんでした"
+      added: "%{item}のメンバーに追加されました"
+      already_registered_plan: "すでに%{item}のメンバーです"
+      invitation_token_invalid: "この招待コードは不正です メンバーにURLの再発行を依頼してください"
+
   plans:
     index:
       title: プラン一覧

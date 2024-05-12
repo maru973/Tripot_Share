@@ -5,7 +5,7 @@ ja:
     invitations:
       send_instructions: '招待メールが%{email}に送信されました'
       failure: '送信ができませんでした'
-      already_registered_plan: '%{email}はすでにこのプランを登録しています'
+      already_registered_plan: '%{email}はすでにこのプランのメンバーです'
       invitation_token_invalid: '招待コードが不正です'
       updated: 'パスワードが設定されました お使いのアカウントでログインできます'
       updated_not_active: 'パスワードが設定されました'
