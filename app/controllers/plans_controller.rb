@@ -50,14 +50,15 @@ class PlansController < ApplicationController
         session[:plan_id] = nil
         @plan.update(invitation_token: nil)
 
-        redirect_to plans_path, notice: t('defaults.flash_message.added', item: @plan.name)
+        redirect_to plan_path(@plan), notice: t('defaults.flash_message.added', item: @plan.name)
+
       elsif user_signed_in? && Member.find_by(plan_id: @plan.id, user_id: current_user.id).present?
         session[:plan_id] = nil
         @plan.update(invitation_token: nil)
+
         redirect_to plan_path(@plan), notice:t('defaults.flash_message.already_registered_plan', item: @plan.name)
-      else
-        redirect_to new_user_registration_path
       end
+
     else
       redirect_to root_path, alert: t('defaults.flash_message.invitation_token_invalid')
     end
