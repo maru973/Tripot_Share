@@ -1,4 +1,15 @@
 ja:
+  date:
+    formats:
+      day_name: "%A"
+    day_names:
+    - 日曜日
+    - 月曜日
+    - 火曜日
+    - 水曜日
+    - 木曜日
+    - 金曜日
+    - 土曜日
   views:
     pagination:
       truncate: "..."
@@ -11,7 +22,6 @@ ja:
       added: "%{item}のメンバーに追加されました"
       already_registered_plan: "すでに%{item}のメンバーです"
       invitation_token_invalid: "この招待コードは不正です メンバーにURLの再発行を依頼してください"
-
   plans:
     index:
       title: プラン一覧
