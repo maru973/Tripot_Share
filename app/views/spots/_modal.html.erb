@@ -14,36 +14,42 @@
     <h2 class="text-lg md:text-xl font-bold mb-1 md:mb-4 underline text-center"><%= spot.name %></h2>
     <div class="md:text-lg">
       <p>住所：<%= spot.address %></p>
-      <p class="m-2">
-        <span class="material-symbols-outlined" style= "font-size: 18px;">
-          call
-        </span>
-        :
-        <button class="link link-primary">
-          <%= spot.phone_number %>
-        </button>
-      </p>
-      <div class="m-2">
-        <div class="flex">
-          <p class="font-bold underline">営業時間</p>
-          <div class="dropdown dropdown-right">
-            <div tabindex="0" role="button" class="m-1">
-              <span class="material-symbols-outlined" style= "font-size: 18px;">
-                info
-              </span>
+      <% if spot.phone_number.present? %>
+        <p class="m-2">
+          <span class="material-symbols-outlined" style= "font-size: 18px;">
+            call
+          </span>
+          :
+          <button class="link link-primary">
+            <%= spot.phone_number %>
+          </button>
+        </p>
+      <% end %>
+      <% if spot.opening_hours.present? %>
+        <div class="m-2">
+          <div class="flex">
+            <p class="font-bold underline">営業時間</p>
+            <div class="dropdown dropdown-right">
+              <div tabindex="0" role="button" class="m-1">
+                <span class="material-symbols-outlined" style= "font-size: 18px;">
+                  info
+                </span>
+              </div>
+            <div tabindex="0" class="dropdown-content z-[1] p-2 w-40 shadow bg-accent rounded-lg text-center">
+              <p class="text-sm">今日は<%= l(Date.today, format: :day_name) %>です</p>
             </div>
-          <div tabindex="0" class="dropdown-content z-[1] p-2 w-40 shadow bg-accent rounded-lg text-center">
-            <p class="text-sm">今日は<%= l(Date.today, format: :day_name) %>です</p>
           </div>
+          </div>
+          <ul class="pl-5">
+            <% spot.opening_hours.split("\n").each do |hour| %>
+              <li><%= hour %></li>
+            <% end %>
+          </ul>
         </div>
-        </div>
-        <ul class="pl-5">
-          <% spot.opening_hours.split("\n").each do |hour| %>
-            <li><%= hour %></li>
-          <% end %>
-        </ul>
-      </div>
-      <%= link_to "ウェブサイトはこちら", spot.website, target: "_blank", class: "link link-primary" %>
+      <% end %>
+      <% if spot.website.present? %>
+        <%= link_to "ウェブサイトはこちら", spot.website, target: "_blank", class: "link link-primary" %>
+      <% end %>
     </div>
   </dialog>
 </div>
