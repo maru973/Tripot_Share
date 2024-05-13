@@ -72,5 +72,6 @@ gem 'geocoder'
 gem 'kaminari'
 gem 'rails-i18n'
 gem 'devise_invitable'
+gem 'google_places'
 
 gem "dockerfile-rails", ">= 1.6", :group => :development
