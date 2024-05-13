@@ -1,0 +1,55 @@
+<div data-controller="modal">
+  <div class="link link-hover" data-action="click->modal#open">
+    <div class="text-md md:text-lg"><%= spot.name %></div>
+    <div class="text-xs md:text-sm opacity-50 truncate"><%= spot.address %></div>
+  </div>
+  <dialog data-modal-target="dialog" class="max-w-[500px] p-6 rounded-lg backdrop:bg-black/50 text-base-content">
+    <div class="flex justify-end">
+      <button autofocus data-action="modal#close">
+        <span class="material-symbols-outlined">
+          close
+        </span>
+      </button>
+    </div>
+    <h2 class="text-lg md:text-xl font-bold mb-1 md:mb-4 underline text-center"><%= spot.name %></h2>
+    <div class="md:text-lg">
+      <p>住所：<%= spot.address %></p>
+      <% if spot.phone_number.present? %>
+        <p class="m-2">
+          <span class="material-symbols-outlined" style= "font-size: 18px;">
+            call
+          </span>
+          :
+          <button class="link link-primary">
+            <%= spot.phone_number %>
+          </button>
+        </p>
+      <% end %>
+      <% if spot.opening_hours.present? %>
+        <div class="m-2">
+          <div class="flex">
+            <p class="font-bold underline">営業時間</p>
+            <div class="dropdown dropdown-right">
+              <div tabindex="0" role="button" class="m-1">
+                <span class="material-symbols-outlined" style= "font-size: 18px;">
+                  info
+                </span>
+              </div>
+            <div tabindex="0" class="dropdown-content z-[1] p-2 w-40 shadow bg-accent rounded-lg text-center">
+              <p class="text-sm">今日は<%= l(Date.today, format: :day_name) %>です</p>
+            </div>
+          </div>
+          </div>
+          <ul class="pl-5">
+            <% spot.opening_hours.split("\n").each do |hour| %>
+              <li><%= hour %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <% if spot.website.present? %>
+        <%= link_to "ウェブサイトはこちら", spot.website, target: "_blank", class: "link link-primary" %>
+      <% end %>
+    </div>
+  </dialog>
+</div>
