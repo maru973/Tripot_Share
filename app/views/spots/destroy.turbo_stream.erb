@@ -1,0 +1,4 @@
+
+<%= turbo_stream.remove "spot-#{@spot.id}" do %>
+  <%= render "spot", spot: @spot %>
+<% end %>

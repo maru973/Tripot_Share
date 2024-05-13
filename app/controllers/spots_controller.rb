@@ -23,6 +23,13 @@ class SpotsController < ApplicationController
     end
   end
 
+  def destroy
+    @plan = Plan.find(params[:id])
+    @spot = Spot.find(params[:id])
+    @planned_spot = @plan.planned_spots.find_by(spot_id: @spot.id)
+    @planned_spot.destroy!
+  end
+
   private
 
   def spot_params

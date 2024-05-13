@@ -12,6 +12,9 @@
       </div>
     <% end %>
   </td>
+  <td>
+    <%= link_to "削除", spot_path(spot), class:"btn btn-accent", data: {turbo_method: :delete, turbo_confirm: t('defaults.flash_message.delete_confirm') } %>
+  </td>
   <th>
     <label>
       <input type="checkbox" class="checkbox" />
