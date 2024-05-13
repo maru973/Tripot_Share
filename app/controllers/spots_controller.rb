@@ -7,6 +7,14 @@ class SpotsController < ApplicationController
       @spot.latitude = @latlng[0]
       @spot.longitude = @latlng[1]
       @spot.address = results.first.address
+      
+      spot_details = @spot.get_spot_details(spot_params[:name])
+      if spot_details
+        @spot.opening_hours = spot_details[:opening_hours]
+        @spot.website = spot_details[:website]
+        @spot.phone_number = spot_details[:phone_number]
+      end
+
       @spot.save
     end
     @planned_spot = PlannedSpot.find_or_initialize_by(plan_id: params[:plan_id], spot_id: @spot.id)
