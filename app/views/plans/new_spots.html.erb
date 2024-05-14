@@ -90,8 +90,7 @@
 <script>
   // 他のファイルでも使用できるようにfunctionの外側で定義
   let map
-
-  // 配列にマーカーの情報を追加する
+  
   let markers = [];
 
   // マップの初期化設定
@@ -109,7 +108,8 @@
       (() => {
         let marker = new google.maps.Marker({
           map: map,
-          position: {lat: <%= spot.latitude %>, lng: <%= spot.longitude %>}
+          position: {lat: <%= spot.latitude %>, lng: <%= spot.longitude %>},
+          id: <%= spot.id %>
         });
       })();
     <% end %>

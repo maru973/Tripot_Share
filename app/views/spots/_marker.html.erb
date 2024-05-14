@@ -1,13 +1,10 @@
 <script>
-  // マーカーidをつけて定義
-  const marker = new google.maps.Marker({
+  // マーカーにidを付与して、配列に追加
+  markers.push(new google.maps.Marker({
     map: map,
     position: {lat: <%= @spot.latitude %>, lng: <%= @spot.longitude %>},
     id: <%= @spot.id %>
-  });
-
-  // マーカーを配列に追加
-  markers.push(marker);
+  }));
 
   // マーカーを削除
   function removeMarker(markerId) {
