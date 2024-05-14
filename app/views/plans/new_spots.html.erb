@@ -38,11 +38,11 @@
                   </th>
                 </tr>
               </thead>
-              <tbody id="spot-table">
-                <% @user_spots[user.id].each do |spot| %>
-                  <%= render partial: 'spots/spot', locals: { spot: spot, plan: @plan } %>
-                <% end %>
-              </tbody>
+                <tbody id="spot-table-<%= user.id %>">
+                  <% @user_spots[user.id].each do |spot| %>
+                    <%= render partial: 'spots/spot', locals: { spot: spot, plan: @plan } %>
+                  <% end %>
+                </tbody>
             </table>
           </div>
         </div>
