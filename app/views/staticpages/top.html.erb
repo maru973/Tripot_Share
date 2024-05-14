@@ -1,15 +1,18 @@
-<div class="m-4">
-  <h1>Staticpages#top</h1>
-  <p>Find me in app/views/staticpages/top.html.erb</p>
-  <h1 class="text-3xl underline">
-      Hello world!
-  </h1>  
-  <button class="btn btn-primary text-base-content">daisyUI</button>
-  <button class="btn btn-accent text-base-content">daisyUI</button>
-  <button class="btn btn-secondary text-base-content">daisyUI</button>
-  <button class="btn btn-info text-base-content">info</button>
-  <button class="btn btn-error text-base-content">error</button>
-  <%= link_to 'プラン一覧', plans_path, class: "btn btn-success text-base-content" %>
-  <%= link_to '地図を見る', new_plan_path, class: "btn btn-warning text-base-content" %>
-  <%= link_to '会員登録', new_user_registration_path, class: "btn btn-primary text-base-content" %>
+<div class="flex flex-col justify-center items-center m-3">
+  <div class="pt-4 md:pt-8 text-center">
+    <!--<h1 class="underline m-3">TripotShare</h1>-->
+    <h1 class="text-lg md:text-3xl">行きたい場所のシェア、</h1>
+    <h1 class="text-2xl md:text-4xl font-black ps-3 md:ps-5">もっと気軽に。もっと楽しく。</h1>
+  </div>
+  <%= image_tag "Tripot Share.jpg", alt: "Top", class:"mx-auto w-[200px] h-[200px] md:w-[400px] md:h-[400px]" %>
+
+  <p class="">メンバーと行きたい場所を共有して、<br />もっと気軽にオリジナルな旅行計画を<br />たてることができるサービスです。</p>
+
+  <div class="m-3 pt-4">
+    <p class="underline font-bold">旅行計画立てる時こんなことはないですか？</p>
+    <ul class="text-sm">
+      <li>・モデルコースじゃなくて自分たちの行きたい<br />ところだけで旅行をしたい！</li>
+      <li>・一緒に行くメンバーと行きたいところを<br />共有し合うのが大変！</li>
+    </ul>
+  <div>
 </div>
