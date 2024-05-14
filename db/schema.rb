@@ -28,7 +28,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_14_015125) do
     t.bigint "spot_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id"
+    t.bigint "user_id", null: false
     t.index ["plan_id"], name: "index_planned_spots_on_plan_id"
     t.index ["spot_id"], name: "index_planned_spots_on_spot_id"
     t.index ["user_id"], name: "index_planned_spots_on_user_id"

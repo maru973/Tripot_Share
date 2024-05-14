@@ -17,8 +17,9 @@ class SpotsController < ApplicationController
 
       @spot.save
     end
-    @planned_spot = PlannedSpot.find_or_initialize_by(plan_id: params[:plan_id], spot_id: @spot.id, user_id: current_user.id)
+    @planned_spot = PlannedSpot.find_or_initialize_by(plan_id: params[:plan_id], spot_id: @spot.id,)
     if @planned_spot.new_record?
+      @planned_spot.user_id = current_user.id
       @planned_spot.save
     end
   end
