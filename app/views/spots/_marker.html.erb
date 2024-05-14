@@ -1,7 +1,17 @@
 <script>
-  // マーカーを作成して配列に追加する
+  // マーカーにidを付与して、配列に追加
   markers.push(new google.maps.Marker({
     map: map,
-    position: {lat: <%= @spot.latitude %>, lng: <%= @spot.longitude %>}
+    position: {lat: <%= @spot.latitude %>, lng: <%= @spot.longitude %>},
+    id: <%= @spot.id %>
   }));
+
+  // マーカーを削除
+  function removeMarker(markerId) {
+    const markerIndex = markers.findIndex(marker => marker.id === markerId);
+    if (markerIndex !== -1) {
+      markers[markerIndex].setMap(null); // マーカーをマップから削除
+      markers.splice(markerIndex, 1); // 配列からマーカーを削除
+    }
+  }
 </script>

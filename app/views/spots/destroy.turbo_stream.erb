@@ -1,0 +1,7 @@
+<%= turbo_stream.remove "map-marker-#{@spot.id}" %>
+<%= turbo_stream.remove "spot-#{@spot.id}" do %>
+  <%= render "spot", spot: @spot %>
+<% end %>
+<script>
+  removeMarker(<%= @spot.id %>);
+</script>

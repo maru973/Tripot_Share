@@ -52,6 +52,7 @@
               <th class="md:w-[100px]"></th>
               <th>スポット名</th>
               <th class="md:w-[100px]">登録者</th>
+              <th class="md:w-[100px]"></th>
               <th class="md:w-[100px]">
                 <label>
                   <input type="checkbox" class="checkbox" />
@@ -60,7 +61,7 @@
             </tr>
           </thead>
           <tbody id="spot-table">
-            <%= render @spots %>
+            <%= render partial: 'spots/spot', collection: @spots, as: :spot, locals: { plan: @plan } %>
           </tbody>
         </table>
       </div>
@@ -77,6 +78,7 @@
               <th class="md:w-[100px]"></th>
               <th>スポット名</th>
               <th class="md:w-[100px]">登録者</th>
+              <th class="md:w-[100px]"></th>
               <th class="md:w-[100px]">
                 <label>
                   <input type="checkbox" class="checkbox" />
@@ -112,7 +114,7 @@
 
   <!-- シェアボタン　--> 
   <div class="flex justify-center mt-3">
-    <%= link_to "一覧ページへ戻る", "#", class:"btn btn-accent btn-sm md:btn-lg" %>
+    <%= link_to "一覧ページへ戻る", "#", class:"text-base-content btn btn-accent btn-sm md:btn-lg" %>
   </div>       
   <%= render 'plans/invitation_url_button' %>
 </article>
@@ -123,7 +125,6 @@
   // 他のファイルでも使用できるようにfunctionの外側で定義
   let map
 
-  // 配列にマーカーの情報を追加する
   let markers = [];
 
   // マップの初期化設定
@@ -141,7 +142,8 @@
       (() => {
         let marker = new google.maps.Marker({
           map: map,
-          position: {lat: <%= spot.latitude %>, lng: <%= spot.longitude %>}
+          position: {lat: <%= spot.latitude %>, lng: <%= spot.longitude %>},
+          id: <%= spot.id %>
         });
       })();
     <% end %>
