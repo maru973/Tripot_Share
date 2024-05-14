@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_13_014732) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_14_015125) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -28,8 +28,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_13_014732) do
     t.bigint "spot_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
     t.index ["plan_id"], name: "index_planned_spots_on_plan_id"
     t.index ["spot_id"], name: "index_planned_spots_on_spot_id"
+    t.index ["user_id"], name: "index_planned_spots_on_user_id"
   end
 
   create_table "plans", force: :cascade do |t|
@@ -86,5 +88,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_13_014732) do
   add_foreign_key "members", "users"
   add_foreign_key "planned_spots", "plans"
   add_foreign_key "planned_spots", "spots"
+  add_foreign_key "planned_spots", "users"
   add_foreign_key "plans", "users", column: "owner_id"
 end
