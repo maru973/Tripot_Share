@@ -13,7 +13,7 @@
     <% end %>
   </td>
   <td>
-    <%= link_to "削除", spot_path(spot, plan_id: plan.id), class:"btn btn-accent", data: {turbo_method: :delete, turbo_confirm: t('defaults.flash_message.delete_confirm') } %>
+      <%= link_to "削除", spot_path(spot, plan_id:plan.id), class:"btn btn-accent", data: {turbo_method: :delete, turbo_confirm: t('defaults.flash_message.delete_confirm') } %>
   </td>
   <th>
     <label>

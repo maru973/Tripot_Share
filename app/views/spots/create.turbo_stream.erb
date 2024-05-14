@@ -1,7 +1,7 @@
 <% if @planned_spot.save %>
   <%= turbo_stream.append "map", partial: "marker" %>
   <%= turbo_stream.append "spot-table" do %>
-    <%= render "spot", spot: @spot %>
+    <%= render "spot", spot: @spot, plan: @planned_spot.plan %>
   <% end %>
 <% end %>
 <%= turbo_stream.replace "spot-form" do %>

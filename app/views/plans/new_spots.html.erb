@@ -28,7 +28,7 @@
             </tr>
           </thead>
           <tbody id="spot-table">
-            <%= render @spots %>
+            <%= render partial: 'spots/spot', collection: @plan.spots, as: :spot, locals: { plan: @plan } %>
           </tbody>
         </table>
       </div>
