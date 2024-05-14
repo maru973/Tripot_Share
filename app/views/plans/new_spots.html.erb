@@ -8,8 +8,87 @@
   <%= render "spots/form", spot: @spot, plan: @plan %>
 
   <!-- 登録済みリスト -->
-  <%= render 'list' %>
+  <div class="m-5">
+    <div data-controller="tabs" data-tabs-active-tab-class="-mb-px border-l border-t border-r rounded-t-xl bg-primary">
+      <div class="flex overflow-x-auto">
+        <div class="flex-none">
+          <ul class="list-reset flex">
+            <% @users.each do |user| %>
+              <li class="mr-1" data-tabs-target="tab" data-action="click->tabs#change">
+                <a class="text-xs md:text-lg inline-block px-2 md:py-2 md:px-4 rounded-t-xl"><%= user.name %></a>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
 
+      <div class="hidden py-4 px-4 border bg-base-100 rounded-box rounded-tl-none" data-tabs-target="panel">
+        <div class="overflow-auto h-[400px] w-[300px] md:w-[1300px] mx-auto">
+          <table class="table table-sm md:table-md table-pin-rows table-pin-cols">
+            <thead>
+              <tr>
+                <th class="md:w-[100px]"></th>
+                <th>スポット名</th>
+                <th class="md:w-[100px]">登録者</th>
+                <th class="md:w-[100px]"></th>
+                <th class="md:w-[100px]">
+                  <label>
+                    <input type="checkbox" class="checkbox" />
+                  </label>
+                </th>
+              </tr>
+            </thead>
+            <tbody id="spot-table">
+              <%= render partial: 'spots/spot', collection: @plan.spots, as: :spot, locals: { plan: @plan } %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="hidden py-4 px-4 border bg-base-100 rounded-box" data-tabs-target="panel">
+        <div class="overflow-auto h-[400px] w-[300px] md:w-[1300px] mx-auto">
+          <table class="table table-sm md:table-md table-pin-rows table-pin-cols">
+            <thead>
+              <tr>
+                <th class="md:w-[100px]"></th>
+                <th>スポット名</th>
+                <th class="md:w-[100px]">登録者</th>
+                <th class="md:w-[100px]"></th>
+                <th class="md:w-[100px]">
+                  <label>
+                    <input type="checkbox" class="checkbox" />
+                  </label>
+                </th>
+              </tr>
+            </thead>
+            <tbody id="spot-table">
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="hidden py-4 px-4 border bg-base-100 rounded-box" data-tabs-target="panel">
+        <div class="overflow-auto h-[400px] w-[300px] md:w-[1300px] mx-auto">
+          <table class="table table-sm md:table-md table-pin-rows table-pin-cols">
+            <thead>
+              <tr>
+                <th class="md:w-[100px]"></th>
+                <th>スポット名</th>
+                <th class="md:w-[100px]">登録者</th>
+                <th class="md:w-[100px]"></th>
+                <th class="md:w-[100px]">
+                  <label>
+                    <input type="checkbox" class="checkbox" />
+                  </label>
+                </th>
+              </tr>
+            </thead>
+            <tbody id="spot-table">
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  
   <!-- リスト保存ボタン　-->
   <div class="flex justify-center mt-3">
     <%= link_to "一時保存", plan_path(@plan), class:"text-base-content btn btn-accent btn-sm md:btn-lg" %>

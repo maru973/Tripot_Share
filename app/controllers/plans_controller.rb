@@ -21,6 +21,7 @@ class PlansController < ApplicationController
 
   def new_spots
     @plan = Plan.find(params[:id])
+    @users = @plan.users
     if current_user.member?(@plan.id)
       @spot = Spot.new
       @spots = @plan.spots
@@ -31,6 +32,7 @@ class PlansController < ApplicationController
 
   def show
     @plan = Plan.find(params[:id])
+    @users = @plan.users
     @spots = @plan.spots
     @user = User.new
     @resource_name = @user.class.name.underscore
