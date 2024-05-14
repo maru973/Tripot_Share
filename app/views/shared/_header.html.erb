@@ -5,8 +5,8 @@
   </div>
   <div>
     <ul class="flex justify-end menu menu-horizontal md:m-2">
-      <li class="hidden md:block link link-hover"><%= link_to "みんなのプランをみる", "#" %></li>
-      <li class="hidden md:block link link-hover"><%= link_to "旅行プランをつくる", "#" %></li>
+      <li class="hidden md:block link link-hover"><%= link_to "みんなのプランをみる", plans_path %></li>
+      <li class="hidden md:block link link-hover"><%= link_to "旅行プランをつくる", new_plan_path %></li>
       <li>
         <div class="dropdown dropdown-bottom dropdown-end">
           <div tabindex="0" role="button">
@@ -28,9 +28,9 @@
 
           </div>
           <ul tabindex="0" class="border dropdown-content z-[1] menu mt-2 md:mt-4 shadow bg-base-100 rounded-box w-40 md:w-52">
-            <li class="md:hidden"><%= link_to "プラン計画", "#" %></li>
+            <li class="md:hidden"><%= link_to "プラン計画", new_plan_path %></li>
             <li><%= link_to "マイプラン", "#" %></li>
-            <li class="md:hidden"><%= link_to "皆のプラン", "#" %></li>
+            <li class="md:hidden"><%= link_to "皆のプラン", plans_path %></li>
             <li><%= link_to "マイページ", "#" %></li>
             <li><%= link_to "ログアウト", destroy_user_session_path, data: {turbo_method: :delete} %></li>
           </ul>
