@@ -8,5 +8,6 @@ window.Stimulus   = application
 
 export { application }
 
-import { Modal } from "tailwindcss-stimulus-components"
+import { Modal, Tabs } from "tailwindcss-stimulus-components"
 application.register('modal', Modal)
+application.register('tabs', Tabs)

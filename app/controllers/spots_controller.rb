@@ -1,5 +1,6 @@
 class SpotsController < ApplicationController
   def create
+    @user = current_user
     @spot = Spot.find_or_initialize_by(name: spot_params[:name])
     if @spot.new_record?
       results = Geocoder.search(spot_params[:name])
