@@ -22,6 +22,14 @@ class PlansController < ApplicationController
   def new_spots
     @plan = Plan.find(params[:id])
     @users = @plan.users
+    @user_spots = {}
+
+    # 各ユーザーのスポットをハッシュに入れる
+    @users.each do |user|
+      @user_spots[user.id] = Spot.joins(:planned_spots).where(planned_spots: { plan_id: @plan.id, user_id: user.id })
+    end
+
+    # memberのみ編集可
     if current_user.member?(@plan.id)
       @spot = Spot.new
       @spots = @plan.spots
@@ -33,7 +41,12 @@ class PlansController < ApplicationController
   def show
     @plan = Plan.find(params[:id])
     @users = @plan.users
-    @spots = @plan.spots
+    @spots = @plan.spots # マーカーを表示に使用
+    @user_spots = {}
+
+    @users.each do |user|
+      @user_spots[user.id] = Spot.joins(:planned_spots).where(planned_spots: { plan_id: @plan.id, user_id: user.id })
+    end
     @user = User.new
     @resource_name = @user.class.name.underscore
     @invite_link = accept_plan_url(invitation_token: @plan.invitation_token) if @plan.invitation_token.present?

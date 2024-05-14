@@ -1,6 +1,8 @@
 class Spot < ApplicationRecord
   has_many :planned_spots, dependent: :destroy
-  has_many :plans,through: :planned_spots
+  has_many :plans, through: :planned_spots
+  has_many :users, through: :planned_spots
+
 
 
   geocoded_by :address
