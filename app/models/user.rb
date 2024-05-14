@@ -2,6 +2,7 @@ class User < ApplicationRecord
   has_many :plans, foreign_key: 'owner_id'
   has_many :members, dependent: :destroy
   has_many :plans, through: :members
+  has_many :planned_spots
 
 
   attr_accessor :plan_id
