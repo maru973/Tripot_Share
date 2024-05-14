@@ -8,7 +8,7 @@
   <%= render "spots/form", spot: @spot, plan: @plan %>
 
   <!-- 登録済みリスト -->
-  <div class="m-5">
+    <div class="m-5">
     <div data-controller="tabs" data-tabs-active-tab-class="-mb-px border-l border-t border-r rounded-t-xl bg-primary">
       <div class="flex overflow-x-auto">
         <div class="flex-none">
@@ -21,53 +21,35 @@
           </ul>
         </div>
       </div>
-
-      <div class="hidden py-4 px-4 border bg-base-100 rounded-box rounded-tl-none" data-tabs-target="panel">
-        <div class="overflow-auto h-[400px] w-[300px] md:w-[1300px] mx-auto">
-          <table class="table table-sm md:table-md table-pin-rows table-pin-cols">
-            <thead>
-              <tr>
-                <th class="md:w-[100px]"></th>
-                <th>スポット名</th>
-                <th class="md:w-[100px]">登録者</th>
-                <th class="md:w-[100px]"></th>
-                <th class="md:w-[100px]">
-                  <label>
-                    <input type="checkbox" class="checkbox" />
-                  </label>
-                </th>
-              </tr>
-            </thead>
-            <tbody id="spot-table">
-              <%= render partial: 'spots/spot', collection: @plan.spots, as: :spot, locals: { plan: @plan } %>
-            </tbody>
-          </table>
+      <% @users.each do |user| %>
+        <div class="hidden py-4 px-4 border bg-base-100 rounded-box rounded-tl-none" data-tabs-target="panel">
+          <div class="overflow-auto h-[400px] w-[300px] md:w-[1300px] mx-auto">
+            <table class="table table-sm md:table-md table-pin-rows table-pin-cols">
+              <thead>
+                <tr>
+                  <th class="md:w-[100px]"></th>
+                  <th>スポット名</th>
+                  <th class="md:w-[100px]">登録者</th>
+                  <th class="md:w-[100px]"></th>
+                  <th class="md:w-[100px]">
+                    <label>
+                      <input type="checkbox" class="checkbox" />
+                    </label>
+                  </th>
+                </tr>
+              </thead>
+              <tbody id="spot-table">
+                <% @user_spots[user.id].each do |spot| %>
+                  <%= render partial: 'spots/spot', locals: { spot: spot, plan: @plan } %>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
-      <div class="hidden py-4 px-4 border bg-base-100 rounded-box" data-tabs-target="panel">
-        <div class="overflow-auto h-[400px] w-[300px] md:w-[1300px] mx-auto">
-          <table class="table table-sm md:table-md table-pin-rows table-pin-cols">
-            <thead>
-              <tr>
-                <th class="md:w-[100px]"></th>
-                <th>スポット名</th>
-                <th class="md:w-[100px]">登録者</th>
-                <th class="md:w-[100px]"></th>
-                <th class="md:w-[100px]">
-                  <label>
-                    <input type="checkbox" class="checkbox" />
-                  </label>
-                </th>
-              </tr>
-            </thead>
-            <tbody id="spot-table">
-            </tbody>
-          </table>
-        </div>
-      </div>
+      <% end %>
     </div>
   </div>
-  
+
   <!-- リスト保存ボタン　-->
   <div class="flex justify-center mt-3">
     <%= link_to "一時保存", plan_path(@plan), class:"text-base-content btn btn-accent btn-sm md:btn-lg" %>
