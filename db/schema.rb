@@ -43,9 +43,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_15_062628) do
     t.integer "owner_id", null: false
     t.string "invitation_token"
     t.string "location", null: false
-    t.string "address", null: false
-    t.float "latitude", null: false
-    t.float "longitude", null: false
     t.index ["invitation_token"], name: "index_plans_on_invitation_token", unique: true
   end
 
