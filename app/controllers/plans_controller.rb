@@ -63,6 +63,19 @@ class PlansController < ApplicationController
     @invite_link = accept_plan_url(invitation_token: @plan.invitation_token) if @plan.invitation_token.present?
   end
 
+  def edit
+    @plan = current_user.plans.find(params[:id])
+  end
+
+  def update
+    @plan = current_user.plans.find(params[:id])
+    if current_user.id === @plan.owner_id
+      @plan.update(plan_params)
+    else
+      redirect_to plans_path, alert: "あなたはこのプランのオーナーではないため編集できません"
+    end
+  end
+
   def invitation
     @plan = Plan.find(params[:id])
     @plan.generate_token

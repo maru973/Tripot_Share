@@ -1,10 +1,10 @@
 <div class="card bg-base-100 w-[350px] h-[130px] md:w-[500px] md:h-[300px] shadow-xl overflow-hidden hover:shadow-2xl group rounded-xl transition-all duration-300 transform">
   <%= image_tag "bgcard.jpg", alt: "bg-image", class: "md:block absolute inset-0 h-full w-full object-cover z-0" %>
   <%= image_tag "bgcard-sm.jpg", alt: "bg-image", class: "md:hidden absolute inset-0 h-full w-full object-cover z-0" %>
-  <div class="card-body ms-4 mt-2 md:items-center md:text-center z-10 bg-opacity-0 md:mt-14 md:pt-8">
+  <div id="plan-<%= plan.id %>" class="card-body ms-4 mt-2 md:items-center md:text-center z-10 bg-opacity-0 md:mt-14 md:pt-8">
     <h2 class="text-base truncate md:text-2xl">
       <%= plan.name %>
-      <%= link_to "#" do %>
+      <%= link_to edit_plan_path(plan) do %>
         <span class="material-symbols-outlined pt-2 md:pt-3" style= "font-size: 16px;">
           edit_square
         </span>
