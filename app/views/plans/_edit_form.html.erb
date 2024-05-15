@@ -1,0 +1,28 @@
+<div id="plan-<%= plan.id %>" class="card-body ms-4 md:items-center md:text-center z-10 bg-opacity-0 md:mt-14 md:pt-8">
+  <div class="pb-10">
+  <%= form_with model: plan do |f|%>
+    <%= render 'shared/error_messages', object: f.object %>
+    <% f.label :name %>
+    <%= f.text_field :name, autofocus: true, class: "input input-xs md:input-sm input-bordered", placeholder: "例：卒業旅行 in 京都" %>
+    <div class="flex-col">
+      <div class="flex md:justify-center md:mt-2">
+        <span class="material-symbols-outlined pt-1 md:pt-1" style= "font-size: 18px;">
+          location_on
+        </span>
+        <% f.label :location %>
+        <%= f.select :location, options_for_select(Plan::JAPAN_PREFECTURES), {include_blank: ""}, {class: "select select-xs md:select-sm select-bordered"} %>
+      </div>
+        <p class="md:pt-2">
+          <% f.label :start_date %>
+          <%= f.date_field :start_date, class: "input input-xs md:input-sm input-bordered" %>
+          〜
+          <% f.label :end_date %>
+          <%= f.date_field :end_date, class: "input input-xs md:input-sm input-bordered" %>
+        </p>
+    </div>
+    <div class="md:mt-3">
+      <%= f.submit "更新", class: "text-base-content btn btn-xs md:btn-sm btn-secondary" %>
+    </div>
+  <% end %>
+  </div>
+</div>
