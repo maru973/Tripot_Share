@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_14_015125) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_15_062628) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,6 +42,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_14_015125) do
     t.datetime "updated_at", null: false
     t.integer "owner_id", null: false
     t.string "invitation_token"
+    t.string "location", null: false
     t.index ["invitation_token"], name: "index_plans_on_invitation_token", unique: true
   end
 

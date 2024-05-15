@@ -60,8 +60,8 @@
   // マップの初期化設定
   function initMap() {
     map = new google.maps.Map(document.getElementById("map"), {
-      zoom: 5,
-      center:  { lat: 37.148, lng: 138.234 }, // 地図の中心を指定
+      zoom: 10,
+      center:  { lat: <%= @location.latitude %>, lng: <%= @location.longitude %> }, // 地図の中心を指定
       // ストリートビューなど地図右下に表示されていたオプションを削除
       disableDefaultUI: true,
       keyboardShortcuts: false

@@ -12,6 +12,15 @@ class PlansController < ApplicationController
     @plan.owner_id = current_user.id
     if @plan.save
       @plan.users << current_user
+      @location = Spot.find_or_initialize_by(name: @plan.location)
+      if @location.new_record?
+        results = Geocoder.search(@plan.location)
+        @latlng = results.first.coordinates
+        @location.latitude = @latlng[0]
+        @location.longitude = @latlng[1]
+        @location.address = results.first.address
+        @location.save
+      end
       redirect_to new_spots_plan_path(@plan), notice: t('defaults.flash_message.created', item: @plan.name)
     else
       flash.now[:alert] = t('defaults.flash_message.not_created', item: Plan.model_name.human)
@@ -21,6 +30,7 @@ class PlansController < ApplicationController
 
   def new_spots
     @plan = Plan.find(params[:id])
+    @location = Spot.find_by(name: @plan.location)
     @users = @plan.users
     @user_spots = {}
 
@@ -40,6 +50,7 @@ class PlansController < ApplicationController
 
   def show
     @plan = Plan.find(params[:id])
+    @location = Spot.find_by(name: @plan.location)
     @users = @plan.users
     @spots = @plan.spots # マーカーを表示に使用
     @user_spots = {}
@@ -85,6 +96,6 @@ class PlansController < ApplicationController
   private
 
   def plan_params
-    params.require(:plan).permit(:name, :start_date, :end_date, :invitation_token)
+    params.require(:plan).permit(:name, :start_date, :end_date, :invitation_token, :location)
   end
 end
