@@ -42,10 +42,18 @@
   <!-- 登録済みリスト -->
   <%= render 'list', users: @users, user_spots: @user_spots, plan: @plan %>
 
-  <!-- シェアボタン --> 
-  <div class="flex justify-center mt-3">
+  <!-- 削除ボタン -->
+  <div class="flex justify-around mt-3">
+    <% if current_user.id === @plan.owner_id %>
+      <%= link_to "削除", @plans_path, class:"text-base-content btn btn-error btn-sm md:btn-lg", data: {turbo_method: :delete, turbo_confirm: "#{@plan.name}を削除しますか" } %>
+    <% end %>
+
+    <!-- 一覧ページボタン --> 
     <%= link_to "一覧ページへ戻る", plans_path, class:"text-base-content btn btn-accent btn-sm md:btn-lg" %>
-  </div>       
+  </div>
+
+  
+
   <%= render 'plans/invitation_url_button' %>
 </article>
 
