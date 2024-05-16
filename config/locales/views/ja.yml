@@ -25,10 +25,13 @@ ja:
       delete_confirm: 削除しますか？
   plans:
     index:
-      title: プラン一覧
+      title: みんなのプラン
       no_result: プランがありません
     new:
       title: プラン作成
       null_permission: (未定の場合は空欄可)
     new_spots:
       title: スポット登録
+  mypages:
+    myplans: 
+      title: マイプラン

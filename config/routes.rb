@@ -30,11 +30,10 @@ Rails.application.routes.draw do
 
 
   resources :courses
-  resources :spots, only: %i[create destroy]
+  resource :spots, only: %i[create destroy]
 
-  namespace :mypage do
-    resources :plans, only: [:index]
-    resources :courses, only: [:index]
-    resource :settings, only: %i[show update destroy]
-  end
+  resource :mypage, only: %i[show edit destroy]
+  get 'myplans', to: 'mypages#myplans'
+  get 'mycourses', to: 'mypages#mycourses'
+
 end
