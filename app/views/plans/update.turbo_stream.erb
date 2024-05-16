@@ -1,0 +1,6 @@
+<%= turbo_stream.replace "plan-#{@plan.id}" do %>
+  <%= render 'edit_form', plan: @plan %>
+<% end %>
+<%= turbo_stream.replace "plan-card" do %>
+  <%= render 'plan', plan: @plan%>
+<% end %>

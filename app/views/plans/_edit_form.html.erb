@@ -10,7 +10,7 @@
           location_on
         </span>
         <% f.label :location %>
-        <%= f.select :location, options_for_select(Plan::JAPAN_PREFECTURES), {include_blank: ""}, {class: "select select-xs md:select-sm select-bordered"} %>
+        <%= f.select :location, options_for_select(Plan::JAPAN_PREFECTURES, plan.location), {include_blank: ""}, {class: "select select-xs md:select-sm select-bordered"} %>
       </div>
         <p class="md:pt-2">
           <% f.label :start_date %>
