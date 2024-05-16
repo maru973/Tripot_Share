@@ -22,7 +22,7 @@
 <script>
   // 他のファイルでも使用できるようにfunctionの外側で定義
   let map
-  
+
   let markers = [];
 
   // マップの初期化設定
@@ -32,27 +32,37 @@
       center:  { lat: <%= @location.latitude %>, lng: <%= @location.longitude %> }, // 地図の中心を指定
       // ストリートビューなど地図右下に表示されていたオプションを削除
       disableDefaultUI: true,
-      keyboardShortcuts: false
+      keyboardShortcuts: false,
+      mapId: "<%= ENV['GOOGLE_MAP_ID'] %>"
     });
+
     
+
+
     // ページリロードしても登録したマーカーが消えない設定
     <% @spots.each do |spot| %>
       (() => {
-        let marker = new google.maps.Marker({
+        let glyphImg = document.createElement("img");
+
+        glyphImg.src = '<%= asset_path('sample.jpg') %>';
+        glyphImg.className = 'glyph-img';    
+
+        let glyphSvgPinView = new google.maps.marker.PinElement({
+          glyph: glyphImg,
+          
+        });
+
+        let marker = new google.maps.marker.AdvancedMarkerElement({
           map: map,
           position: {lat: <%= spot.latitude %>, lng: <%= spot.longitude %>},
           id: <%= spot.id %>,
-          icon: {
-		        url: '<%= asset_path('sample.jpg') %>',
-		        scaledSize: new google.maps.Size(40, 40)
-	        },
-          optimized: false
+          content: glyphSvgPinView.element,
         });
       })();
     <% end %>
-  } 
+  }
 
 </script>
 <!-- google mapのスクリプト -->
-<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLEMAPS_API_KEY']%>&callback=initMap&libraries=places&v=weekly" defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLEMAPS_API_KEY']%>&callback=initMap&libraries=places&v=weekly&libraries=marker" defer></script>
 
