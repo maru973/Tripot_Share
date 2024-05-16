@@ -1,10 +1,23 @@
 <script>
   // マーカーにidを付与して、配列に追加
-  markers.push(new google.maps.Marker({
-    map: map,
-    position: {lat: <%= @spot.latitude %>, lng: <%= @spot.longitude %>},
-    id: <%= @spot.id %>
-  }));
+  (() => {
+        let glyphImg = document.createElement("img");
+
+        glyphImg.src = '<%= asset_path('sample.jpg') %>';
+        glyphImg.className = 'glyph-img';    
+
+        let glyphSvgPinView = new google.maps.marker.PinElement({
+          glyph: glyphImg,
+          
+        });
+
+        let marker = new google.maps.marker.AdvancedMarkerElement({
+          map: map,
+          position: {lat: <%= @spot.latitude %>, lng: <%= @spot.longitude %>},
+          id: <%= @spot.id %>,
+          content: glyphSvgPinView.element,
+        });
+      })();
 
   // マーカーを削除
   function removeMarker(markerId) {
