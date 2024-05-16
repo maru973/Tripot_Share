@@ -76,6 +76,16 @@ class PlansController < ApplicationController
     end
   end
 
+  def destroy
+    @plan = current_user.plans.find(params[:id])
+    if current_user.id === @plan.owner_id
+      @plan.destroy!
+      redirect_to plans_path, status: :see_other, notice: "プランが削除されました"
+    else
+      redirect_to plans_path, alert: "あなたはこのプランのオーナーではないため削除できません"
+    end
+  end
+
   def invitation
     @plan = Plan.find(params[:id])
     @plan.generate_token
