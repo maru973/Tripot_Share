@@ -1,0 +1,3 @@
+<%= turbo_stream.replace "plan-#{@plan.id}" do %>
+  <%= render 'edit_form', plan: @plan %>
+<% end %>
