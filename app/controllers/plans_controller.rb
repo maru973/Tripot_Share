@@ -1,6 +1,6 @@
 class PlansController < ApplicationController
   def index
-    @plans = current_user.plans.page(params[:page])
+    @plans = Plan.includes(:owner).order(created_at: :desc).page(params[:page])
   end
 
   def new
