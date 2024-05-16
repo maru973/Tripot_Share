@@ -41,7 +41,12 @@
         let marker = new google.maps.Marker({
           map: map,
           position: {lat: <%= spot.latitude %>, lng: <%= spot.longitude %>},
-          id: <%= spot.id %>
+          id: <%= spot.id %>,
+          icon: {
+		        url: '<%= asset_path('sample.jpg') %>',
+		        scaledSize: new google.maps.Size(40, 40)
+	        },
+          optimized: false
         });
       })();
     <% end %>

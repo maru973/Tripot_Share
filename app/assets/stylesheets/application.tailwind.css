@@ -5,3 +5,9 @@
 .material-symbols-outlined {
   text-color: #592926;
 }
+
+.glyph-img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%; 
+}
