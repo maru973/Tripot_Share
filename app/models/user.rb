@@ -5,6 +5,8 @@ class User < ApplicationRecord
   has_many :planned_spots, dependent: :destroy
   has_many :spots, through: :planned_spots
 
+  mount_uploader :avatar, AvatarUploader
+
   attr_accessor :plan_id
 
   # Include default devise modules. Others available are:

@@ -28,6 +28,16 @@
 
           </div>
           <ul tabindex="0" class="border dropdown-content z-[1] menu mt-2 md:mt-4 shadow bg-base-100 rounded-box w-40 md:w-52">
+            <li class="no-hover">
+              <div class="flex">
+                <div class="avatar">
+                  <div class="w-7 h-7 mr-1 rounded-full">
+                    <%= image_tag current_user.avatar_url %>
+                  </div>
+                </div>
+                <%= current_user.name %>
+              </div>
+            </li>
             <li class="md:hidden"><%= link_to "プラン計画", new_plan_path %></li>
             <li><%= link_to "マイプラン", myplans_path %></li>
             <li class="md:hidden"><%= link_to "皆のプラン", plans_path %></li>
