@@ -7,18 +7,18 @@
       </div>
     </div>
   </figure>
-    <% f.label :avatar, class:"text-sm" %>
-    <%= f.file_field :avatar, class: 'file-input file-input-bordered file-input-sm md:file-input-md mx-auto mt-2', accept: 'image/*' %>
+    <% f.label :avatar %>
+    <%= f.file_field :avatar, class: "file-input file-input-bordered file-input-sm md:file-input-md mx-auto mt-2", accept: "image/*" %>
     <%= f.hidden_field :avatar_cache %>
 
   <div class="card-body items-center text-center">
     <h2 class="card-title">
-      <% f.label :name, class:"text-sm" %>
+      <% f.label :name %>
       <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "input input-sm md:input-md input-bordered", placeholder: "名前" %>
     </h2>
     <p class="text-base-content text-opacity-70">
       <% if current_user.provider.nil? %>
-        <% f.label :email, class:"text-sm" %>
+        <% f.label :email %>
         <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input input-sm md:input-md input-bordered", placeholder: "メールアドレス" %>
       <% end %>
     </p>
