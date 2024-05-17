@@ -41,7 +41,7 @@
             <li class="md:hidden"><%= link_to "プラン計画", new_plan_path %></li>
             <li><%= link_to "マイプラン", myplans_path %></li>
             <li class="md:hidden"><%= link_to "皆のプラン", plans_path %></li>
-            <li><%= link_to "マイページ", "#" %></li>
+            <li><%= link_to "マイページ", mypage_path %></li>
             <li><%= link_to "ログアウト", destroy_user_session_path, data: {turbo_method: :delete} %></li>
           </ul>
         </div>

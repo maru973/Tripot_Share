@@ -1,0 +1,31 @@
+<%= form_with model: user, url: mypage_path, method: :put do |f|%>
+<div id="profile" class="card w-80 md:w-96 bg-base-100 shadow-xl">
+  <figure class="px-10 pt-10">
+    <div class="avatar">
+      <div class="w-24 rounded-full border-4 mx-auto mt-4">
+        <%= image_tag current_user.avatar_url, alt:"Avatar" %>
+      </div>
+    </div>
+  </figure>
+    <% f.label :avatar %>
+    <%= f.file_field :avatar, class: "file-input file-input-bordered file-input-sm md:file-input-md mx-auto mt-2", accept: "image/*" %>
+    <%= f.hidden_field :avatar_cache %>
+
+  <div class="card-body items-center text-center">
+    <h2 class="card-title">
+      <% f.label :name %>
+      <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "input input-sm md:input-md input-bordered", placeholder: "名前" %>
+    </h2>
+    <p class="text-base-content text-opacity-70">
+      <% if current_user.provider.nil? %>
+        <% f.label :email %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input input-sm md:input-md input-bordered", placeholder: "メールアドレス" %>
+      <% end %>
+    </p>
+    <div class="flex justify-center gap-3 mt-1 md:mt-3 md:mr-4">
+      <%= link_to '戻る', plans_path, class: "text-base-content btn btn-primary" %>
+      <%= f.submit "更新", class:"text-base-content btn btn-accent" %>
+    </div>
+  </div>
+</div>
+<% end %>

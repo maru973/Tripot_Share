@@ -27,6 +27,12 @@
         </div>
 
         <div class="form-control my-1">
+          <%= f.label :avatar, class:"text-sm" %>
+          <%= f.file_field :avatar, class: "file-input file-input-bordered file-input-sm md:file-input-md text-base-content", accept: "image/*" %>
+          <%= f.hidden_field :avatar_cache %>
+        </div>
+
+        <div class="form-control my-1">
           <%= f.label :email, class:"text-sm" %>
           <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input input-sm md:input-md input-bordered", placeholder: "メールアドレスを入力してね" %>
         </div>
