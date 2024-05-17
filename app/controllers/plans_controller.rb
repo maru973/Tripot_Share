@@ -31,18 +31,24 @@ class PlansController < ApplicationController
   def new_spots
     @plan = Plan.find(params[:id])
     @location = Spot.find_by(name: @plan.location)
-    @users = @plan.users
-    @user_spots = {}
-
-    # 各ユーザーのスポットをハッシュに入れる
-    @users.each do |user|
-      @user_spots[user.id] = Spot.joins(:planned_spots).where(planned_spots: { plan_id: @plan.id, user_id: user.id })
-    end
-
+    
     # memberのみ編集可
     if current_user.member?(@plan.id)
       @spot = Spot.new
       @spots = @plan.spots
+      @users = @plan.users
+      @user_spots = {}
+      @spot_subscribers = {}
+      
+      # プランにスポットを登録したユーザーを取得
+      @spots.each do |spot|
+        @spot_subscribers[spot.id] = User.joins(:planned_spots).where(planned_spots: { plan_id: @plan.id, spot_id: spot.id })
+      end
+      
+      # 各ユーザーのスポットをハッシュに入れる
+      @users.each do |user|
+        @user_spots[user.id] = Spot.joins(:planned_spots).where(planned_spots: { plan_id: @plan.id, user_id: user.id })
+      end
     else
       redirect_to plan_path(@plan), alert: "あなたはこのプランのメンバーではないため、スポットの登録はできません"
     end
@@ -54,7 +60,12 @@ class PlansController < ApplicationController
     @users = @plan.users
     @spots = @plan.spots # マーカーを表示に使用
     @user_spots = {}
+    @spot_subscribers = {}
 
+    @spots.each do |spot|
+      @spot_subscribers[spot.id] = User.joins(:planned_spots).where(planned_spots: { plan_id: @plan.id, spot_id: spot.id })
+    end
+    
     @users.each do |user|
       @user_spots[user.id] = Spot.joins(:planned_spots).where(planned_spots: { plan_id: @plan.id, user_id: user.id })
     end

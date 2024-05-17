@@ -84,10 +84,11 @@
       (() => {
         let glyphImg = document.createElement("img");
 
-        // CarrierWave URLを絶対URLに変換
-        const avatarUrl = '<%= current_user.avatar_url %>'.startsWith('http')
-          ? '<%= current_user.avatar_url %>'
-          : new URL('<%= current_user.avatar_url %>', baseUrl).href;
+        <% @spot_subscribers[spot.id].each do |user| %>
+          let avatarUrl = '<%= user.avatar_url %>'.startsWith('http')
+          ? '<%= user.avatar_url %>'
+          : new URL('<%= user.avatar_url %>', baseUrl).href;
+        <% end %>
 
         glyphImg.src = avatarUrl;
         glyphImg.className = 'glyph-img';    

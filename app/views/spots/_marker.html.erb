@@ -1,13 +1,9 @@
 <script>
     const baseUrl = '<%= request.base_url %>';
 
-
-    // ページリロードしても登録したマーカーが消えない設定
-
       (() => {
         let glyphImg = document.createElement("img");
 
-        // CarrierWave URLを絶対URLに変換
         const avatarUrl = '<%= current_user.avatar_url %>'.startsWith('http')
           ? '<%= current_user.avatar_url %>'
           : new URL('<%= current_user.avatar_url %>', baseUrl).href;
