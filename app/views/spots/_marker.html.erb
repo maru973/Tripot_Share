@@ -1,9 +1,18 @@
 <script>
-  // マーカーにidを付与して、配列に追加
-  (() => {
+    const baseUrl = '<%= request.base_url %>';
+
+
+    // ページリロードしても登録したマーカーが消えない設定
+
+      (() => {
         let glyphImg = document.createElement("img");
 
-        glyphImg.src = '<%= asset_path('sample.jpg') %>';
+        // CarrierWave URLを絶対URLに変換
+        const avatarUrl = '<%= current_user.avatar_url %>'.startsWith('http')
+          ? '<%= current_user.avatar_url %>'
+          : new URL('<%= current_user.avatar_url %>', baseUrl).href;
+
+        glyphImg.src = avatarUrl;
         glyphImg.className = 'glyph-img';    
 
         let glyphSvgPinView = new google.maps.marker.PinElement({
@@ -18,6 +27,7 @@
           content: glyphSvgPinView.element,
         });
       })();
+
 
   // マーカーを削除
   function removeMarker(markerId) {
