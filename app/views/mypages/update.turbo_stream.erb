@@ -1,0 +1,6 @@
+<%= turbo_stream.replace "profile" do %>
+  <%= render 'edit_form', user: @user %>
+<% end %>
+<%= turbo_stream.replace "profile" do %>
+  <%= render 'show', current_user: @user%>
+<% end %>

@@ -1,0 +1,22 @@
+<div class="flex justify-center items-center mt-6">
+  <div id="profile" class="card w-80 md:w-96 bg-base-100 shadow-xl">
+    <figure class="px-10 pt-10">
+      <div class="avatar">
+        <div class="w-24 rounded-full border-4 mx-auto mt-4">
+          <%= image_tag current_user.avatar_url, alt:"Avatar" %>
+        </div>
+      </div>
+    </figure>
+    <div class="card-body items-center text-center">
+      <h2 class="card-title"><%= current_user.name %></h2>
+      <p class="text-base-content text-opacity-70">
+        <% if current_user.provider.nil? %>
+          <%= current_user.email %>
+        <% end %>
+      </p>
+      <div class="card-actions">
+        <%= link_to "編集", edit_mypage_path, class:"text-base-content btn btn-primary", data: { turbo_stream: true } %>
+      </div>
+    </div>
+  </div>
+</div>

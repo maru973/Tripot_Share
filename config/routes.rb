@@ -32,7 +32,7 @@ Rails.application.routes.draw do
   resources :courses
   resource :spots, only: %i[create destroy]
 
-  resource :mypage, only: %i[show edit destroy]
+  resource :mypage, only: %i[show edit destroy update]
   get 'myplans', to: 'mypages#myplans'
   get 'mycourses', to: 'mypages#mycourses'
 
