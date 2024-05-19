@@ -32,6 +32,9 @@ ja:
       null_permission: (未定の場合は空欄可)
     new_spots:
       title: スポット登録
+    show:
+      destroy: プランの削除
+      back_index: みんなのプランへ戻る
   mypages:
     myplans: 
       title: マイプラン
