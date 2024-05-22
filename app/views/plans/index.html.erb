@@ -1,6 +1,7 @@
 <article>
   <div class="grid justify-center items-center">
     <h2 class="text-xl md:text-2xl font-bold underline my-1 md:my-2 text-center"><%= t('.title') %></h2>
+    <%= render 'search_form' %>
     <% if @plans.present? %>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-10 mt-3">
         <%= render @plans %>
@@ -9,5 +10,5 @@
       <%= t('.no_result') %>
     <% end %>
   </div>
-  <%= paginate @plans %>
+  <%= paginate @plans, q: @q, url: plans_path %>
 </article>

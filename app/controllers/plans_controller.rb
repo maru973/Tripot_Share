@@ -1,6 +1,7 @@
 class PlansController < ApplicationController
   def index
-    @plans = Plan.includes(:owner).order(created_at: :desc).page(params[:page])
+    @q = Plan.ransack(params[:q])
+    @plans = @q.result(distinct: true).includes(:owner).order(created_at: :desc).page(params[:page])
   end
 
   def new
