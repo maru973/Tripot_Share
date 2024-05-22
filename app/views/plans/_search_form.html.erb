@@ -1,7 +1,7 @@
-<%= search_form_for @q, url: plans_path do |f| %>
-  <div class="flex justify-center">
-    <%= f.search_field :name_cont, class: "input input-sm md:input-md input-bordered", placeholder: "例：卒業旅行 in 京都" %>
-    <%= f.select :location_eq, options_for_select(Plan::JAPAN_PREFECTURES), {include_blank: ""}, {class: "select select-sm md:select-md select-bordered"} %>
-    <%= f.submit class: 'btn btn-primary' %>
+<%= search_form_for @q, url: url do |f| %>
+  <div class="flex justify-center mx-3 md:mx-auto border rounded-lg m-4">
+    <%= f.search_field :name_cont, class: "input input-sm md:input-lg w-full max-w-xs md:max-w-full rounded-none rounded-l-lg input-bordered", placeholder: "検索ワード" %>
+    <%= f.select :location_eq, options_for_select(Plan::JAPAN_PREFECTURES), {include_blank: "都道府県を選択"}, {class: "select select-sm md:select-lg rounded-none select-bordered"} %>
+    <%= f.submit class: 'text-base-content btn btn-secondary btn-sm md:btn-lg rounded-none rounded-r-lg' %>
   </div>
 <% end %>

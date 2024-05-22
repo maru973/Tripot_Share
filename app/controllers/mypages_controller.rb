@@ -15,7 +15,8 @@ class MypagesController < ApplicationController
   end
 
   def myplans
-    @plans = current_user.plans.order(created_at: :desc).page(params[:page])
+    @q = current_user.plans.ransack(params[:q])
+    @plans = @q.result(distinct: true).includes(:users).order(created_at: :desc).page(params[:page])
   end
 
   private
