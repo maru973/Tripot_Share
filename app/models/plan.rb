@@ -44,4 +44,8 @@ class Plan < ApplicationRecord
       errors.add(:end_date, '今日以降の日付に設定してください')
     end
   end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["name", "location"]
+  end
 end

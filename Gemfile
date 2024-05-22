@@ -75,5 +75,6 @@ gem 'devise_invitable'
 gem 'google_places'
 gem 'carrierwave'
 gem 'fog-aws'
+gem 'ransack'
 
 gem "dockerfile-rails", ">= 1.6", :group => :development
