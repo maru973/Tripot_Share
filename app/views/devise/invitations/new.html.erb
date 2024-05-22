@@ -9,10 +9,10 @@
         </button>
       </div>
       <h2 class="text-lg md:text-xl font-bold mb-1 md:mb-4 underline text-center"><%= t "devise.invitations.new.header" %></h2>
-      <%= form_for(@user, as: @resource_name, url: user_invitation_path, html: { method: :post }) do |f| %>
-        <%= render "devise/shared/error_messages", resource: @user %>
+      <%= form_for(resource, as: resource_name, url: invitation_path(resource_name), html: { method: :post }) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
 
-        <% @user.class.invite_key_fields.each do |field| -%>
+        <% resource.class.invite_key_fields.each do |field| -%>
           <% f.label field, class:"text-md" %>
           <p class="text-xs md:text-sm text-center">招待メールを送る場合は下記フォームに<br />招待したいメンバーのメールアドレスを<br class="md:hidden" />入力してください</p>
           <div class="flex mx-auto md:mx-20 my-3 border rounded-lg"> 

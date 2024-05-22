@@ -1,9 +1,10 @@
 class Users::InvitationsController < Devise::InvitationsController
   def create
+    self.resource = resource_class.new
     user_email = params[:user][:email]
     plan_id = params[:user][:plan_id]
 
-     # 既存ユーザーの処理
+    # 既存ユーザーの処理
     if User.find_by(email: user_email.downcase).present?
       user_id = User.find_by(email: user_email.downcase).id
       user = User.find(user_id)
@@ -18,11 +19,11 @@ class Users::InvitationsController < Devise::InvitationsController
         user.save
         redirect_to plan_path(plan_id), notice: t('devise.invitations.send_instructions', email: user_email)
       end
-    elsif User.invite!(email: user_email, invited_plan_id: plan_id).valid? # 新規ユーザーの処理
+    elsif User.invite!(email: user_email, invited_plan_id: plan_id, name: "仮ユーザー名").valid? # 新規ユーザーの処理
       redirect_to plan_path(plan_id), notice: t('devise.invitations.send_instructions', email: user_email)
     else
       flash[:notice] = t('devise.invitations.failure')
-      render 'new', locals: { plan: plan_id }
+      render 'new', locals: { id: plan_id }
     end
   end
 
@@ -31,13 +32,13 @@ class Users::InvitationsController < Devise::InvitationsController
     self.resource = accept_resource
     invitation_accepted = resource.errors.empty?
 
-    user_id = resource.id
-    user = User.find(user_id)
-    Member.create(user_id: user_id, plan_id: user.invited_plan_id)
     yield resource if block_given?
-
+    
     if invitation_accepted
       if resource.class.allow_insecure_sign_in_after_accept
+        user_id = resource.id
+        user = User.find(user_id)
+        Member.create(user_id: user_id, plan_id: user.invited_plan_id)
         flash_message = resource.active_for_authentication? ? :updated : :updated_not_active
         set_flash_message :notice, flash_message if is_flashing_format?
         resource.after_database_authentication
@@ -49,7 +50,7 @@ class Users::InvitationsController < Devise::InvitationsController
       end
     else
       resource.invitation_token = raw_invitation_token
-      respond_with_navigational(resource) { render :edit, status: :unprocessable_entity }
+      respond_with resource { render :edit, status: :unprocessable_entity }
     end
   end
 end
