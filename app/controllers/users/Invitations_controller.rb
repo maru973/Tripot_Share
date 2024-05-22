@@ -1,9 +1,4 @@
 class Users::InvitationsController < Devise::InvitationsController
-  def new
-    @plan = Plan.find(params[:id])
-    super
-  end
-
   def create
     self.resource = resource_class.new
     user_email = params[:user][:email]
