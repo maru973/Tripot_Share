@@ -11,3 +11,7 @@
   height: 30px;
   border-radius: 50%; 
 }
+
+.field_with_errors {
+  display: contents;
+}
