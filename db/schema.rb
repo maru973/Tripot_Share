@@ -74,11 +74,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_16_132128) do
     t.string "invited_by_type"
     t.bigint "invited_by_id"
     t.integer "invitations_count", default: 0
+    t.integer "invited_plan_id"
+    t.string "avatar"
     t.string "provider"
     t.string "uid"
     t.string "name", default: "", null: false
-    t.integer "invited_plan_id"
-    t.string "avatar"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
     t.index ["invited_by_id"], name: "index_users_on_invited_by_id"
