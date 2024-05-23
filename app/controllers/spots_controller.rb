@@ -30,8 +30,9 @@ class SpotsController < ApplicationController
         if @planned_spot.new_record?
           @planned_spot.user_id = current_user.id
           @planned_spot.save
+          format.turbo_stream { flash.now[:notice] = "スポットを登録しました" }
         end
-        format.turbo_stream { flash.now[:notice] = "スポットを登録しました" }
+        format.turbo_stream { flash.now[:alert] = "そのスポットはすでにプランに登録されています" }
       end
     end
   end
