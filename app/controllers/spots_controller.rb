@@ -6,7 +6,7 @@ class SpotsController < ApplicationController
       if spot_params[:name].blank?
         format.turbo_stream do
           flash.now[:alert] = 'スポット名を入力してください'
-          render turbo_stream: turbo_stream.replace("flash", partial: "shared/flash_message")
+          render turbo_stream: turbo_stream.prepend("flash", partial: "shared/flash_message")
         end
       else
         @spot = Spot.find_or_initialize_by(name: spot_params[:name])

@@ -1,5 +1,5 @@
 <% flash.each do |message_type, message| %>
-  <div class="<%= flash_color(message_type) %> px-4 py-2 rounded-xl mb-4">
+  <div class="<%= flash_color(message_type) %> px-4 py-2 rounded-xl mb-4" data-controller="removals">
     <%= message %>
   </div>
 <% end %>
