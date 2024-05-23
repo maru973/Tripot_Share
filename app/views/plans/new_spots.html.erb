@@ -20,11 +20,6 @@
 
 
 <script>
-  // 他のファイルでも使用できるようにfunctionの外側で定義
-  let map
-
-  let markers = [];
-
   // マップの初期化設定
   function initMap() {
     map = new google.maps.Map(document.getElementById("map"), {
@@ -71,5 +66,5 @@
 
 </script>
 <!-- google mapのスクリプト -->
-<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLEMAPS_API_KEY']%>&callback=initMap&libraries=places&v=weekly&libraries=marker" defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLEMAPS_API_KEY']%>&callback=initMap&libraries=places,marker&v=weekly" async defer></script>
 
