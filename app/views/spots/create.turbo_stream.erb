@@ -4,6 +4,7 @@
     <%= render "spot", spot: @spot, plan: @planned_spot.plan %>
   <% end %>
 <% end %>
+<%= turbo_stream.prepend "flash", partial: "shared/flash_message" %>
 <%= turbo_stream.replace "spot-form" do %>
   <%= render "form", spot: Spot.new, plan: @planned_spot.plan %>
 <% end %>
