@@ -32,8 +32,10 @@ class Users::InvitationsController < Devise::InvitationsController
           render turbo_stream: turbo_stream.prepend("flash", partial: "shared/flash_message")
         end
       else
-        flash[:alert] = t('devise.invitations.failure')
-        render 'new', locals: { id: plan_id }
+        format.turbo_stream do
+          flash.now[:alert] = t('devise.invitations.failure')
+          render turbo_stream: turbo_stream.prepend("flash", partial: "shared/flash_message")
+        end
       end
     end
   end
