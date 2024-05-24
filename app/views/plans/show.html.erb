@@ -76,9 +76,6 @@
       mapId: "<%= ENV['GOOGLE_MAP_ID'] %>"
     });
 
-    const baseUrl = '<%= request.base_url %>';
-
-
     // ページリロードしても登録したマーカーが消えない設定
     <% @spots.each do |spot| %>
       (() => {
