@@ -100,9 +100,10 @@
         let marker = new google.maps.marker.AdvancedMarkerElement({
           map: map,
           position: {lat: <%= spot.latitude %>, lng: <%= spot.longitude %>},
-          id: <%= spot.id %>,
           content: glyphSvgPinView.element,
         });
+        marker.id = <%= spot.id %>;
+        markers.push(marker);
       })();
     <% end %>
   }
