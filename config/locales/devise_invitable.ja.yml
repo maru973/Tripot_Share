@@ -22,6 +22,7 @@ ja:
         subject: '旅行メンバーに招待されました'
         hello: '%{email}さん'
         someone_invited_you: '%{url}に招待されました。以下のリンクから参加できます。'
+        expired_url: '下記URLの有効期限は15分です。有効期限が切れた場合は、再度招待の依頼をしてください。'
         accept: 'このプランに参加する'
         accept_until: 'この招待は%{due_date}まで有効です。'
         ignore: '身に覚えがない場合は、このメールを無視してください。'
