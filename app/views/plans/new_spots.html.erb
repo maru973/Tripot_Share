@@ -12,7 +12,7 @@
 
   <!-- リスト保存ボタン　-->
   <div class="flex justify-center mt-3">
-    <%= link_to "一時保存", plan_path(@plan), class:"text-base-content btn btn-accent btn-sm md:btn-lg" %>
+    <%= link_to "一時保存", plan_path(@plan), class:"text-base-content btn btn-accent btn-sm md:btn-lg", data: { turbo: false }  %>
   </div>
   
 </article>

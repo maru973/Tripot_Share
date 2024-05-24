@@ -12,7 +12,7 @@
         </div>
         <ul tabindex="0" class="border dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-40 md:w-52">
           <li class="text-xs md:text-lg">
-            <%= link_to new_spots_plan_path(@plan) do %>
+            <%= link_to new_spots_plan_path(@plan), data: { turbo: false } do %>
               <span class= "material-symbols-outlined" style= "font-size: 20px;">
                 add_location_alt
               </span>
