@@ -8,7 +8,7 @@
     </div>
   </figure>
     <% f.label :avatar %>
-    <%= f.file_field :avatar, class: "file-input file-input-bordered file-input-sm md:file-input-md mx-auto mt-2", accept: "image/*" %>
+    <%= f.file_field :avatar, class: "file-input file-input-bordered file-input-sm md:file-input-md mx-5 md:mx-auto mt-2", accept: "image/*" %>
     <%= f.hidden_field :avatar_cache %>
 
   <div class="card-body items-center text-center">
@@ -23,7 +23,7 @@
       <% end %>
     </p>
     <div class="flex justify-center gap-3 mt-1 md:mt-3 md:mr-4">
-      <%= link_to '戻る', plans_path, class: "text-base-content btn btn-primary" %>
+      <%= link_to '戻る', mypage_path, class: "text-base-content btn btn-primary" %>
       <%= f.submit "更新", class:"text-base-content btn btn-accent" %>
     </div>
   </div>
