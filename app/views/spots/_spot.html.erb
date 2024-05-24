@@ -16,7 +16,7 @@
     <%= link_to "削除", spot_path(spot, plan_id:plan.id), class:"text-base-content btn btn-error", data: {turbo_method: :delete, turbo_confirm: t('defaults.flash_message.delete_confirm') }, onclick: "removeMarker(#{spot.id});" %>
   </td>
   <td class="md:hidden">
-    <%= link_to spot_path(spot, plan_id:plan.id), data: {turbo_method: :delete, turbo_confirm: t('defaults.flash_message.delete_confirm') } do %>
+    <%= link_to spot_path(spot, plan_id:plan.id), data: {turbo_method: :delete, turbo_confirm: t('defaults.flash_message.delete_confirm') }, onclick: "removeMarker(#{spot.id});" do %>
       <span class="material-symbols-outlined">
         delete
       </span>
