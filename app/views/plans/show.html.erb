@@ -108,6 +108,17 @@
     <% end %>
   }
 
+  function removeMarker(markerId) {
+    // マーカー配列の中から指定されたspot.idのマーカーを探して削除する
+    markers = markers.filter(marker => {
+      if (marker.id == markerId) {
+        marker.setMap(null); // マーカーを地図から削除
+        return false; // 配列から削除
+      }
+      return true; // 配列に残す
+    });
+  }
+
 </script>
 <!-- google mapのスクリプト -->
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLEMAPS_API_KEY']%>&callback=initMap&libraries=places,marker&v=weekly" async defer></script>

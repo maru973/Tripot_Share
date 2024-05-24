@@ -60,30 +60,22 @@
           position: {lat: <%= spot.latitude %>, lng: <%= spot.longitude %>},
           content: glyphSvgPinView.element,
         });
-        marker.id = "<%= spot.id %>";
+        marker.id = <%= spot.id %>;
         markers.push(marker);
         console.log(markers);
       })();
     <% end %>
   }
 
-  function del(markerId) {
-  let marker = markers.find(marker => marker.id === parseInt(markerId));
-  if (marker) {
-    marker.setMap(null);
-  }
-}
-
-function removeMarker(markerId) {
+  function removeMarker(markerId) {
     // マーカー配列の中から指定されたspot.idのマーカーを探して削除する
     markers = markers.filter(marker => {
-      if (marker.id === markerId) {
+      if (marker.id == markerId) {
         marker.setMap(null); // マーカーを地図から削除
         return false; // 配列から削除
       }
       return true; // 配列に残す
     });
-    console.log(markers);
   }
 
 </script>
