@@ -2,6 +2,8 @@
 
 <p><%= t("devise.mailer.invitation_instructions.someone_invited_you", url: root_url) %></p>
 
+<p><%= t("devise.mailer.invitation_instructions.expired_url") %></p>
+
 <p><%= link_to t("devise.mailer.invitation_instructions.accept"), accept_invitation_url(@resource, invitation_token: @token) %></p>
 
 <% if @resource.invitation_due_at %>
