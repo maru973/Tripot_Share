@@ -1,30 +1,26 @@
-<script>
-  (() => {
+<script>  
+  function addMarker() {
     let glyphImg = document.createElement("img");
+
     const avatarUrl = '<%= current_user.avatar_url %>'.startsWith('http')
       ? '<%= current_user.avatar_url %>'
       : new URL('<%= current_user.avatar_url %>', baseUrl).href;
+
     glyphImg.src = avatarUrl;
-    glyphImg.className = 'glyph-img';    
+    glyphImg.className = 'glyph-img';  
+
     let glyphSvgPinView = new google.maps.marker.PinElement({
       glyph: glyphImg,
-      
     });
     let marker = new google.maps.marker.AdvancedMarkerElement({
       map: map,
       position: {lat: <%= @spot.latitude %>, lng: <%= @spot.longitude %>},
-      id: <%= @spot.id %>,
       content: glyphSvgPinView.element,
     });
-  })();
-
-
-  // マーカーを削除
-  function removeMarker(markerId) {
-    const markerIndex = markers.findIndex(marker => marker.id === markerId);
-    if (markerIndex !== -1) {
-      markers[markerIndex].setMap(null); // マーカーをマップから削除
-      markers.splice(markerIndex, 1); // 配列からマーカーを削除
-    }
+    marker.id = <%= @spot.id %>;
+    markers.push(marker);
   }
+
+
+  addMarker();
 </script>
