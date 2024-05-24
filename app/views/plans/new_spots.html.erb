@@ -12,7 +12,7 @@
 
   <!-- リスト保存ボタン　-->
   <div class="flex justify-center mt-3">
-    <%= link_to "一時保存", plan_path(@plan), class:"text-base-content btn btn-accent btn-sm md:btn-lg" %>
+    <%= link_to "一時保存", plan_path(@plan), class:"text-base-content btn btn-accent btn-sm md:btn-lg", data: { turbo: false }  %>
   </div>
   
 </article>
@@ -20,10 +20,7 @@
 
 
 <script>
-  // 他のファイルでも使用できるようにfunctionの外側で定義
-  let map
-
-  let markers = [];
+  const baseUrl = '<%= request.base_url %>';
 
   // マップの初期化設定
   function initMap() {
@@ -35,9 +32,6 @@
       keyboardShortcuts: false,
       mapId: "<%= ENV['GOOGLE_MAP_ID'] %>"
     });
-
-    const baseUrl = '<%= request.base_url %>';
-
 
     // ページリロードしても登録したマーカーが消えない設定
     <% @spots.each do |spot| %>
@@ -71,5 +65,5 @@
 
 </script>
 <!-- google mapのスクリプト -->
-<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLEMAPS_API_KEY']%>&callback=initMap&libraries=places&v=weekly&libraries=marker" defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLEMAPS_API_KEY']%>&callback=initMap&libraries=places,marker&v=weekly" async defer></script>
 

@@ -12,7 +12,7 @@
         </div>
         <ul tabindex="0" class="border dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-40 md:w-52">
           <li class="text-xs md:text-lg">
-            <%= link_to new_spots_plan_path(@plan) do %>
+            <%= link_to new_spots_plan_path(@plan), data: { turbo: false } do %>
               <span class= "material-symbols-outlined" style= "font-size: 20px;">
                 add_location_alt
               </span>
@@ -65,6 +65,8 @@
 
   let markers = [];
 
+  const baseUrl = '<%= request.base_url %>';
+
   // マップの初期化設定
   function initMap() {
     map = new google.maps.Map(document.getElementById("map"), {
@@ -75,9 +77,6 @@
       keyboardShortcuts: false,
       mapId: "<%= ENV['GOOGLE_MAP_ID'] %>"
     });
-
-    const baseUrl = '<%= request.base_url %>';
-
 
     // ページリロードしても登録したマーカーが消えない設定
     <% @spots.each do |spot| %>
@@ -110,7 +109,4 @@
 
 </script>
 <!-- google mapのスクリプト -->
-<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLEMAPS_API_KEY']%>&callback=initMap&libraries=places&v=weekly&libraries=marker" defer></script>
-<style>
-
-</style>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLEMAPS_API_KEY']%>&callback=initMap&libraries=places,marker&v=weekly" async defer></script>
