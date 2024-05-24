@@ -65,6 +65,8 @@
 
   let markers = [];
 
+  const baseUrl = '<%= request.base_url %>';
+
   // マップの初期化設定
   function initMap() {
     map = new google.maps.Map(document.getElementById("map"), {
