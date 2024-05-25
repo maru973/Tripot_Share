@@ -2,8 +2,10 @@
   <%= image_tag "bgcard.jpg", alt: "bg-image", class: "md:block absolute inset-0 h-full w-full object-cover z-0" %>
   <%= image_tag "bgcard-sm.jpg", alt: "bg-image", class: "md:hidden absolute inset-0 h-full w-full object-cover z-0" %>
   <div class="card-body ms-4 mt-2 md:items-center md:text-center z-10 bg-opacity-0 md:mt-14 md:pt-8">
-    <h2 class="text-base truncate md:text-2xl">
+    <div class="flex text-base md:text-2xl md:px-5">
+      <div class="line-clamp-1">
       <%= plan.name %>
+      </div>
       <% if current_user.present? && current_user.id === plan.owner_id %>
         <%= link_to edit_plan_path(plan), data: { turbo_stream: true } do %>
           <span class="material-symbols-outlined pt-2 md:pt-3" style= "font-size: 16px;">
@@ -11,7 +13,7 @@
           </span>
         <% end %>
       <% end %>
-    </h2>
+    </div>
     <div class="flex md:flex-col">
       <div class="flex md:justify-center ps-1 md:ps-0">
         <span class="material-symbols-outlined md:pt-1" style= "font-size: 18px;">
