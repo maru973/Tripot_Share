@@ -1,4 +1,6 @@
 class PlansController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:index]
+
   def index
     @q = Plan.ransack(params[:q])
     @plans = @q.result(distinct: true).includes(:owner).order(created_at: :desc).page(params[:page])

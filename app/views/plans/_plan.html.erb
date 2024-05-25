@@ -4,7 +4,7 @@
   <div class="card-body ms-4 mt-2 md:items-center md:text-center z-10 bg-opacity-0 md:mt-14 md:pt-8">
     <h2 class="text-base truncate md:text-2xl">
       <%= plan.name %>
-      <% if current_user.id === plan.owner_id %>
+      <% if current_user.present? && current_user.id === plan.owner_id %>
         <%= link_to edit_plan_path(plan), data: { turbo_stream: true } do %>
           <span class="material-symbols-outlined pt-2 md:pt-3" style= "font-size: 16px;">
             edit_square
