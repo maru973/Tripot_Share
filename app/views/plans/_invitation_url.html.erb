@@ -1,11 +1,10 @@
-
-  <% if invite_link.present? %>
-    <div id="invite-link-<%= plan.id %>" class="flex flex-col" data-controller="clipboard">
-      <div data-clipboard-target='link' class="underline break-words">
-        <%= invite_link %>
-      </div>
-      <button data-action="clipboard#copyToClipboard" class="text-base-content btn btn-sm text-sm sm:text-sm mx-auto my-3">
-        リンクをコピーする
-      </button>
+<div id="invite-link">
+  <div class="flex flex-col" data-controller="clipboard">
+    <div data-clipboard-target='link' class="underline break-words">
+      <%= @invite_link %>
     </div>
-  <% end %>
+    <button data-action="clipboard#copyToClipboard" class="text-base-content btn btn-sm text-sm sm:text-sm mx-auto my-3">
+      リンクをコピーする
+    </button>
+  </div>
+</div>
