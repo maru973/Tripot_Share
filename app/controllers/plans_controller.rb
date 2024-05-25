@@ -1,5 +1,5 @@
 class PlansController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:index]
+  skip_before_action :authenticate_user!, only: %i[show index]
 
   def index
     @q = Plan.ransack(params[:q])
