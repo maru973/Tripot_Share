@@ -1,12 +1,10 @@
-<%= turbo_frame_tag 'invite_link' do %>
-  <% if @invite_link.present? %>
-    <div class="flex flex-col" data-controller="clipboard">
-      <div data-clipboard-target='link' class="underline break-words">
-        <%= @invite_link %>
-      </div>
-      <button data-action="clipboard#copyToClipboard" class="text-base-content btn btn-sm text-sm sm:text-sm mx-auto my-3">
-        リンクをコピーする
-      </button>
+<div id="invite-link">
+  <div class="flex flex-col" data-controller="clipboard">
+    <div data-clipboard-target='link' class="underline break-words">
+      <%= @invite_link %>
     </div>
-  <% end %>
-<% end %>
+    <button data-action="clipboard#copyToClipboard" class="text-base-content btn btn-sm text-sm sm:text-sm mx-auto my-3">
+      リンクをコピーする
+    </button>
+  </div>
+</div>

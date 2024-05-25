@@ -23,13 +23,15 @@
         </div>
       <% end -%>
     <% end %>
-    <%= turbo_frame_tag 'invite_link' do %>
-      <%= render 'plans/invitation_url' %>
-      <% unless @invite_link.present? %>
+    <div id="invite-link">
+      <% if @invite_link.present? %>
+        <%= render 'plans/invitation_url' %>
+      <% else %>
         <div class="flex justify-center">
-          <%= link_to "リンクを生成", invitation_plan_path(params[:id]), class:"text-base-content btn btn-accent btn-sm md:btn-md", data: {turbo_method: :post, turbo_frame: "invite_link"} %>
+          <%= link_to "リンクを生成", invitation_plan_path(params[:id]), class:"text-base-content btn btn-accent btn-sm md:btn-md", data: {turbo_method: :post, turbo_stream: true} %>
         </div>
       <% end %>
-    <% end %>
+    </div>
+
   </dialog>
 <% end %>
