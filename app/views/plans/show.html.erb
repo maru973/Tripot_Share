@@ -2,7 +2,7 @@
   <div class="flex items-center">
     <h2 class="grow text-xl md:text-2xl font-bold underline my-1 md:my-2 text-center ps-7"><%= @plan.name %></h2>
 
-    <% if current_user.member?(@plan.id) %>
+    <% if current_user.present? && current_user.member?(@plan.id) %>
      <!-- 追加メニュー -->
       <div class="flex-none dropdown dropdown-end">
         <div tabindex="0" role="button" class="pt-1 md:pr-5">
@@ -44,7 +44,7 @@
 
   <!-- 削除ボタン -->
   <div class="flex justify-around mt-3">
-    <% if current_user.id === @plan.owner_id %>
+    <% if current_user.present? && current_user.id === @plan.owner_id %>
       <%= link_to t('.destroy'), @plans_path, class:"text-base-content btn btn-error btn-sm md:btn-lg", data: {turbo_method: :delete, turbo_confirm: "#{@plan.name}を削除しますか" } %>
     <% end %>
 
