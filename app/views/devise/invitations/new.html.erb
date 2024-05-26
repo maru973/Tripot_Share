@@ -25,9 +25,13 @@
     <% end %>
 
     <%= turbo_frame_tag "invite-link" do %>
-      <div class="flex justify-center">
-        <%= button_to "リンクを生成", invitation_plan_path(params[:id]), class:"text-base-content btn btn-accent btn-sm md:btn-md" %>
-      </div>
+      <% if @invite_link.present? %>
+        <%= render template: 'plans/invitation' %>
+      <% else %>
+        <div class="flex justify-center">
+          <%= button_to "リンクを生成", invitation_plan_path(params[:id]), class:"text-base-content btn btn-accent btn-sm md:btn-md" %>
+        </div>
+      <% end %>
     <% end %>
    
   </dialog>
