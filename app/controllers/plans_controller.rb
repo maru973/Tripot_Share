@@ -104,6 +104,8 @@ class PlansController < ApplicationController
     @plan = Plan.find(params[:id])
     @plan.generate_token
     @invite_link = accept_plan_url(invitation_token: @plan.invitation_token) if @plan.invitation_token.present?
+    
+
   end
 
   def accept
