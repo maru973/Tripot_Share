@@ -5,6 +5,6 @@ class Users::SessionsController < Devise::SessionsController
       user.name = 'ゲスト'
     end
     sign_in user
-    redirect_to root_path, notice: 'ゲストユーザーとしてログインしました'
+    redirect_to plans_path, notice: 'ゲストユーザーとしてログインしました'
   end
 end
