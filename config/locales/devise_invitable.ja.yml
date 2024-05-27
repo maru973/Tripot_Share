@@ -20,7 +20,7 @@ ja:
     mailer:
       invitation_instructions:
         subject: '旅行メンバーに招待されました'
-        hello: '%{email}さん'
+        hello: '%{email}様'
         someone_invited_you: '%{url}に招待されました。以下のリンクから参加できます。'
         expired_url: '下記URLの有効期限は15分です。有効期限が切れた場合は、再度招待の依頼をしてください。'
         accept: 'このプランに参加する'
