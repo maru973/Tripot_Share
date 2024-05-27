@@ -102,8 +102,12 @@ class PlansController < ApplicationController
 
   def invitation
     @plan = Plan.find(params[:id])
-    @plan.generate_token
-    @invite_link = accept_plan_url(invitation_token: @plan.invitation_token) if @plan.invitation_token.present?
+
+    if @plan.generate_token
+      @invite_link = accept_plan_url(invitation_token: @plan.invitation_token) 
+    else
+      redirect_to plan_path(@plan), alert: "招待リンクが作成できませんでした"
+    end
   end
 
   def accept

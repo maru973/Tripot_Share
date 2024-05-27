@@ -22,8 +22,8 @@ class Plan < ApplicationRecord
 
   # トークン生成のためのメソッド
   def generate_token
-   self.invitation_token = Devise.friendly_token
-   save
+    self.invitation_token = Devise.friendly_token
+    update(invitation_token: self.invitation_token)
   end
 
   private
