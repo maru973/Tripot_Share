@@ -1,4 +1,8 @@
-<h2><%= t('.title', resource: devise_i18n_fix_model_name_case(resource.model_name.human, i18n_key: 'registrations.edit.title')) %></h2>
+<div class="flex flex-col items-center p-5">
+  <h2 class="text-xl md:text-2xl font-bold mb-1 md:mb-2 text-center">このページは現在使われていません。</h2>
+  <p>ユーザーの編集をしたい場合は<%= link_to "こちら", mypage_path, class:"link btn-link" %>からお願いいたします。</p>
+</div>
+<!--<h2><%= t('.title', resource: devise_i18n_fix_model_name_case(resource.model_name.human, i18n_key: 'registrations.edit.title')) %></h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
@@ -40,4 +44,4 @@
 
 <div><%= t('.unhappy') %> <%= button_to t('.cancel_my_account'), registration_path(resource_name), data: { confirm: t('.are_you_sure'), turbo_confirm: t('.are_you_sure') }, method: :delete %></div>
 
-<%= link_to t('devise.shared.links.back'), :back %>
+<%= link_to t('devise.shared.links.back'), :back %>-->
