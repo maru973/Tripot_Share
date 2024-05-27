@@ -8,4 +8,11 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:invite) { |u| u.permit(:email, :name, :plan_id) }
     devise_parameter_sanitizer.permit(:accept_invitation) { |u| u.permit(:password, :password_confirmation, :invitation_token, :name, :plan_id, :email) }
   end
+
+  def check_guest
+    email = current_user&.email || resource&.email || params[:user][:email].downcase
+    if email === ENV['GUEST_USER_EMAIL']
+      redirect_to root_path, alert: 'この機能はゲストユーザーでは使えません'
+    end
+  end
 end

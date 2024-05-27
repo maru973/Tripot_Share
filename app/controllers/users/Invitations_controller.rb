@@ -1,4 +1,6 @@
 class Users::InvitationsController < Devise::InvitationsController
+  before_action :check_guest, only: %i[create update]
+
   def create
     self.resource = resource_class.new
     user_email = params[:user][:email]

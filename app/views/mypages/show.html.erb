@@ -18,5 +18,8 @@
         <%= link_to "編集", edit_mypage_path, class:"text-base-content btn btn-primary", data: { turbo_stream: true } %>
       </div>
     </div>
+    <div class="flex justify-end pr-5 pb-4">
+      <%= link_to "アカウント削除", user_registration_path, class:"text-base-content btn btn-error btn-sm bg-opacity-90", data: {turbo_method: :delete, turbo_confirm: "本当にアカウントを削除しますか" } %>
+    </div>
   </div>
 </div>

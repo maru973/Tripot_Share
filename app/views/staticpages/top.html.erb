@@ -1,7 +1,6 @@
 <div class="flex flex-col justify-center items-center m-3">
   <div class="bg-info w-full">
     <div class="pt-4 md:pt-8 text-center">
-      <!--<h1 class="underline m-3">TripotShare</h1>-->
       <h1 class="text-lg md:text-3xl text-base-content text-opacity-80">私たちだけの旅行プラン、</h1>
       <h1 class="text-2xl md:text-4xl font-black">もっと気軽に。もっと楽しく。</h1>
     </div>
@@ -17,6 +16,7 @@
       <%= link_to "プランをつくってみる", new_user_registration_path, class:"text-base-content btn btn-primary btn-sm md:btn-lg" %>
     <% end %>
     <%= link_to "みんなのプランをみる", plans_path, class:"text-base-content btn btn-accent btn-sm md:btn-lg" %>
+    <%= link_to 'ゲストログイン', users_guest_sign_in_path, class:"text-base-content btn btn-accent btn-sm md:btn-lg", data: {turbo_method: :post} %>
   </div> 
 
   <div class="m-6 pt-4 md:pt-8 w-full md:w-9/12">

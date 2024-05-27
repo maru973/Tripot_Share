@@ -1,4 +1,5 @@
 class MypagesController < ApplicationController
+  before_action :check_guest, only: :update
   def show; end
 
   def edit
