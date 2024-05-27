@@ -35,6 +35,13 @@
       mapId: "<%= ENV['GOOGLE_MAP_ID'] %>"
     });
 
+    const input = document.getElementById("pac-input");
+    const options = {
+      fields: ["address_components", "name"],
+    };
+    const autocomplete = new google.maps.places.Autocomplete(input, options);
+    autocomplete.bindTo("bounds", map);
+
     // ページリロードしても登録したマーカーが消えない設定
     <% @spots.each do |spot| %>
       (() => {
