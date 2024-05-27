@@ -1,5 +1,5 @@
 class PlansController < ApplicationController
-  skip_before_action :authenticate_user!, only: %i[show index]
+  skip_before_action :authenticate_user!, only: %i[show index accept]
 
   def index
     @q = Plan.ransack(params[:q])
@@ -34,7 +34,7 @@ class PlansController < ApplicationController
   def new_spots
     @plan = Plan.find(params[:id])
     @location = Spot.find_by(name: @plan.location)
-    
+
     # memberのみ編集可
     if current_user.member?(@plan.id)
       @spot = Spot.new
@@ -103,10 +103,12 @@ class PlansController < ApplicationController
   def invitation
     @plan = Plan.find(params[:id])
 
-    if @plan.generate_token
-      @invite_link = accept_plan_url(invitation_token: @plan.invitation_token) 
-    else
-      redirect_to plan_path(@plan), alert: "招待リンクが作成できませんでした"
+    unless current_user.email === ENV['GUEST_USER_EMAIL']
+      if @plan.generate_token
+        @invite_link = accept_plan_url(invitation_token: @plan.invitation_token) 
+      else
+        redirect_to plan_path(@plan), alert: "招待リンクが作成できませんでした"
+      end
     end
   end
 

@@ -35,10 +35,10 @@
                   info
                 </span>
               </div>
-            <div tabindex="0" class="dropdown-content z-[1] p-2 w-40 shadow bg-accent rounded-lg text-center">
-              <p class="text-sm">今日は<%= l(Date.today, format: :day_name) %>です</p>
+              <div tabindex="0" class="dropdown-content z-[1] p-2 w-40 shadow bg-accent rounded-lg text-center">
+                <p class="text-sm">今日は<%= l(Date.today, format: :day_name) %>です</p>
+              </div>
             </div>
-          </div>
           </div>
           <ul class="pl-5">
             <% spot.opening_hours.split("\n").each do |hour| %>

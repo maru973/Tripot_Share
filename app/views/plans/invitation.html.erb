@@ -1,12 +1,17 @@
 <%= turbo_frame_tag "invite-link" do %>
   <div id="invite-link">
     <div class="flex flex-col" data-controller="clipboard">
-      <div data-clipboard-target='link' class="underline break-words">
-        <%= @invite_link %>
-      </div>
-      <button data-action="clipboard#copyToClipboard" class="text-base-content btn btn-sm text-sm sm:text-sm mx-auto my-3">
-        リンクをコピーする
-      </button>
+      <% if current_user.email === ENV['GUEST_USER_EMAIL'] %>
+        <p>ゲストユーザーでは招待リンクを生成できません</p>
+      <% else %>
+        <div data-clipboard-target='link' class="underline break-words">
+          <%= @invite_link %>
+        </div>
+    
+        <button data-action="clipboard#copyToClipboard" class="text-base-content btn btn-sm text-sm sm:text-sm mx-auto my-3">
+          リンクをコピーする
+        </button>
+      <% end %>
     </div>
   </div>
 <% end %>

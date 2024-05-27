@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
 
   def check_guest
     email = current_user&.email || resource&.email || params[:user][:email].downcase
-    if email === 'guest@example.com'
+    if email === ENV['GUEST_USER_EMAIL']
       redirect_to root_path, alert: 'この機能はゲストユーザーでは使えません'
     end
   end
