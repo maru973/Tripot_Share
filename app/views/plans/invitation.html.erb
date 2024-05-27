@@ -2,7 +2,7 @@
   <div id="invite-link">
     <div class="flex flex-col" data-controller="clipboard">
       <% if current_user.email === ENV['GUEST_USER_EMAIL'] %>
-        <p>ゲストユーザーでは招待リンクを生成できません</p>
+        <p class="text-center">ゲストユーザーでは招待リンクを生成できません</p>
       <% else %>
         <div data-clipboard-target='link' class="underline break-words">
           <%= @invite_link %>
