@@ -8,4 +8,11 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:invite) { |u| u.permit(:email, :name, :plan_id) }
     devise_parameter_sanitizer.permit(:accept_invitation) { |u| u.permit(:password, :password_confirmation, :invitation_token, :name, :plan_id, :email) }
   end
+
+  def check_guest
+    email = resource&.email || params[:user][:email].downcase
+    if email === 'guest@example.com'
+      redirect_to root_path, alert: 'ゲストユーザーの更新・削除はできません'
+    end
+  end
 end
