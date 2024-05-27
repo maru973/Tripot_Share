@@ -8,10 +8,22 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
-    <!-- google font-->
+    <!-- google font -->
     <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru&family=Zen+Antique+Soft&display=swap" rel="stylesheet">
 
+    <!-- google icon -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    
+    <!-- font awsome -->
+    <link href="https://use.fontawesome.com/releases/v6.2.0/css/all.css" rel="stylesheet" />
+
+    <!-- twitter card -->
+    <% if Rails.env.production? %>
+      <meta name="twitter:card" content="summary_large_image">
+      <meta property="og:title" content="Tripot Share">
+      <meta property="og:url" content="https://tripot-share.fly.dev" />
+      <meta property="og:image" content="<%= image_url "twitter_card.png" %>" />
+    <% end %>
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KVFZR0X497"></script>
