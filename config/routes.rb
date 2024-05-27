@@ -3,7 +3,9 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: {
     omniauth_callbacks: "omniauth_callbacks",
-    invitations: 'users/invitations'
+    invitations: 'users/invitations',
+    registrations: 'users/registrations',
+    passwords: 'users/passwords'
   }
 
   devise_scope :user do
