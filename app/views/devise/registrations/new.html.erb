@@ -55,6 +55,15 @@
         </div>
       <% end %>
 
+      <div class="border-b text-gray-600 pt-4"></div> 
+        <div class="px-2 text-xs md:text-sm text-gray-500">
+          お試しでアプリを触ってみたい方は下のボタンからゲストとしてログインしてください
+        </div>
+        <div class="flex justify-center pt-2">
+          <%= link_to 'ゲストログイン', users_guest_sign_in_path, class:"text-base-content btn btn-sm", data: {turbo_method: :post} %>
+        </div>
+      </div>
+
       <%= render "devise/shared/links" %>
     </div>
   </div>
