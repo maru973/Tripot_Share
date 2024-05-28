@@ -4,7 +4,7 @@ class User < ApplicationRecord
   has_many :plans, through: :members
   has_many :planned_spots, dependent: :destroy
   has_many :spots, through: :planned_spots
-  has_many :spot_rankings
+  has_many :spot_points
 
   mount_uploader :avatar, AvatarUploader
 

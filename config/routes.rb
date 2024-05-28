@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     resources :spots, only: %i[create destroy], shallow: true
     member do
       get 'new_spots'
+      get 'new_spot_point'
       get 'course'
       post 'invitation'
       get 'invitation/accept/:invitation_token', to: 'plans#accept', as: 'accept'

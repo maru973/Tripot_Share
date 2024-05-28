@@ -46,14 +46,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_28_051555) do
     t.index ["invitation_token"], name: "index_plans_on_invitation_token", unique: true
   end
 
-  create_table "spot_rankings", force: :cascade do |t|
+  create_table "spot_points", force: :cascade do |t|
     t.integer "point", default: 0, null: false
     t.bigint "user_id", null: false
     t.bigint "planned_spot_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["planned_spot_id"], name: "index_spot_rankings_on_planned_spot_id"
-    t.index ["user_id"], name: "index_spot_rankings_on_user_id"
+    t.index ["planned_spot_id"], name: "index_spot_points_on_planned_spot_id"
+    t.index ["user_id"], name: "index_spot_points_on_user_id"
   end
 
   create_table "spots", force: :cascade do |t|
@@ -102,6 +102,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_28_051555) do
   add_foreign_key "planned_spots", "spots"
   add_foreign_key "planned_spots", "users"
   add_foreign_key "plans", "users", column: "owner_id"
-  add_foreign_key "spot_rankings", "planned_spots"
-  add_foreign_key "spot_rankings", "users"
+  add_foreign_key "spot_points", "planned_spots"
+  add_foreign_key "spot_points", "users"
 end

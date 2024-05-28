@@ -100,6 +100,21 @@ class PlansController < ApplicationController
     end
   end
 
+  def new_spot_point
+    @plan = Plan.find(params[:id])
+    @location = Spot.find_by(name: @plan.location)
+    @spots = @plan.spots
+
+    @spots.each do |spot|
+      @spot_subscribers[spot.id] = User.joins(:planned_spots).where(planned_spots: { plan_id: @plan.id, spot_id: spot.id })
+    end
+
+    # memberのみ編集可
+    if current_user.member?(@plan.id)
+      
+    end
+  end
+
   def invitation
     @plan = Plan.find(params[:id])
 

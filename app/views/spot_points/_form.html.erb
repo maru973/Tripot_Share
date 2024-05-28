@@ -1,0 +1,8 @@
+<div id="point-form">
+  <%= form_with model: spot_point do |f|%>
+    <div class="flex mx-auto md:mx-20 my-3 border rounded-lg"> 
+      <% f.label :point %>
+      <%= f.select :point, options_for_select({ "5 絶対行きたい" => 5, "4 時間があったら行きたい" => 4, "3 暇になったら行きたい" => 3, "2 あまり行きたくない" => 2, "1 今回はパス" => 1 }), {include_blank: ""}, {class: "select select-xs md:select-sm select-bordered"} %>
+    </div>
+  <% end %>
+</div>
