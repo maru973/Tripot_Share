@@ -1,21 +1,20 @@
-
-  <tr id="spot-<%= spot.id %>">
-    <td>1</td>
-    <td>  
-      <%= render 'spots/modal', spot: spot %>
-    </td>
-    <td>
-      <%= link_to "#", class:"hover:brightness-75" do %>
-        <div class="avatar">
-            <div class="rounded-full mx-2 md:mx-auto w-7 h-7 md:w-12 md:h-12">
-              <%= image_tag "sample.jpg", alt:"Avatar" %>
-            </div>
-        </div>
-      <% end %>
-    </td>
-    <td class="whitespace-nowrap">3. 時間があったら行きたい</td>
-    <th>
-      <%= link_to '編集', edit_spot_point_path(spot, plan_id:plan.id), data: { turbo_stream: true } %>
-    </th>
-  </tr>
+<tr id="spot-<%= spot.id %>">
+  <td>1</td>
+  <td>  
+    <%= render 'spots/modal', spot: spot %>
+  </td>
+  <td>
+    <%= link_to "#", class:"hover:brightness-75" do %>
+      <div class="avatar">
+          <div class="rounded-full mx-2 md:mx-auto w-7 h-7 md:w-12 md:h-12">
+            <%= image_tag "sample.jpg", alt:"Avatar" %>
+          </div>
+      </div>
+    <% end %>
+  </td>
+  <td class="whitespace-nowrap">3. 時間があったら行きたい</td>
+  <td>
+    <%= link_to '編集', edit_spot_point_path(spot, plan_id: plan.id), data: { turbo_stream: true } %>
+  </td>
+</tr>
 

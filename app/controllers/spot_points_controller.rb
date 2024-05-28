@@ -27,11 +27,8 @@ class SpotPointsController < ApplicationController
   end
 
   def update
-    if @spot_point.update(spot_point_params)
-      redirect_to spot_points_path(@plan), notice: 'Spot point was successfully updated.'
-    else
-      render :edit
-    end
+    @spot_point = current_user.spot_points.find_by(planned_spot_id: @planned_spot.id)
+    @spot_point.update(spot_point_params)
   end
 
   private
@@ -47,6 +44,6 @@ class SpotPointsController < ApplicationController
   end
 
   def spot_point_params
-    params.require(:spot_point).permit(:point, :plan_id)
+    params.require(:spot_point).permit(:point)
   end
 end

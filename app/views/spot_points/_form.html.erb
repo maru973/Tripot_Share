@@ -20,7 +20,10 @@
       </div>
     </td>
     <th>
+      <div class="flex gap-3">
+      <%= link_to '戻る', spot_points_path(params[:plan_id]), class: "text-base-content btn btn-primary" %>
       <%= f.submit "更新", class:"text-base-content btn btn-info" %>
+      </div>
     </th>
   <% end %>
 </tr>
