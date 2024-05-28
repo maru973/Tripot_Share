@@ -1,10 +1,10 @@
 <% if @planned_spot.save %>
   <%= turbo_stream.append "map", partial: "marker" %>
   <%= turbo_stream.append "spot-table-#{@user.id}" do %>
-    <%= render "spot", spot: @spot, plan: @planned_spot.plan, planned_spot: @planned_spot %>
+    <%= render "spot", spot: @spot, plan: @planned_spot.plan %>
   <% end %>
 <% end %>
 <%= turbo_stream.prepend "flash", partial: "shared/flash_message" %>
 <%= turbo_stream.replace "spot-form" do %>
-  <%= render "form", spot: Spot.new, plan: @planned_spot.plan %>
+  <%= render "form", spot: Spot.new, plan: @planned_spot.plan, user_id: @planned_spot.user_id %>
 <% end %>

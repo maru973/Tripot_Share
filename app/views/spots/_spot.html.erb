@@ -12,7 +12,7 @@
       </div>
     <% end %>
   </td>
-
+  <% if current_user.present? && current_user.id === user_id %>
     <td class="hidden md:block">
       <%= link_to "削除", spot_path(spot, plan_id:plan.id), class:"text-base-content btn btn-error", data: {turbo_method: :delete, turbo_confirm: t('defaults.flash_message.delete_confirm') }, onclick: "removeMarker(#{spot.id});" %>
     </td>
@@ -23,7 +23,9 @@
         </span>
       <% end %>
     </td>
-
+  <% else %>
+    <td></td>
+  <% end %>
   <th>
     <label>
       <input type="checkbox" class="checkbox" />
