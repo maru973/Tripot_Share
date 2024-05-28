@@ -1,9 +1,9 @@
 class SpotPointsController < ApplicationController
-  def new
+  def index
     @plan = Plan.find(params[:id])
     @location = Spot.find_by(name: @plan.location)
     @users = @plan.users
-    @spots = @plan.spots # マーカーを表示に使用
+    @spots = @plan.spots
     @user_spots = {}
     @spot_subscribers = {}
     
@@ -22,7 +22,7 @@ class SpotPointsController < ApplicationController
   end
 
   def create
-
+    @
   end
-  
+
 end
