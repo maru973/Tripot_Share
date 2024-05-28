@@ -15,7 +15,7 @@
     </td>
     <td class="whitespace-nowrap">3. 時間があったら行きたい</td>
     <th>
-      <%= link_to '編集', edit_spot_point_path(plan), data: { turbo_stream: true } %>
+      <%= link_to '編集', edit_spot_point_path(spot, plan_id:plan.id), data: { turbo_stream: true } %>
     </th>
   </tr>
 

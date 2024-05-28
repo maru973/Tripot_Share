@@ -22,7 +22,9 @@ class SpotPointsController < ApplicationController
     @invite_link = accept_plan_url(invitation_token: @plan.invitation_token) if @plan.invitation_token.present?
   end
 
-  def edit; end
+  def edit
+    @spot_point = current_user.spot_points.find_by(planned_spot_id: @planned_spot.id)
+  end
 
   def update
     if @spot_point.update(spot_point_params)
@@ -41,10 +43,10 @@ class SpotPointsController < ApplicationController
 
   def set_spot_point
     @planned_spot = PlannedSpot.find_by(plan_id: @plan.id, spot_id: @spot.id)
-    @spot_point = SpotPoint.find_or_initialize_by(user_id: current_user.id, planned_spot_id: @planned_spot.id)
+    @spot_point = SpotPoint.find_or_create_by(user_id: current_user.id, planned_spot_id: @planned_spot.id)
   end
 
   def spot_point_params
-    params.require(:spot_point).permit(:point)
+    params.require(:spot_point).permit(:point, :plan_id)
   end
 end

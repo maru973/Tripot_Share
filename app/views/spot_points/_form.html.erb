@@ -1,18 +1,18 @@
-<%= form_with model: spot_point do |f|%>
-  <tr id="spot-<%= spot.id %>">
-    <td>1</td>
-    <td>  
-      <%= render 'spots/modal', spot: spot %>
-    </td>
-    <td>
-      <%= link_to "#", class:"hover:brightness-75" do %>
-        <div class="avatar">
-            <div class="rounded-full mx-2 md:mx-auto w-7 h-7 md:w-12 md:h-12">
-              <%= image_tag "sample.jpg", alt:"Avatar" %>
-            </div>
-        </div>
-      <% end %>
-    </td>
+<tr id="spot-<%= spot.id %>">
+  <td>1</td>
+  <td>  
+    <%= render 'spots/modal', spot: spot %>
+  </td>
+  <td>
+    <%= link_to "#", class:"hover:brightness-75" do %>
+      <div class="avatar">
+          <div class="rounded-full mx-2 md:mx-auto w-7 h-7 md:w-12 md:h-12">
+            <%= image_tag "sample.jpg", alt:"Avatar" %>
+          </div>
+      </div>
+    <% end %>
+  </td>
+  <%= form_with model: spot_point do |f|%>
     <td>
       <div class="flex mx-auto md:mx-20 my-3 border rounded-lg"> 
         <% f.label :point %>
@@ -22,5 +22,5 @@
     <th>
       <%= f.submit "更新", class:"text-base-content btn btn-info" %>
     </th>
-  </tr>
-<% end %>
+  <% end %>
+</tr>

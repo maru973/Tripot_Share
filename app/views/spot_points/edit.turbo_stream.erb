@@ -1,3 +1,3 @@
 <%= turbo_stream.replace "spot-#{@spot.id}" do %>
-  <%= render 'form', spot: @spot, spot_point: @spot_point %>
+  <%= render 'form', spot_point: @spot_point, spot: @spot %>
 <% end %>
