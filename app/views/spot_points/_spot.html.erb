@@ -14,7 +14,7 @@
   </td>
   <td class="whitespace-nowrap"><%=  spot_point.point %>ポイント</td>
   <td>
-    <%= link_to '編集', edit_spot_point_path(spot, plan_id: plan.id), data: { turbo_stream: true } %>
+    <%= link_to '編集', edit_spot_point_path(spot, plan_id: plan.id), data: { turbo_stream: true }, class:"text-base-content btn btn-sm md:btn-md btn-info" %>
   </td>
 </tr>
 
