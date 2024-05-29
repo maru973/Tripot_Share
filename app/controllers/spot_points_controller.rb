@@ -7,17 +7,13 @@ class SpotPointsController < ApplicationController
     @location = Spot.find_by(name: @plan.location)
     @users = @plan.users
     @spots = @plan.spots
-    @planned_spots = @plan.planned_spots
     @user_spots = {}
     @spot_subscribers = {}
-    @spot_points = {}
-
-    @planned_spots.each do |p|
-      @spot_points = SpotPoint.where(planned_spot_id: p.id, user_id: current_user.id)
-    end
 
     @spots.each do |spot|
       @spot_subscribers[spot.id] = User.joins(:planned_spots).where(planned_spots: { plan_id: @plan.id, spot_id: spot.id })
+      @planned_spot = PlannedSpot.find_by(plan_id: @plan.id, spot_id: spot.id)
+      @spot_point = SpotPoint.find_or_create_by(user_id: current_user.id, planned_spot_id: @planned_spot.id)
     end
     
     @users.each do |user|
