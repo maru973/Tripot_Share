@@ -16,7 +16,7 @@
     <%= form_with model: spot_point do |f|%>
       <div class="flex mx-auto gap-2">
         <% f.label :point %>
-        <%= f.select :point, options_for_select({ "4. 絶対行きたい" => 4, "3. 時間があったら行きたい" => 3, "2. どっちでもいい" => 2, "1. あまり行きたくない" => 1, "0. 今回はパス" => 0 }), {include_blank: ""}, {class: "select select-sm md:select-md select-bordered"} %>
+        <%= f.select :point, options_for_select({ "4. 絶対行きたい" => 4, "3. 時間があったら行きたい" => 3, "2. どっちでもいい" => 2, "1. あまり行きたくない" => 1, "0. 今回はパス" => 0 }, spot_point.point), {}, {class: "select select-sm md:select-md select-bordered"} %>
         <%= f.submit "更新", class:"text-base-content btn btn-sm md:btn-md btn-info" %>
       </div>
     <% end %>

@@ -7,11 +7,12 @@
   <div id="map" class="border w-full h-[250px] md:h-[400px] mt-1"></div>
 
   <!-- 登録済みリスト -->
-  <%= render 'list', users: @users, user_spots: @user_spots, plan: @plan, spot_point: @spot_point %>
 
+  <%= render 'list', users: @users, user_spots: @user_spots, plan: @plan, spot_points: @spot_points %>
+
+  <!-- 一覧ページボタン --> 
   <div class="flex justify-around mt-3">
-    <!-- 一覧ページボタン --> 
-    <%= link_to t('.back_index'), plans_path, class:"text-base-content btn btn-accent btn-sm md:btn-lg" %>
+    <%= link_to t('.back_index'), plan_path(@plan), class:"text-base-content btn btn-accent btn-sm md:btn-lg" %>
   </div>
 </article>
 

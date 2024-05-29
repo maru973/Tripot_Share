@@ -9,11 +9,12 @@ class SpotPointsController < ApplicationController
     @spots = @plan.spots
     @user_spots = {}
     @spot_subscribers = {}
+    @spot_points = {}
 
     @spots.each do |spot|
       @spot_subscribers[spot.id] = User.joins(:planned_spots).where(planned_spots: { plan_id: @plan.id, spot_id: spot.id })
       @planned_spot = PlannedSpot.find_by(plan_id: @plan.id, spot_id: spot.id)
-      @spot_point = SpotPoint.find_or_create_by(user_id: current_user.id, planned_spot_id: @planned_spot.id)
+      @spot_points[spot.id] = SpotPoint.find_or_create_by(user_id: current_user.id, planned_spot_id: @planned_spot.id)
     end
     
     @users.each do |user|

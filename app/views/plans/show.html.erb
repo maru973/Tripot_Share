@@ -26,6 +26,17 @@
             <% end %>
           </li>
 
+          <!--<li class="text-xs md:text-lg">
+            <div class="md:tooltip md:tooltip-left md:tooltip-accent" data-tip="登録したスポットの行きたい度合いを選択して投票しよう！メンバーが投票した結果を集計してランキングをつくるよ！">
+              <%= link_to plan_spot_points_path(@plan), data: { turbo: false } do %>
+                <span class= "material-symbols-outlined" style= "font-size: 20px;">
+                  how_to_vote
+                </span>
+                ランキング投票
+              <% end %>
+            </div>
+          </li>-->
+
           <li class="text-xs md:text-lg">
             <div data-controller="modal">
               <%= render template: 'devise/invitations/new', locals: { resource: @user, resource_name: @resource_name } %>
