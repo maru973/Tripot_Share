@@ -51,7 +51,7 @@
   <!-- 削除ボタン -->
   <div class="flex justify-around mt-3">
     <% if current_user.present? && current_user.id === @plan.owner_id %>
-      <%= link_to t('.destroy'), plans_path, class:"text-base-content btn btn-error btn-sm md:btn-lg", data: {turbo_method: :delete, turbo_confirm: "#{@plan.name}を削除しますか" } %>
+      <%= link_to t('.destroy'), plan_path(@plan), class:"text-base-content btn btn-error btn-sm md:btn-lg", data: {turbo_method: :delete, turbo_confirm: "#{@plan.name}を削除しますか" } %>
     <% end %>
 
     <!-- 一覧ページボタン --> 
