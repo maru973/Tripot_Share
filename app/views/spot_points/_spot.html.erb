@@ -12,11 +12,7 @@
       </div>
     <% end %>
   </td>
-
-  <!-- spot_pointsからspot.idと同じ値のデータを持ってくる。lastだとspot_pointを取り出す。-->
-  
-    <td class="whitespace-nowrap"><%=  spot_point.point %>ポイント</td>
-
+  <td class="whitespace-nowrap"><%=  spot_point.point %>ポイント</td>
   <td>
     <%= link_to '編集', edit_spot_point_path(spot, plan_id: plan.id), data: { turbo_stream: true }, class:"text-base-content btn btn-sm md:btn-md btn-info" %>
   </td>
