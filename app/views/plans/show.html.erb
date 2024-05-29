@@ -27,12 +27,14 @@
           </li>
 
           <li class="text-xs md:text-lg">
-            <%= link_to plan_spot_points_path(@plan), data: { turbo: false } do %>
-              <span class= "material-symbols-outlined" style= "font-size: 20px;">
-                how_to_vote
-              </span>
-              ランキング投票
-            <% end %>
+            <div class="md:tooltip md:tooltip-left md:tooltip-accent" data-tip="登録したスポットの行きたい度合いを選択してランキングをつろう！">
+              <%= link_to plan_spot_points_path(@plan), data: { turbo: false } do %>
+                <span class= "material-symbols-outlined" style= "font-size: 20px;">
+                  how_to_vote
+                </span>
+                ランキング投票
+              <% end %>
+            </div>
           </li>
 
           <li class="text-xs md:text-lg">
