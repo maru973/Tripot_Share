@@ -1,5 +1,5 @@
 class PlansController < ApplicationController
-  skip_before_action :authenticate_user!, only: %i[show index accept]
+  skip_before_action :authenticate_user!, only: %i[show index]
 
   def index
     @q = Plan.ransack(params[:q])
@@ -97,21 +97,6 @@ class PlansController < ApplicationController
       redirect_to plans_path, status: :see_other, notice: "プランが削除されました"
     else
       redirect_to plans_path, alert: "あなたはこのプランのオーナーではないため削除できません"
-    end
-  end
-
-  def new_spot_point
-    @plan = Plan.find(params[:id])
-    @location = Spot.find_by(name: @plan.location)
-    @spots = @plan.spots
-
-    @spots.each do |spot|
-      @spot_subscribers[spot.id] = User.joins(:planned_spots).where(planned_spots: { plan_id: @plan.id, spot_id: spot.id })
-    end
-
-    # memberのみ編集可
-    if current_user.member?(@plan.id)
-      
     end
   end
 
