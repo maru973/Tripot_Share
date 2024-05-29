@@ -26,7 +26,7 @@
             </thead>
               <tbody id="spot-table-<%= user.id %>">
                 <% user_spots[user.id].each do |spot| %>
-                  <%= render partial: 'spot', locals: { spot: spot, plan: plan, user_id: user.id} %>
+                  <%= render partial: 'spot', locals: { spot: spot, plan: plan, user_id: user.id, spot_point: spot_point} %>
                 <% end %>
               </tbody>
           </table>

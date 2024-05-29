@@ -12,7 +12,7 @@
       </div>
     <% end %>
   </td>
-  <td class="whitespace-nowrap">3. 時間があったら行きたい</td>
+  <td class="whitespace-nowrap"><%=  spot_point.point %>ポイント</td>
   <td>
     <%= link_to '編集', edit_spot_point_path(spot, plan_id: plan.id), data: { turbo_stream: true } %>
   </td>

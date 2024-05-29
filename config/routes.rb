@@ -23,9 +23,9 @@ Rails.application.routes.draw do
   
   resources :plans do
     resources :spots, only: %i[create destroy], shallow: true
+    resources :spot_points, only: %i[index update edit], shallow: true
     member do
       get 'new_spots'
-      resources :spot_points, shallow: true
       get 'course'
       post 'invitation'
       get 'invitation/accept/:invitation_token', to: 'plans#accept', as: 'accept'
@@ -38,6 +38,7 @@ Rails.application.routes.draw do
 
   resources :courses
   resource :spots, only: %i[create destroy]
+  resources :spot_points, only: %i[index update edit]
 
   resource :mypage, only: %i[show edit destroy update]
   get 'myplans', to: 'mypages#myplans'
