@@ -38,7 +38,6 @@ Rails.application.routes.draw do
 
   resources :courses
   resource :spots, only: %i[create destroy]
-  resources :spot_points, only: %i[index update edit]
 
   resource :mypage, only: %i[show edit destroy update]
   get 'myplans', to: 'mypages#myplans'

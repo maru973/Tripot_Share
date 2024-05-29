@@ -1,6 +1,6 @@
 class SpotPointsController < ApplicationController
-  before_action :set_plan_and_spot, only: [:edit, :update]
-  before_action :set_spot_point, only: [:edit, :update]
+  before_action :set_plan_and_spot, only: [:edit]
+  before_action :set_spot_point, only: [:edit]
 
   def index
     @plan = Plan.find(params[:plan_id])
@@ -33,7 +33,7 @@ class SpotPointsController < ApplicationController
   end
 
   def update
-    @spot_point = current_user.spot_points.find_by(planned_spot_id: @planned_spot.id)
+    @spot_point = current_user.spot_points.find(params[:id])
     @spot_point.update(spot_point_params)
   end
 

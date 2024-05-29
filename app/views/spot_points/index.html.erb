@@ -21,9 +21,6 @@
 
 
 <script>
-  // 他のファイルでも使用できるようにfunctionの外側で定義
-  let map
-
   let markers = [];
 
   const baseUrl = '<%= request.base_url %>';
@@ -67,17 +64,6 @@
         markers.push(marker);
       })();
     <% end %>
-  }
-
-  function removeMarker(markerId) {
-    // マーカー配列の中から指定されたspot.idのマーカーを探して削除する
-    markers = markers.filter(marker => {
-      if (marker.id == markerId) {
-        marker.setMap(null); // マーカーを地図から削除
-        return false; // 配列から削除
-      }
-      return true; // 配列に残す
-    });
   }
 
 </script>
