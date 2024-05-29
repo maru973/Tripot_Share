@@ -1,0 +1,27 @@
+<tr id="spot-<%= spot.id %>">
+  <td>1</td>
+  <td>  
+    <%= render 'spots/modal', spot: spot %>
+  </td>
+  <td>
+    <%= link_to "#", class:"hover:brightness-75" do %>
+      <div class="avatar">
+          <div class="rounded-full mx-2 md:mx-auto w-7 h-7 md:w-12 md:h-12">
+            <%= image_tag "sample.jpg", alt:"Avatar" %>
+          </div>
+      </div>
+    <% end %>
+  </td>
+  <td>
+    <%= form_with model: spot_point do |f|%>
+      <div class="flex mx-auto gap-2">
+        <% f.label :point %>
+        <%= f.select :point, options_for_select({ "4. 絶対行きたい" => 4, "3. 時間があったら行きたい" => 3, "2. どっちでもいい" => 2, "1. あまり行きたくない" => 1, "0. 今回はパス" => 0 }), {include_blank: ""}, {class: "select select-sm md:select-md select-bordered"} %>
+        <%= f.submit "更新", class:"text-base-content btn btn-sm md:btn-md btn-info" %>
+      </div>
+    <% end %>
+  </td>
+  <td>
+    <%= link_to '戻る', plan_spot_points_path(plan_id), class: "text-base-content btn btn-sm md:btn-md btn-primary" %>
+  </td>
+</tr>

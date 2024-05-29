@@ -3,9 +3,6 @@
     <div class="flex overflow-x-auto">
       <div class="flex-none">
         <ul class="list-reset flex">
-          <li class="mr-1" data-tabs-target="tab" data-action="click->tabs#change">
-            <a class="text-xs md:text-lg inline-block px-2 md:py-2 md:px-4 rounded-t-xl">ランキング</a>
-          </li>
           <% users.each do |user| %>
             <li class="mr-1" data-tabs-target="tab" data-action="click->tabs#change">
               <a class="text-xs md:text-lg inline-block px-2 md:py-2 md:px-4 rounded-t-xl"><%= user.name %></a>
@@ -14,24 +11,6 @@
         </ul>
       </div>
     </div>
-    <div class="hidden py-4 px-4 border bg-base-100 rounded-box rounded-tl-none" data-tabs-target="panel">
-        <div class="overflow-auto h-[400px] w-[300px] md:w-[1300px] mx-auto">
-          <table class="table table-sm md:table-md table-pin-rows table-pin-cols">
-            <thead>
-              <tr>
-                <th class="md:w-[100px]"></th>
-                <th>スポット名</th>
-                <th class="md:w-[100px]">登録者</th>
-                <th class="md:w-[100px]"></th>
-                <th class="md:w-[100px]"></th>
-              </tr>
-            </thead>
-              <tbody id="spot-table-#">
-
-              </tbody>
-          </table>
-        </div>
-      </div>
     <% users.each do |user| %>
       <div class="hidden py-4 px-4 border bg-base-100 rounded-box rounded-tl-none" data-tabs-target="panel">
         <div class="overflow-auto h-[400px] w-[300px] md:w-[1300px] mx-auto">
@@ -41,13 +20,13 @@
                 <th class="md:w-[100px]"></th>
                 <th>スポット名</th>
                 <th class="md:w-[100px]">登録者</th>
+                <th class="md:w-[100px] md:text-center">行きたい度</th>
                 <th class="md:w-[100px]"></th>
-                <th class="md:w-[100px]">合計行きたい度</th>
               </tr>
             </thead>
               <tbody id="spot-table-<%= user.id %>">
                 <% user_spots[user.id].each do |spot| %>
-                  <%= render partial: 'spots/spot', locals: { spot: spot, plan: plan, user_id: user.id} %>
+                  <%= render partial: 'spot', locals: { spot: spot, plan: plan, user_id: user.id, spot_point: spot_point} %>
                 <% end %>
               </tbody>
           </table>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_16_132128) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_28_051555) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -44,6 +44,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_16_132128) do
     t.string "invitation_token"
     t.string "location", null: false
     t.index ["invitation_token"], name: "index_plans_on_invitation_token", unique: true
+  end
+
+  create_table "spot_points", force: :cascade do |t|
+    t.integer "point", default: 0, null: false
+    t.bigint "user_id", null: false
+    t.bigint "planned_spot_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["planned_spot_id"], name: "index_spot_points_on_planned_spot_id"
+    t.index ["user_id"], name: "index_spot_points_on_user_id"
   end
 
   create_table "spots", force: :cascade do |t|
@@ -92,4 +102,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_16_132128) do
   add_foreign_key "planned_spots", "spots"
   add_foreign_key "planned_spots", "users"
   add_foreign_key "plans", "users", column: "owner_id"
+  add_foreign_key "spot_points", "planned_spots"
+  add_foreign_key "spot_points", "users"
 end
