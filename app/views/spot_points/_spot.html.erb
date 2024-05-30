@@ -1,5 +1,5 @@
 <tr id="spot-<%= spot.id %>">
-  <td>1</td>
+  <td><%= index + 1 %></td>
   <td>  
     <%= render 'spots/modal', spot: spot %>
   </td>
@@ -7,7 +7,7 @@
     <%= link_to "#", class:"hover:brightness-75" do %>
       <div class="avatar">
           <div class="rounded-full mx-2 md:mx-auto w-7 h-7 md:w-12 md:h-12">
-            <%= image_tag "sample.jpg", alt:"Avatar" %>
+            <%= image_tag user.avatar_url, alt:"Avatar" %>
           </div>
       </div>
     <% end %>

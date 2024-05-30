@@ -29,12 +29,12 @@
               <th class="md:w-[100px]"></th>
             </tr>
           </thead>
-            <tbody id="ranking-table-#">
-              <% spots.each do |spot| %>
+            <tbody id="ranking-table">
+              <% spots.each_with_index do |spot, index| %>
                 <% spot_point = spot_points.find { |spot_id, spot_point| spot_id == spot.id }&.last %>
                 <% spot_subscribers[spot.id].each do |user| %>
                   <% if spot_point %>
-                    <%= render partial: 'spots/spot_rankig', locals: { spot: spot, plan: plan, user: user, spot_point: spot_point, tab_type: 'ranking' } %>
+                    <%= render partial: 'spots/spot_rankig', locals: { spot: spot, plan: plan, user: user, spot_point: spot_point, spot_counter: spot_counter, index: index, tab_type: 'ranking' } %>
                   <% end %>
                 <% end %>
               <% end %>
@@ -56,10 +56,12 @@
               </tr>
             </thead>
               <tbody id="spot-table-<%= user.id %>">
-                <% user_spots[user.id].each do |spot| %>
+                <% user_spots[user.id].each_with_index do |spot, index| %>
+                  <% spot_counter = 1 %>
                   <% spot_point = spot_points.find { |spot_id, spot_point| spot_id == spot.id }&.last %>
                   <% if spot_point %>
-                    <%= render partial: 'spots/spot_rankig', locals: { spot: spot, plan: plan, user: user, spot_point: spot_point, tab_type: 'user' } %>
+                    <%= render partial: 'spots/spot_rankig', locals: { spot: spot, plan: plan, user: user, spot_point: spot_point, spot_counter: spot_counter, index: index, tab_type: 'user' } %>
+                    <% spot_counter += 1 %>
                   <% end %>
                 <% end %>
               </tbody>
