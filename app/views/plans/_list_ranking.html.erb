@@ -17,7 +17,6 @@
         </ul>
       </div>
     </div>
-    <% users.each do |user| %>
     <div class="hidden py-4 px-4 border bg-base-100 rounded-box rounded-tl-none" data-tabs-target="panel">
       <div class="overflow-auto h-[400px] w-[300px] md:w-[1300px] mx-auto">
         <table class="table table-sm md:table-md table-pin-rows table-pin-cols">
@@ -33,14 +32,17 @@
             <tbody id="ranking-table-#">
               <% spots.each do |spot| %>
                 <% spot_point = spot_points.find { |spot_id, spot_point| spot_id == spot.id }&.last %>
-                <% if spot_point %>
-                  <%= render partial: 'spots/spot_rankig', locals: { spot: spot, plan: plan, user_id: user.id, spot_point: spot_point} %>
+                  <% @spot_subscribers[spot.id].each do |user| %>
+                  <% if spot_point %>
+                    <%= render partial: 'spots/spot_rankig', locals: { spot: spot, plan: plan, user: user, spot_point: spot_point} %>
+                  <% end %>
                 <% end %>
               <% end %>
             </tbody>
         </table>
       </div>
     </div>
+    <% users.each do |user| %>
       <div class="hidden py-4 px-4 border bg-base-100 rounded-box rounded-tl-none" data-tabs-target="panel">
         <div class="overflow-auto h-[400px] w-[300px] md:w-[1300px] mx-auto">
           <table class="table table-sm md:table-md table-pin-rows table-pin-cols">
@@ -57,7 +59,7 @@
                 <% user_spots[user.id].each do |spot| %>
                   <% spot_point = spot_points.find { |spot_id, spot_point| spot_id == spot.id }&.last %>
                   <% if spot_point %>
-                    <%= render partial: 'spots/spot_rankig', locals: { spot: spot, plan: plan, user_id: user.id, spot_point: spot_point} %>
+                    <%= render partial: 'spots/spot_rankig', locals: { spot: spot, plan: plan, user: user, spot_point: spot_point} %>
                   <% end %>
                 <% end %>
               </tbody>
