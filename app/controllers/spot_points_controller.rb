@@ -27,6 +27,7 @@ class SpotPointsController < ApplicationController
 
   def edit
     @spot_point = current_user.spot_points.find_by(planned_spot_id: @planned_spot.id)
+    @user = @spot_point.planned_spot.user
   end
 
   def update
