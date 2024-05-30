@@ -33,6 +33,7 @@ class SpotPointsController < ApplicationController
     @spot_point = current_user.spot_points.find(params[:id])
     @spot = @spot_point.planned_spot.spot
     @plan = @spot_point.planned_spot.plan
+    @user = @spot_point.planned_spot.user
     @spot_point.update(spot_point_params)
   end
 
