@@ -1,0 +1,67 @@
+<div class="m-5">
+  <div data-controller="tabs" data-tabs-active-tab-class="-mb-px border-l border-t border-r rounded-t-xl bg-primary">
+    <div class="flex overflow-x-auto">
+      <div class="flex-none">
+        <ul class="list-reset flex">
+          <!-- ランキングタブ -->
+          <li class="mr-1" data-tabs-target="tab" data-action="click->tabs#change">
+            <a class="text-xs md:text-lg inline-block px-2 md:py-2 md:px-4 rounded-t-xl">ランキング</a>
+          </li>
+
+          <!-- ユーザータブ -->
+          <% users.each do |user| %>
+            <li class="mr-1" data-tabs-target="tab" data-action="click->tabs#change">
+              <a class="text-xs md:text-lg inline-block px-2 md:py-2 md:px-4 rounded-t-xl"><%= user.name %></a>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+    <div class="hidden py-4 px-4 border bg-base-100 rounded-box rounded-tl-none" data-tabs-target="panel">
+      <div class="overflow-auto h-[400px] w-[300px] md:w-[1300px] mx-auto">
+        <table class="table table-sm md:table-md table-pin-rows table-pin-cols">
+          <thead>
+            <tr>
+              <th class="md:w-[100px]"></th>
+              <th>スポット名</th>
+              <th class="md:w-[100px]">登録者</th>
+              <th class="md:w-[100px]">みんなの行きたい度</th>
+              <th class="md:w-[100px]"></th>
+            </tr>
+          </thead>
+            <tbody id="ranking-table">
+              <% spots.each_with_index do |spot, index| %>
+                <% spot_point = spot_points.find { |spot_id, spot_point| spot_id == spot.id }&.last %>
+                <% spot_subscribers[spot.id].each do |user| %>
+                  <%= render partial: 'spots/spot_rankig', locals: { spot: spot, plan: plan, user: user, spot_point: spot_point, spot_counter: spot_counter, index: index, tab_type: 'ranking' } %>
+                <% end %>
+              <% end %>
+            </tbody>
+        </table>
+      </div>
+    </div>
+    <% users.each do |user| %>
+      <div class="hidden py-4 px-4 border bg-base-100 rounded-box rounded-tl-none" data-tabs-target="panel">
+        <div class="overflow-auto h-[400px] w-[300px] md:w-[1300px] mx-auto">
+          <table class="table table-sm md:table-md table-pin-rows table-pin-cols">
+            <thead>
+              <tr>
+                <th class="md:w-[100px]"></th>
+                <th>スポット名</th>
+                <th class="md:w-[100px]">登録者</th>
+                <th class="md:w-[100px] md:text-center">みんなの行きたい度</th>
+                <th class="md:w-[100px]"></th>
+              </tr>
+            </thead>
+              <tbody id="spot-table-<%= user.id %>">
+                <% user_spots[user.id].each_with_index do |spot, index| %>
+                  <% spot_point = spot_points.find { |spot_id, spot_point| spot_id == spot.id }&.last %>
+                  <%= render partial: 'spots/spot_rankig', locals: { spot: spot, plan: plan, user: user, spot_point: spot_point, spot_counter: spot_counter, index: index, tab_type: 'user' } %>
+                <% end %>
+              </tbody>
+          </table>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

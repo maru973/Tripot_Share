@@ -29,7 +29,7 @@
                   <!-- spot_pointsからspot.idと同じ値のデータを持ってくる。lastだとspot_pointを取り出す。--> 
                   <% spot_point = spot_points.find { |spot_id, spot_point| spot_id == spot.id }&.last %>
                   <% if spot_point %>
-                    <%= render partial: 'spot', locals: { spot: spot, plan: plan, user_id: user.id, spot_point: spot_point} %>
+                    <%= render partial: 'spot', locals: { spot: spot, plan: plan, user: user, spot_point: spot_point } %>
                   <% end %>
                 <% end %>
               </tbody>
