@@ -27,12 +27,14 @@ class SpotPointsController < ApplicationController
 
   def edit
     @spot_point = current_user.spot_points.find_by(planned_spot_id: @planned_spot.id)
+    @user = @spot_point.planned_spot.user
   end
 
   def update
     @spot_point = current_user.spot_points.find(params[:id])
     @spot = @spot_point.planned_spot.spot
     @plan = @spot_point.planned_spot.plan
+    @user = @spot_point.planned_spot.user
     @spot_point.update(spot_point_params)
   end
 
