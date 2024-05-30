@@ -1,5 +1,6 @@
 class PlansController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[show index]
+  before_action :point_calculate, only: [:show]
 
   def index
     @q = Plan.ransack(params[:q])
@@ -141,5 +142,13 @@ class PlansController < ApplicationController
 
   def plan_params
     params.require(:plan).permit(:name, :start_date, :end_date, :invitation_token, :location)
+  end
+
+  def point_calculate
+    @plan = Plan.find(params[:id])
+    @spot_points = SpotPoint.joins(:planned_spot)
+      .where(planned_spots: { plan_id: @plan.id })
+      .group('planned_spots.spot_id')
+      .sum(:point)
   end
 end

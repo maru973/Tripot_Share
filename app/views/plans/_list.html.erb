@@ -41,13 +41,16 @@
                 <th class="md:w-[100px]"></th>
                 <th>スポット名</th>
                 <th class="md:w-[100px]">登録者</th>
-                <th class="md:w-[100px]">合計行きたい度</th>
+                <th class="md:w-[100px] md:text-center">みんなの行きたい度</th>
                 <th class="md:w-[100px]"></th>
               </tr>
             </thead>
               <tbody id="spot-table-<%= user.id %>">
                 <% user_spots[user.id].each do |spot| %>
-                  <%= render partial: 'spots/spot', locals: { spot: spot, plan: plan, user_id: user.id} %>
+                  <% spot_point = spot_points.find { |spot_id, spot_point| spot_id == spot.id }&.last %>
+                  <% if spot_point %>
+                    <%= render partial: 'spots/spot', locals: { spot: spot, plan: plan, user_id: user.id, spot_point: spot_point} %>
+                  <% end %>
                 <% end %>
               </tbody>
           </table>
