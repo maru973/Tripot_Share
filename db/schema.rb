@@ -10,9 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_31_033909) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_31_043106) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "courses", force: :cascade do |t|
+    t.string "start_location", null: false
+    t.string "end_location", null: false
+    t.bigint "plan_id", null: false
+    t.bigint "planned_spot_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["plan_id"], name: "index_courses_on_plan_id"
+    t.index ["planned_spot_id"], name: "index_courses_on_planned_spot_id"
+  end
 
   create_table "members", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -68,17 +79,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_31_033909) do
     t.string "website"
   end
 
-  create_table "start_end_spots", force: :cascade do |t|
-    t.string "start_spot", null: false
-    t.string "end_spot", null: false
-    t.bigint "plan_id", null: false
-    t.bigint "planned_spot_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["plan_id"], name: "index_start_end_spots_on_plan_id"
-    t.index ["planned_spot_id"], name: "index_start_end_spots_on_planned_spot_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -107,6 +107,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_31_033909) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "courses", "planned_spots"
+  add_foreign_key "courses", "plans"
   add_foreign_key "members", "plans"
   add_foreign_key "members", "users"
   add_foreign_key "planned_spots", "plans"
@@ -115,6 +117,4 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_31_033909) do
   add_foreign_key "plans", "users", column: "owner_id"
   add_foreign_key "spot_points", "planned_spots"
   add_foreign_key "spot_points", "users"
-  add_foreign_key "start_end_spots", "planned_spots"
-  add_foreign_key "start_end_spots", "plans"
 end
