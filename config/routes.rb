@@ -24,20 +24,14 @@ Rails.application.routes.draw do
   resources :plans do
     resources :spots, only: %i[create destroy], shallow: true
     resources :spot_points, only: %i[index update edit], shallow: true
+    resources :courses, only: %i[new create update edit], shallow: true
+  
     member do
       get 'new_spots'
-      get 'course'
       post 'invitation'
       get 'invitation/accept/:invitation_token', to: 'plans#accept', as: 'accept'
-      
-      #今後必要があれば
-      # get 'courses'
     end
   end
-
-
-  resources :courses
-  resource :spots, only: %i[create destroy]
 
   resource :mypage, only: %i[show edit destroy update]
   get 'myplans', to: 'mypages#myplans'
