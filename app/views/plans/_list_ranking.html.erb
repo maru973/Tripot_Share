@@ -30,7 +30,7 @@
             </tr>
           </thead>
           <tbody id="ranking-table">
-            <% spots.each_with_index do |spot, index| %>
+            <% ranking_spots.each_with_index do |spot, index| %>
               <% spot_point = spot_points.find { |spot_id, spot_point| spot_id == spot.id }&.last %>
               <% spot_subscribers[spot.id].each do |user| %>
                 <%= render partial: 'spots/spot_rankig', locals: { spot: spot, plan: plan, user: user, spot_point: spot_point, spot_counter: spot_counter, index: index, tab_type: 'ranking' } %>
@@ -39,13 +39,16 @@
           </tbody>
         </table>
       </div>
-      <!--<div class="flex justify-center pt-2">
-        <%= link_to "#", class:"text-base-content btn btn-primary btn-sm md:btn-lg" do %>
-          <span class="material-symbols-outlined">
-            route
-          </span>
-          ルート作成
-        <% end %>
+      <!--<div data-controller="modal">
+        <div class="flex justify-center pt-2">
+          <%= render template: 'courses/new' %>
+          <%= link_to new_plan_course_path(plan), data: { action: "click->modal#open", turbo_frame: "course" }, class:"text-base-content btn btn-primary btn-sm md:btn-lg", data: { action: "click->modal#open", turbo_frame: "course" } do %>
+            <span class="material-symbols-outlined">
+              route
+            </span>
+            ルート作成
+          <% end %>
+        </div>
       </div>-->
     </div>
     <% users.each do |user| %>

@@ -62,13 +62,15 @@ class PlansController < ApplicationController
     @plan = Plan.find(params[:id])
     @location = Spot.find_by(name: @plan.location)
     @users = @plan.users
+    @spots = @plan.spots
     @user_spots = {}
     @spot_subscribers = {}
+    @course = Course.new
 
     # @spot_poinsのキー(spot_id)を使って並び替え
     spot_ids = @spot_points.keys
     spots = Spot.where(id: spot_ids)
-    @spots = spot_ids.map { |id| spots.find { |spot| spot.id == id } }
+    @ranking_spots = spot_ids.map { |id| spots.find { |spot| spot.id == id } }
 
     @spots.each do |spot|
       @spot_subscribers[spot.id] = User.joins(:planned_spots).where(planned_spots: { plan_id: @plan.id, spot_id: spot.id })
