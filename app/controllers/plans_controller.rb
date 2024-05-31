@@ -1,5 +1,5 @@
 class PlansController < ApplicationController
-  skip_before_action :authenticate_user!, only: %i[show index]
+  skip_before_action :authenticate_user!, only: %i[show index accept]
   before_action :point_calculate, only: [:show]
 
   def index
@@ -136,6 +136,10 @@ class PlansController < ApplicationController
         @plan.update(invitation_token: nil)
 
         redirect_to plan_path(@plan), notice:t('defaults.flash_message.already_registered_plan', item: @plan.name)
+      else
+        # ログインしてない場合は招待リンクをセッションとして持たせて、ログインパスに遷移する
+        session[:after_sign_in_path] = accept_plan_url(invitation_token: params[:invitation_token])
+        redirect_to new_user_session_path, alert: t('defaults.flash_message.please_sign_in')
       end
 
     else
