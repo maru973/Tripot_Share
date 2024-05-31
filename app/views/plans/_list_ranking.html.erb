@@ -29,16 +29,24 @@
               <th class="md:w-[100px]"></th>
             </tr>
           </thead>
-            <tbody id="ranking-table">
-              <% spots.each_with_index do |spot, index| %>
-                <% spot_point = spot_points.find { |spot_id, spot_point| spot_id == spot.id }&.last %>
-                <% spot_subscribers[spot.id].each do |user| %>
-                  <%= render partial: 'spots/spot_rankig', locals: { spot: spot, plan: plan, user: user, spot_point: spot_point, spot_counter: spot_counter, index: index, tab_type: 'ranking' } %>
-                <% end %>
+          <tbody id="ranking-table">
+            <% spots.each_with_index do |spot, index| %>
+              <% spot_point = spot_points.find { |spot_id, spot_point| spot_id == spot.id }&.last %>
+              <% spot_subscribers[spot.id].each do |user| %>
+                <%= render partial: 'spots/spot_rankig', locals: { spot: spot, plan: plan, user: user, spot_point: spot_point, spot_counter: spot_counter, index: index, tab_type: 'ranking' } %>
               <% end %>
-            </tbody>
+            <% end %>
+          </tbody>
         </table>
       </div>
+      <!--<div class="flex justify-center pt-2">
+        <%= link_to "#", class:"text-base-content btn btn-primary btn-sm md:btn-lg" do %>
+          <span class="material-symbols-outlined">
+            route
+          </span>
+          ルート作成
+        <% end %>
+      </div>-->
     </div>
     <% users.each do |user| %>
       <div class="hidden py-4 px-4 border bg-base-100 rounded-box rounded-tl-none" data-tabs-target="panel">
@@ -53,12 +61,12 @@
                 <th class="md:w-[100px]"></th>
               </tr>
             </thead>
-              <tbody id="spot-table-<%= user.id %>">
-                <% user_spots[user.id].each_with_index do |spot, index| %>
-                  <% spot_point = spot_points.find { |spot_id, spot_point| spot_id == spot.id }&.last %>
-                  <%= render partial: 'spots/spot_rankig', locals: { spot: spot, plan: plan, user: user, spot_point: spot_point, spot_counter: spot_counter, index: index, tab_type: 'user' } %>
-                <% end %>
-              </tbody>
+            <tbody id="spot-table-<%= user.id %>">
+              <% user_spots[user.id].each_with_index do |spot, index| %>
+                <% spot_point = spot_points.find { |spot_id, spot_point| spot_id == spot.id }&.last %>
+                <%= render partial: 'spots/spot_rankig', locals: { spot: spot, plan: plan, user: user, spot_point: spot_point, spot_counter: spot_counter, index: index, tab_type: 'user' } %>
+              <% end %>
+            </tbody>
           </table>
         </div>
       </div>
