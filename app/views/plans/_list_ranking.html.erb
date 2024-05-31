@@ -30,7 +30,7 @@
             </tr>
           </thead>
           <tbody id="ranking-table">
-            <% spots.each_with_index do |spot, index| %>
+            <% ranking_spots.each_with_index do |spot, index| %>
               <% spot_point = spot_points.find { |spot_id, spot_point| spot_id == spot.id }&.last %>
               <% spot_subscribers[spot.id].each do |user| %>
                 <%= render partial: 'spots/spot_rankig', locals: { spot: spot, plan: plan, user: user, spot_point: spot_point, spot_counter: spot_counter, index: index, tab_type: 'ranking' } %>
