@@ -65,6 +65,7 @@ class PlansController < ApplicationController
     @spots = @plan.spots
     @user_spots = {}
     @spot_subscribers = {}
+    @course = Course.new
 
     # @spot_poinsのキー(spot_id)を使って並び替え
     spot_ids = @spot_points.keys

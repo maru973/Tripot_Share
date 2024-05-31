@@ -24,7 +24,7 @@ Rails.application.routes.draw do
   resources :plans do
     resources :spots, only: %i[create destroy], shallow: true
     resources :spot_points, only: %i[index update edit], shallow: true
-    resources :courses, only: %i[new create update edit], shallow: true
+    resources :courses, only: %i[new create update edit show], shallow: true
   
     member do
       get 'new_spots'

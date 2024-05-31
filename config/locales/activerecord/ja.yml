@@ -12,4 +12,7 @@ ja:
       spot:
         name: スポット名
         address: 住所
+      course:
+        start_location: 出発場所
+        end_location: 到着場所
       
