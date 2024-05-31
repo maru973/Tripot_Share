@@ -12,7 +12,12 @@ class ApplicationController < ActionController::Base
   end
   
   def after_sign_in_path_for(resource_or_scope)
-    plans_path
+    if session[:after_sign_in_path]
+      after_sign_in_path = session[:after_sign_in_path]
+      after_sign_in_path = session.delete(:after_sign_in_path)
+    else
+      plans_path
+    end
   end
   
   def check_guest

@@ -23,6 +23,7 @@ ja:
       already_registered_plan: "すでに%{item}のメンバーです"
       invitation_token_invalid: "この招待コードは不正です メンバーにURLの再発行を依頼してください"
       delete_confirm: 削除しますか？
+      please_sign_in: ログインもしくはアカウント登録後にプランに参加できます
   plans:
     index:
       title: みんなのプラン
