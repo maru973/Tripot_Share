@@ -18,11 +18,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_31_043106) do
     t.string "start_location", null: false
     t.string "end_location", null: false
     t.bigint "plan_id", null: false
-    t.bigint "planned_spot_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["plan_id"], name: "index_courses_on_plan_id"
-    t.index ["planned_spot_id"], name: "index_courses_on_planned_spot_id"
   end
 
   create_table "members", force: :cascade do |t|
@@ -107,7 +105,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_31_043106) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "courses", "planned_spots"
   add_foreign_key "courses", "plans"
   add_foreign_key "members", "plans"
   add_foreign_key "members", "users"

@@ -1,0 +1,19 @@
+<article class="pb-4 flex flex-col justify-center">
+  <h2 class="grow text-xl md:text-2xl font-bold underline my-1 md:my-2 text-center ps-7"><%= @plan.name %>当日のルート</h2>
+
+  <!-- 地図の表示 -->
+  <div id="map" class="border w-full h-[250px] md:h-[400px] mt-1"></div>
+
+  <!-- 登録済みリスト -->
+  <%= render 'list', ranking_spots: @ranking_spots, spot_subscribers: @spot_subscribers, plan: @plan, start_location: @start_location, end_location: @end_location %>
+
+  <!-- 削除ボタン -->
+  <div class="flex justify-around mt-3">
+    <% if current_user.present? && current_user.id === @plan.owner_id %>
+      <%= link_to t('.destroy'), plan_path(@plan), class:"text-base-content btn btn-error btn-sm md:btn-lg", data: {turbo_method: :delete, turbo_confirm: "#{@plan.name}を削除しますか" } %>
+    <% end %>
+
+    <!-- 一覧ページボタン --> 
+    <%= link_to 'プラン詳細', plan_path(@plan), class:"text-base-content btn btn-accent btn-sm md:btn-lg" %>
+  </div>
+</article>
