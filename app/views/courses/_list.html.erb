@@ -3,15 +3,13 @@
     <div class="flex overflow-x-auto">
       <div class="flex-none">
         <ul class="list-reset flex">
-          <% users.each do |user| %>
-            <li class="mr-1" data-tabs-target="tab" data-action="click->tabs#change">
-              <a class="text-xs md:text-lg inline-block px-2 md:py-2 md:px-4 rounded-t-xl"><%= user.name %></a>
-            </li>
-          <% end %>
+          <li class="mr-1" data-tabs-target="tab" data-action="click->tabs#change">
+            <a class="text-xs md:text-lg inline-block px-2 md:py-2 md:px-4 rounded-t-xl">ルート結果</a>
+          </li>
         </ul>
       </div>
     </div>
-    <% users.each do |user| %>
+
       <div class="hidden py-4 px-4 border bg-base-100 rounded-box rounded-tl-none" data-tabs-target="panel">
         <div class="overflow-auto h-[400px] w-[300px] md:w-[1300px] mx-auto">
           <table class="table table-sm md:table-md table-pin-rows table-pin-cols">
@@ -32,6 +30,6 @@
           </table>
         </div>
       </div>
-    <% end %>
+
   </div>
 </div>
