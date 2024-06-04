@@ -17,3 +17,54 @@
     <%= link_to 'プラン詳細', plan_path(@plan), class:"text-base-content btn btn-accent btn-sm md:btn-lg" %>
   </div>
 </article>
+
+<script>
+  // 他のファイルでも使用できるようにfunctionの外側で定義
+  let map
+
+  let markers = [];
+
+  const baseUrl = '<%= request.base_url %>';
+
+  // マップの初期化設定
+  function initMap() {
+    map = new google.maps.Map(document.getElementById("map"), {
+      zoom: 10,
+      center: { lat: <%= @start_location.latitude %>, lng: <%= @start_location.longitude %> }, // マップ中央をスタート地点に設定
+      mapTypeId: "roadmap",
+      disableDefaultUI: true,
+      keyboardShortcuts: false,
+      mapId: "<%= ENV['GOOGLE_MAP_ID'] %>"
+    });
+
+    // ページリロードしても登録したマーカーが消えない設定
+    <% @ranking_spots.each do |spot| %>
+      (() => {
+        let glyphImg = document.createElement("img");
+
+        <% @spot_subscribers[spot.id].each do |user| %>
+          let avatarUrl = '<%= user.avatar_url %>'.startsWith('http')
+          ? '<%= user.avatar_url %>'
+          : new URL('<%= user.avatar_url %>', baseUrl).href;
+        <% end %>
+
+        glyphImg.src = avatarUrl;
+        glyphImg.className = 'glyph-img';    
+
+        let glyphSvgPinView = new google.maps.marker.PinElement({
+          glyph: glyphImg,
+          
+        });
+
+        let marker = new google.maps.marker.AdvancedMarkerElement({
+          map: map,
+          position: {lat: <%= spot.latitude %>, lng: <%= spot.longitude %>},
+          content: glyphSvgPinView.element,
+        });
+        marker.id = <%= spot.id %>;
+        markers.push(marker);
+      })();
+    <% end %>
+  }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLEMAPS_API_KEY']%>&callback=initMap&libraries=places,marker&v=weekly" async defer></script>
