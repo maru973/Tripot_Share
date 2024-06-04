@@ -37,6 +37,40 @@
       mapId: "<%= ENV['GOOGLE_MAP_ID'] %>"
     });
 
+    //DirectionsService のオブジェクトを生成
+    let directionsService = new google.maps.DirectionsService();
+
+    //DirectionsRenderer のオブジェクトを生成
+    let directionsRenderer = new google.maps.DirectionsRenderer();
+
+    //directionsRenderer と地図を紐付け
+    directionsRenderer.setMap(map);
+
+    // 経由地の配列を生成（最大6個）
+    let wayPoints = new Array();
+    let waypoint_string = '<%= raw @ranking_spots.map { |spot| { lat: spot.latitude, lng: spot.longitude } }.to_json %>'
+    let waypoint_array = JSON.parse(waypoint_string);
+
+    waypoint_array.forEach(function(waypoint_element) {
+      wayPoints.push({location: waypoint_element});
+    });
+
+
+    // ルートを取得するリクエスト
+    let request = {
+      origin: new google.maps.LatLng(<%= @start_location.latitude %>, <%= @start_location.longitude %>),      // スタート地点
+      destination: new google.maps.LatLng(<%= @end_location.latitude %>, <%= @end_location.longitude %>),   // ゴール地点
+      travelMode: google.maps.TravelMode.DRIVING, // 車モード
+      optimizeWaypoints: true, // 最適化を有効
+      waypoints: wayPoints // 経由地
+    };
+
+    directionsService.route(request, function(result, status) {
+      if (status === 'OK') {
+        directionsRenderer.setDirections(result);
+      }
+    });
+
     // ページリロードしても登録したマーカーが消えない設定
     <% @ranking_spots.each do |spot| %>
       (() => {
