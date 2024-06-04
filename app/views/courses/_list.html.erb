@@ -22,11 +22,13 @@
                 <th class="md:w-[100px]"></th>
               </tr>
             </thead>
-              <tbody id="spot-table-<%= user.id %>">
-                <% user_spots[user.id].each do |spot| %>
-                  <%= render partial: 'spots/spot', locals: { spot: spot, plan: plan, user: user } %>
+            <tbody id="ranking-table">
+              <% ranking_spots.each_with_index do |spot, index| %>
+                <% spot_subscribers[spot.id].each do |user| %>
+                  <%= render partial: 'spot', locals: { spot: spot, plan: plan, user: user } %>
                 <% end %>
-              </tbody>
+              <% end %>
+            </tbody>
           </table>
         </div>
       </div>

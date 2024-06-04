@@ -1,4 +1,6 @@
 class CoursesController < ApplicationController
+  before_action :point_calculate, only: [:show]
+
   def new
     @plan = Plan.find(params[:plan_id])
     @course = Course.new
@@ -29,9 +31,32 @@ class CoursesController < ApplicationController
     redirect_to course_path(@course), notice: 'コースを作成しました'
   end
 
+  def show
+    @spot_subscribers = {}
+
+    spot_ids = @spot_points.keys
+    spots = Spot.where(id: spot_ids)
+    @ranking_spots = spot_ids.map { |id| spots.find { |spot| spot.id == id } }
+
+    @ranking_spots.each do |spot|
+      @spot_subscribers[spot.id] = User.joins(:planned_spots).where(planned_spots: { plan_id: @plan.id, spot_id: spot.id })
+    end
+  end
+
   private
 
   def course_params
     params.require(:course).permit(:start_location, :end_location)
+  end
+
+  def point_calculate
+    @plan = Course.find(params[:id]).plan
+
+    @spot_points = SpotPoint.joins(:planned_spot)
+      .where(planned_spots: { plan_id: @plan.id })
+      .group('planned_spots.spot_id')
+      .order('SUM(point) DESC')
+      .limit(10)
+      .sum(:point)
   end
 end
