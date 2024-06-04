@@ -22,12 +22,32 @@
                 <th class="md:w-[100px]"></th>
               </tr>
             </thead>
-            <tbody id="ranking-table">
+            <tbody id="course-table">
+              <tr id="start-location">
+                <td></td>
+                <td>  
+                  <%= render 'spots/modal', spot: start_location %>
+                </td>
+                <td>
+                  出発地
+                </td>
+                <td></td>
+              </tr>
               <% ranking_spots.each_with_index do |spot, index| %>
                 <% spot_subscribers[spot.id].each do |user| %>
                   <%= render partial: 'spot', locals: { spot: spot, plan: plan, user: user } %>
                 <% end %>
               <% end %>
+              <tr id="end-location">
+                <td></td>
+                <td>  
+                  <%= render 'spots/modal', spot: end_location %>
+                </td>
+                <td>
+                  到着地
+                </td>
+                <td></td>
+              </tr>
             </tbody>
           </table>
         </div>

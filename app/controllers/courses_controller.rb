@@ -32,6 +32,10 @@ class CoursesController < ApplicationController
   end
 
   def show
+    @course = Course.find(params[:id])
+    @start_location = Spot.find_by(name: @course.start_location)
+    @end_location = Spot.find_by(name: @course.end_location)
+
     @spot_subscribers = {}
 
     spot_ids = @spot_points.keys
