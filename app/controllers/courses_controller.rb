@@ -17,6 +17,15 @@ class CoursesController < ApplicationController
       @start_location.latitude = @latlng[0]
       @start_location.longitude = @latlng[1]
       @start_location.address = results.first.address
+
+      spot_details = @start_location.get_spot_details(@course.start_location)
+      if spot_details
+        @start_location.place_id = spot_details[:place_id]
+        @start_location.opening_hours = spot_details[:opening_hours].split(",").join("\n") if spot_details[:opening_hours].present?
+        @start_location.website = spot_details[:website]
+        @start_location.phone_number = spot_details[:phone_number]
+      end
+
       @start_location.save
     end
     if @end_location.new_record?
@@ -25,6 +34,15 @@ class CoursesController < ApplicationController
       @end_location.latitude = @latlng[0]
       @end_location.longitude = @latlng[1]
       @end_location.address = results.first.address
+
+      spot_details = @end_location.get_spot_details(@course.end_location)
+      if spot_details
+        @end_location.place_id = spot_details[:place_id]
+        @end_location.opening_hours = spot_details[:opening_hours].split(",").join("\n") if spot_details[:opening_hours].present?
+        @end_location.website = spot_details[:website]
+        @end_location.phone_number = spot_details[:phone_number]
+      end
+
       @end_location.save
     end
     @course.save
