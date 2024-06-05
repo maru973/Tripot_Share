@@ -17,3 +17,50 @@
     <%= link_to 'プラン詳細', plan_path(@plan), class:"text-base-content btn btn-accent btn-sm md:btn-lg" %>
   </div>
 </article>
+
+<script>
+  function initMap() {
+    map = new google.maps.Map(document.getElementById("map"), {
+      zoom: 10,
+      center: { lat: <%= @start_location.latitude %>, lng: <%= @start_location.longitude %> }, // マップ中央をスタート地点に設定
+      mapTypeId: "roadmap",
+      disableDefaultUI: true,
+      keyboardShortcuts: false,
+      mapId: "<%= ENV['GOOGLE_MAP_ID'] %>"
+    });
+
+    let directionsService = new google.maps.DirectionsService();
+
+    //ルート描写
+    let directionsRenderer = new google.maps.DirectionsRenderer();
+
+    //directionsRenderer と地図を紐付け
+    directionsRenderer.setMap(map);
+
+    // 経由地の配列を生成（最大6個）
+    let wayPoints = new Array();
+    let waypoint_string = '<%= raw @ranking_spots.map { |spot| { lat: spot.latitude, lng: spot.longitude } }.to_json %>'
+    let waypoint_array = JSON.parse(waypoint_string);
+
+    waypoint_array.forEach(function(waypoint_element) {
+      wayPoints.push({location: waypoint_element});
+    });
+
+    // ルートを取得するリクエスト
+    let request = {
+      origin: new google.maps.LatLng(<%= @start_location.latitude %>, <%= @start_location.longitude %>),      // スタート地点
+      destination: new google.maps.LatLng(<%= @end_location.latitude %>, <%= @end_location.longitude %>),   // ゴール地点
+      travelMode: google.maps.TravelMode.DRIVING, // 車モード
+      optimizeWaypoints: true, // 最適化を有効
+      waypoints: wayPoints // 経由地
+    };
+
+    directionsService.route(request, function(result, status) {
+      if (status === 'OK') {
+        directionsRenderer.setDirections(result);
+        console.log(result);
+      }
+    });
+  }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLEMAPS_API_KEY']%>&callback=initMap&libraries=places,marker&v=weekly" async defer></script>

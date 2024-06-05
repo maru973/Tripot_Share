@@ -60,7 +60,7 @@ class CoursesController < ApplicationController
       .where(planned_spots: { plan_id: @plan.id })
       .group('planned_spots.spot_id')
       .order('SUM(point) DESC')
-      .limit(10)
+      .limit(6)
       .sum(:point)
   end
 end
