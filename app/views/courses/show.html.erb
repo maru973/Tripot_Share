@@ -19,7 +19,6 @@
 </article>
 
 <script>
-  // マップの初期化設定
   function initMap() {
     map = new google.maps.Map(document.getElementById("map"), {
       zoom: 10,
@@ -30,10 +29,9 @@
       mapId: "<%= ENV['GOOGLE_MAP_ID'] %>"
     });
 
-    //DirectionsService のオブジェクトを生成
     let directionsService = new google.maps.DirectionsService();
 
-    //DirectionsRenderer のオブジェクトを生成
+    //ルート描写
     let directionsRenderer = new google.maps.DirectionsRenderer();
 
     //directionsRenderer と地図を紐付け
@@ -48,7 +46,6 @@
       wayPoints.push({location: waypoint_element});
     });
 
-
     // ルートを取得するリクエスト
     let request = {
       origin: new google.maps.LatLng(<%= @start_location.latitude %>, <%= @start_location.longitude %>),      // スタート地点
@@ -61,6 +58,7 @@
     directionsService.route(request, function(result, status) {
       if (status === 'OK') {
         directionsRenderer.setDirections(result);
+        console.log(result);
       }
     });
   }
