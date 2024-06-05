@@ -6,7 +6,7 @@
     <% if current_user.present? && current_user.member?(@plan.id) %>
       <div class="twitter mx-3 lg:tooltip" data-tip="Xに投稿する">
         <%= link_to "https://twitter.com/intent/tweet?url=#{plan_url(@plan)}&text=#{@plan.name}を作成しました！&hashtags=TripotShare", target: '_blank' do %>
-          <i class="fa-brands fa-twitter fa-bounce fa-lg"></i>
+          <i class="fa-brands fa-square-x-twitter fa-xl"></i>
         <% end %>
       </div>
       <!-- 追加メニュー -->
