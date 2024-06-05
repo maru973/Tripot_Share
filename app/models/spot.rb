@@ -24,6 +24,7 @@ class Spot < ApplicationRecord
 
     spot_details = @client.spot(place_id, fields: 'place_id,opening_hours,website,formatted_phone_number', language: 'ja')
     {
+      place_id: spot_details.place_id,
       opening_hours: spot_details.opening_hours&.[]('weekday_text'),
       website: spot_details.website ? spot_details.website : nil,
       phone_number: spot_details.formatted_phone_number ? spot_details.formatted_phone_number : nil
