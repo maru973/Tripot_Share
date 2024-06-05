@@ -62,8 +62,8 @@ class CoursesController < ApplicationController
     spot_ids = @spot_points.keys
     spots = Spot.where(id: spot_ids)
     @ranking_spots = Spot.joins(:planned_spots)
-    .where(id: spot_ids, planned_spots: { plan_id: @plan.id })
-    .order('planned_spots.position')
+      .where(id: spot_ids, planned_spots: { plan_id: @plan.id })
+      .order('planned_spots.position')
 
     @ranking_spots.each do |spot|
       @spot_subscribers[spot.id] = User.joins(:planned_spots).where(planned_spots: { plan_id: @plan.id, spot_id: spot.id })
