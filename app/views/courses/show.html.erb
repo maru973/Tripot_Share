@@ -68,7 +68,7 @@
       console.log(placeIds);
 
       // RailsにPOSTリクエストを送信
-      fetch('/courses/<%= @course.id %>/update_order', {
+      fetch('/courses/<%= @course.id %>/update_position', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
