@@ -79,7 +79,7 @@ class CoursesController < ApplicationController
       if spot
         planned_spot = PlannedSpot.find_by(spot_id: spot.id)
         if planned_spot
-          planned_spot.update(position: index + 1) # 1から始まる位置にするためにindexに1を足す
+          planned_spot.update(position: index + 1) # 1から始めるためにindexに1を足す
         end
       end
     end

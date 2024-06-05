@@ -38,7 +38,7 @@ Rails.application.routes.draw do
   get 'mycourses', to: 'mypages#mycourses'
 
   resources :courses, only: %i[show] do
-    collection do
+    member do
       post :update_order
     end
   end
