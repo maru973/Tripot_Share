@@ -30,7 +30,7 @@ class CoursesController < ApplicationController
 
         @start_location.save
       end
-      if @end_location.new_record?
+      if @course.end_location.present? && @end_location.new_record?
         results = Geocoder.search(@course.end_location)
         @latlng = results.first.coordinates
         @end_location.latitude = @latlng[0]
