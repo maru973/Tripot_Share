@@ -39,28 +39,53 @@
 
     // 経由地の配列を生成（最大6個）
     let wayPoints = new Array();
-    let waypoint_string = '<%= raw @ranking_spots.map { |spot| { lat: spot.latitude, lng: spot.longitude } }.to_json %>'
+    let waypoint_string = '<%= raw @ranking_spots.map { |spot| { place_id: spot.place_id } }.to_json %>'
     let waypoint_array = JSON.parse(waypoint_string);
 
     waypoint_array.forEach(function(waypoint_element) {
-      wayPoints.push({location: waypoint_element});
+      wayPoints.push({location: { placeId: waypoint_element.place_id } });
     });
+
+    console.log(wayPoints);
 
     // ルートを取得するリクエスト
     let request = {
-      origin: new google.maps.LatLng(<%= @start_location.latitude %>, <%= @start_location.longitude %>),      // スタート地点
-      destination: new google.maps.LatLng(<%= @end_location.latitude %>, <%= @end_location.longitude %>),   // ゴール地点
+      origin: { placeId: '<%= @start_location.place_id %>' },      // スタート地点
+      destination: { placeId: '<%= @end_location.place_id %>' },   // ゴール地点
       travelMode: google.maps.TravelMode.DRIVING, // 車モード
       optimizeWaypoints: true, // 最適化を有効
       waypoints: wayPoints // 経由地
     };
 
     directionsService.route(request, function(result, status) {
-      if (status === 'OK') {
-        directionsRenderer.setDirections(result);
-        console.log(result);
-      }
-    });
+    if (status === 'OK') {
+      directionsRenderer.setDirections(result);
+      console.log(result);
+
+      // place_idの配列を抽出
+      const placeIds = result.geocoded_waypoints.map(waypoint => waypoint.place_id);
+
+      console.log(placeIds);
+
+      // RailsにPOSTリクエストを送信
+      fetch('/courses/<%= @course.id %>/update_position', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        },
+        body: JSON.stringify({ place_ids: placeIds })
+      })
+      .then(response => {
+        if (response.ok) {
+          console.log("Place IDs sent successfully");
+        } else {
+          console.error("Failed to send Place IDs");
+        }
+      });
+    } else {
+      console.error('Directions request failed due to ' + status);
+    }});
   }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLEMAPS_API_KEY']%>&callback=initMap&libraries=places,marker&v=weekly" async defer></script>

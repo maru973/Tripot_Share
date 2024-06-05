@@ -19,6 +19,7 @@ class SpotsController < ApplicationController
 
           spot_details = @spot.get_spot_details(spot_params[:name])
           if spot_details
+            @spot.place_id = spot_details[:place_id]
             @spot.opening_hours = spot_details[:opening_hours].split(",").join("\n") if spot_details[:opening_hours].present?
             @spot.website = spot_details[:website]
             @spot.phone_number = spot_details[:phone_number]
