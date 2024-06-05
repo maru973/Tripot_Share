@@ -65,6 +65,26 @@ class CoursesController < ApplicationController
     end
   end
 
+  def update_order
+    # JSのルート検索で出てきた結果のplace_idを取得
+    place_ids = params[:place_ids]
+
+    # 配列の最初(出発地のplace_id)と最後(到着地のplace_id)を削除
+    place_ids.shift
+    place_ids.pop
+    
+    place_ids.each_with_index do |place_id, index|
+      spot = Spot.find_by(place_id: place_id)
+      if spot
+        planned_spot = PlannedSpot.find_by(spot_id: spot.id)
+        if planned_spot
+          planned_spot.update(position: index + 1) # 1から始まる位置にするためにindexに1を足す
+        end
+      end
+    end
+    head :ok # 成功時のレスポンス
+  end
+
   private
 
   def course_params
