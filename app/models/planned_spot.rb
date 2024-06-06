@@ -1,4 +1,7 @@
 class PlannedSpot < ApplicationRecord
+  include RankedModel
+  ranks :row_order
+
   belongs_to :plan
   belongs_to :spot
   belongs_to :user

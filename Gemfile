@@ -76,5 +76,6 @@ gem 'google_places'
 gem 'carrierwave'
 gem 'fog-aws'
 gem 'ransack'
+gem 'ranked-model'
 
 gem "dockerfile-rails", ">= 1.6", :group => :development
