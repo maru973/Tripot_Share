@@ -22,7 +22,7 @@
                 <th class="md:w-[100px]"></th>
               </tr>
             </thead>
-            <tbody id="course-table">
+            <tbody id="course-table" data-controller="sortable" data-sortable-handle-selector-value=".sortable-handle">
               <tr id="start-location">
                 <td></td>
                 <td>  
@@ -33,7 +33,7 @@
                 </td>
                 <td></td>
               </tr>
-              <% ranking_spots.each_with_index do |spot, index| %>
+              <% ranking_spots.each do |spot| %>
                 <% spot_subscribers[spot.id].each do |user| %>
                   <%= render partial: 'spot', locals: { spot: spot, plan: plan, user: user } %>
                 <% end %>

@@ -63,7 +63,7 @@ class CoursesController < ApplicationController
     spots = Spot.where(id: spot_ids)
     @ranking_spots = Spot.joins(:planned_spots)
       .where(id: spot_ids, planned_spots: { plan_id: @plan.id })
-      .order('planned_spots.position')
+      .order('planned_spots.row_order')
 
     @ranking_spots.each do |spot|
       @spot_subscribers[spot.id] = User.joins(:planned_spots).where(planned_spots: { plan_id: @plan.id, spot_id: spot.id })
@@ -83,7 +83,7 @@ class CoursesController < ApplicationController
       spot = Spot.find_by(place_id: place_id)
       if spot
         planned_spot = PlannedSpot.find_by(spot_id: spot.id, plan_id: @plan.id)
-        planned_spot.update(position: index + 1) # 1から始めるためにindexに1を足す
+        planned_spot.update(row_order: index + 1) # 1から始めるためにindexに1を足す
       end
     end
   end
