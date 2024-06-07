@@ -35,7 +35,7 @@
               </tr>
               <% ranking_spots.each do |spot| %>
                 <% spot_subscribers[spot.id].each do |user| %>
-                  <%= render partial: 'spot', locals: { spot: spot, plan: plan, user: user } %>
+                  <%= render partial: 'spot', locals: { spot: spot, plan: plan, user: user, course: course } %>
                 <% end %>
               <% end %>
               <tr id="end-location">

@@ -88,6 +88,13 @@ class CoursesController < ApplicationController
     end
   end
 
+  def rank
+    plan = Course.find(params[:id]).plan
+    spot = Spot.find(params[:spot_id])
+    planned_spot = PlannedSpot.find_by(spot_id: spot.id, plan_id: plan.id)
+    planned_spot.update(row_order: params[:row_order_position])
+  end
+
   private
 
   def course_params

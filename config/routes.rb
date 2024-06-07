@@ -40,6 +40,7 @@ Rails.application.routes.draw do
   resources :courses, only: %i[show] do
     member do
       post :update_position
+      patch :rank
     end
   end
 
