@@ -1,5 +1,9 @@
 <tr id="spot-<%= spot.id %>">
-  <td></td>
+  <td class="sortable-handle cursor-grab">
+    <span class="material-symbols-outlined">
+      drag_handle
+    </span>
+  </td>
   <td>  
     <%= render 'spots/modal', spot: spot %>
   </td>
