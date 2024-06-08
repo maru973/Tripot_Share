@@ -9,6 +9,7 @@
 
   <!-- 一覧ページボタン --> 
   <div class="flex justify-center mt-3">
+    <button id="re-search-button">再検索</button>
     <%= link_to 'プラン詳細', plan_path(@plan), class:"text-base-content btn btn-accent btn-sm md:btn-lg" %>
   </div>
 </article>
@@ -32,55 +33,64 @@
     //directionsRenderer と地図を紐付け
     directionsRenderer.setMap(map);
 
-    // 経由地の配列を生成（最大6個）
+    // wayPointsの初期化
     let wayPoints = new Array();
-    let waypoint_string = '<%= raw @ranking_spots.map { |spot| { place_id: spot.place_id } }.to_json %>'
-    let waypoint_array = JSON.parse(waypoint_string);
-
-    waypoint_array.forEach(function(waypoint_element) {
-      wayPoints.push({location: { placeId: waypoint_element.place_id } });
-    });
 
     console.log(wayPoints);
 
-    // ルートを取得するリクエスト
-    let request = {
-      origin: { placeId: '<%= @start_location.place_id %>' },      // スタート地点
-      destination: { placeId: '<%= @end_location.place_id %>' },   // ゴール地点
-      travelMode: google.maps.TravelMode.DRIVING, // 車モード
-      optimizeWaypoints: true, // 最適化を有効
-      waypoints: wayPoints // 経由地
-    };
+    function searchRoute(wayPoints, optimizeWaypoints) {
+      // ルートを取得するリクエスト
+      let request = {
+        origin: { placeId: '<%= @start_location.place_id %>' },      // スタート地点
+        destination: { placeId: '<%= @end_location.place_id %>' },   // ゴール地点
+        travelMode: google.maps.TravelMode.DRIVING, // 車モード
+        optimizeWaypoints: optimizeWaypoints, // 最適化を有効
+        waypoints: wayPoints // 経由地
+      };
 
-    directionsService.route(request, function(result, status) {
-    if (status === 'OK') {
-      directionsRenderer.setDirections(result);
-      console.log(result);
+      directionsService.route(request, function(result, status) {
+        if (status === 'OK') {
+          directionsRenderer.setDirections(result);
+          console.log(result);
 
-      // place_idの配列を抽出
-      const placeIds = result.geocoded_waypoints.map(waypoint => waypoint.place_id);
+          // place_idの配列を抽出
+          const placeIds = result.geocoded_waypoints.map(waypoint => waypoint.place_id);
 
-      console.log(placeIds);
+          console.log(placeIds);
 
-      // RailsにPOSTリクエストを送信
-      fetch('/courses/<%= @course.id %>/update_position', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-        },
-        body: JSON.stringify({ place_ids: placeIds })
-      })
-      .then(response => {
-        if (response.ok) {
-          console.log("Place IDs sent successfully");
+          // RailsにPOSTリクエストを送信
+          fetch('/courses/<%= @course.id %>/update_position', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            },
+            body: JSON.stringify({ place_ids: placeIds })
+          })
+          .then(response => {
+            if (response.ok) {
+              console.log("Place IDs sent successfully");
+            } else {
+              console.error("Failed to send Place IDs");
+            }
+          });
         } else {
-          console.error("Failed to send Place IDs");
+          console.error('Directions request failed due to ' + status);
         }
       });
-    } else {
-      console.error('Directions request failed due to ' + status);
-    }});
+    }
+    let initialWayPoints = JSON.parse('<%= raw @ranking_spots.map { |spot| { place_id: spot.place_id } }.to_json %>').map(spot => ({ location: { placeId: spot.place_id } }));
+    searchRoute(initialWayPoints, true);
+
+    // 再検索ボタンにクリックイベントを追加
+    document.getElementById('re-search-button').addEventListener('click', function() {
+      fetch('/courses/<%= @course.id %>/new_ordered_spots')
+        .then(response => response.json())
+        .then(data => {
+          const newWayPoints = data.map(spot => ({ location: { placeId: spot.place_id } }));
+          searchRoute(newWayPoints, false);
+        });
+    });
   }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLEMAPS_API_KEY']%>&callback=initMap&libraries=places,marker&v=weekly" async defer></script>
