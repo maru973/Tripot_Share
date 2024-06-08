@@ -86,6 +86,7 @@ class CoursesController < ApplicationController
         planned_spot.update(row_order: index + 1) # 1から始めるためにindexに1を足す
       end
     end
+    redirect_to course_path(params[:id])
   end
 
   def rank
