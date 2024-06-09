@@ -39,17 +39,23 @@
           </tbody>
         </table>
       </div>
-      <div data-controller="modal">
+      <% if plan.course.present? %>
         <div class="flex justify-center pt-2">
-          <%= render template: 'courses/new' %>
-          <%= link_to new_plan_course_path(plan), data: { action: "click->modal#open", turbo_frame: "course" }, class:"text-base-content btn btn-primary btn-sm md:btn-lg", data: { action: "click->modal#open", turbo_frame: "course" } do %>
-            <span class="material-symbols-outlined">
-              route
-            </span>
-            ルート作成
-          <% end %>
+          <%= link_to "このプランのルートを確認", course_path(plan.course), class:"text-base-content btn btn-primary btn-sm md:btn-lg" %>
+        <div>
+      <% else %>
+        <div data-controller="modal">
+          <div class="flex justify-center pt-2">
+            <%= render template: 'courses/new' %>
+            <%= link_to new_plan_course_path(plan), data: { action: "click->modal#open", turbo_frame: "course" }, class:"text-base-content btn btn-primary btn-sm md:btn-lg", data: { action: "click->modal#open", turbo_frame: "course" } do %>
+              <span class="material-symbols-outlined">
+                route
+              </span>
+              ルート作成
+            <% end %>
+          </div>
         </div>
-      </div>
+      <% end %>
     </div>
     <% users.each do |user| %>
       <div class="hidden py-4 px-4 border bg-base-100 rounded-box rounded-tl-none" data-tabs-target="panel">
