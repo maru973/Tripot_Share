@@ -41,10 +41,10 @@
     function searchRoute(wayPoints, optimizeWaypoints) {
       // ルートを取得するリクエスト
       let request = {
-        origin: { placeId: '<%= @start_location.place_id %>' },      // スタート地点
-        destination: { placeId: '<%= @end_location.place_id %>' },   // ゴール地点
+        origin: { placeId: '<%= @start_location.place_id %>' },
+        destination: { placeId: '<%= @end_location.place_id %>' },
         travelMode: google.maps.TravelMode.DRIVING, // 車モード
-        optimizeWaypoints: optimizeWaypoints, // 最適化を有効
+        optimizeWaypoints: optimizeWaypoints, // 最適化を有効か無効にする
         waypoints: wayPoints // 経由地
       };
 
@@ -79,8 +79,16 @@
         }
       });
     }
-    let initialWayPoints = JSON.parse('<%= raw @ranking_spots.map { |spot| { place_id: spot.place_id } }.to_json %>').map(spot => ({ location: { placeId: spot.place_id } }));
-    searchRoute(initialWayPoints, true);
+    const isFirstLoad = !sessionStorage.getItem('page_loaded');
+      
+      if (isFirstLoad) {
+        sessionStorage.setItem('page_loaded', 'true');
+      }
+      
+    const initialWayPoints = JSON.parse('<%= raw @ranking_spots.map { |spot| { place_id: spot.place_id } }.to_json %>').map(spot => ({ location: { placeId: spot.place_id } }));
+    searchRoute(initialWayPoints, isFirstLoad); // 初回ロード時は最適化を有効
+
+
 
     // 再検索ボタンにクリックイベントを追加
     document.getElementById('re-search-button').addEventListener('click', function() {
