@@ -9,7 +9,7 @@
     </div>
     <h2 class="text-lg md:text-xl font-bold mb-1 md:mb-4 underline text-center">ルートの作成</h2>
     <p class="text-xs md:text-sm text-center">ランクインしたスポットを出発地から到着地まで<br />効率よく巡ることができるルートを自動で作成します</p>
-    <%= form_with model: @course, url: plan_courses_path(@plan), data: {turbo_method: :post} do |f|%>
+    <%= form_with model: @course, url: plan_courses_path(@plan), id: "form", data: {turbo_method: :post} do |f|%>
       <%= render 'shared/error_messages', object: f.object %>
       <div class="form-control my-3">
         <%= f.label :start_location %>
@@ -27,3 +27,11 @@
     <% end %>
   </dialog>
 <% end %>
+
+<script>
+
+  document.getElementById('form').addEventListener('submit', function(event) {
+    sessionStorage.setItem('first_load', 'true'); 
+  });
+
+</script>
