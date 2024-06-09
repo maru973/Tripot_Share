@@ -4,7 +4,7 @@ class Plan < ApplicationRecord
   belongs_to :owner, class_name: 'User', foreign_key: 'owner_id'
   has_many :members, dependent: :destroy
   has_many :users, through: :members
-  has_many :courses, dependent: :destroy
+  has_one :course, dependent: :destroy
 
   validates :name, presence: true, length: { maximum: 100 }
   validates :location, presence: true
