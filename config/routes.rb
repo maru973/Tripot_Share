@@ -41,7 +41,7 @@ Rails.application.routes.draw do
     member do
       post :update_position
       patch :rank
-      get :new_ordered_spots
+      get :reserach_course
     end
   end
 

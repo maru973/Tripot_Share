@@ -1,5 +1,5 @@
 class CoursesController < ApplicationController
-  before_action :point_calculate, only: [:show, :new_ordered_spots]
+  before_action :point_calculate, only: [:show, :reserach_course]
 
   def new
     @plan = Plan.find(params[:plan_id])
@@ -87,7 +87,7 @@ class CoursesController < ApplicationController
     redirect_to course_path(params[:id])
   end
 
-  def new_ordered_spots
+  def reserach_course
     @course = Course.find(params[:id])
     @plan = @course.plan
 

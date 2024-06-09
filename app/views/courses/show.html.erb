@@ -92,8 +92,8 @@
     }
 
     // 再検索ボタンにクリックイベントを追加
-    document.getElementById('re-search-button').addEventListener('click', function() {
-      fetch('/courses/<%= @course.id %>/new_ordered_spots')
+    document.getElementById('research-button').addEventListener('click', function() {
+      fetch('/courses/<%= @course.id %>/reserach_course')
         .then(response => response.json())
         .then(data => {
           const newWayPoints = data.map(spot => ({ location: { placeId: spot.place_id } }));
