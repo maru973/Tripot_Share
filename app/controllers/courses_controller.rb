@@ -68,7 +68,7 @@ class CoursesController < ApplicationController
     end
   end
 
-  def update_position
+  def create_position
     @plan = Course.find(params[:id]).plan
     # JSのルート検索で出てきた結果のplace_idを取得
     place_ids = params[:place_ids]
