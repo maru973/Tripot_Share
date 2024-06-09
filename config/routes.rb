@@ -39,7 +39,9 @@ Rails.application.routes.draw do
 
   resources :courses, only: %i[show] do
     member do
-      post :update_position
+      post :create_position
+      patch :rank
+      get :reserach_course
     end
   end
 

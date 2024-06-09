@@ -4,7 +4,7 @@
       <div class="flex-none">
         <ul class="list-reset flex">
           <li class="mr-1" data-tabs-target="tab" data-action="click->tabs#change">
-            <a class="text-xs md:text-lg inline-block px-2 md:py-2 md:px-4 rounded-t-xl">ルート結果</a>
+            <a class="text-xs md:text-lg inline-block px-2 md:py-2 md:px-4 rounded-t-xl">検索結果</a>
           </li>
         </ul>
       </div>
@@ -35,7 +35,7 @@
               </tr>
               <% ranking_spots.each do |spot| %>
                 <% spot_subscribers[spot.id].each do |user| %>
-                  <%= render partial: 'spot', locals: { spot: spot, plan: plan, user: user } %>
+                  <%= render partial: 'spot', locals: { spot: spot, plan: plan, user: user, course: course } %>
                 <% end %>
               <% end %>
               <tr id="end-location">
@@ -51,6 +51,9 @@
             </tbody>
           </table>
         </div>
+          <div class="flex justify-center pt-2">
+            <button id="research-button" class="text-base-content btn btn-primary btn-sm md:btn-lg">再検索</button>
+          </div>
       </div>
 
   </div>

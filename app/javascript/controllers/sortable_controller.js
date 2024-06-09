@@ -18,7 +18,9 @@ export default class extends Controller {
   }
  
   onEnd(evt) {
-    const body = { row_order_position: evt.newIndex }
-    console.log(body)
-  }
+    const body = { 
+      row_order_position: evt.newIndex,
+      spot_id: evt.item.dataset.spotId
+    }
+  };
 }
