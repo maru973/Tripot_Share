@@ -79,19 +79,17 @@
         }
       });
     }
+
     const isFirstLoad = sessionStorage.getItem('first_load');
 
-if (isFirstLoad) {
-  const initialWayPoints = JSON.parse('<%= raw @ranking_spots.map { |spot| { place_id: spot.place_id } }.to_json %>').map(spot => ({ location: { placeId: spot.place_id } }));
-  searchRoute(initialWayPoints, true); // 初回ロード時は最適化を有効
-  sessionStorage.removeItem('first_load');
-} else {
-  const initialWayPoints = JSON.parse('<%= raw @ranking_spots.map { |spot| { place_id: spot.place_id } }.to_json %>').map(spot => ({ location: { placeId: spot.place_id } }));
-  searchRoute(initialWayPoints, false); // 最適化を無効
-}
-      
-
-
+    if (isFirstLoad) {
+      const initialWayPoints = JSON.parse('<%= raw @ranking_spots.map { |spot| { place_id: spot.place_id } }.to_json %>').map(spot => ({ location: { placeId: spot.place_id } }));
+      searchRoute(initialWayPoints, true); // 初回ロード時は最適化を有効
+      sessionStorage.removeItem('first_load');
+    } else {
+      const initialWayPoints = JSON.parse('<%= raw @ranking_spots.map { |spot| { place_id: spot.place_id } }.to_json %>').map(spot => ({ location: { placeId: spot.place_id } }));
+      searchRoute(initialWayPoints, false); // 最適化を無効
+    }
 
     // 再検索ボタンにクリックイベントを追加
     document.getElementById('re-search-button').addEventListener('click', function() {
