@@ -1,5 +1,6 @@
 <article class="pb-4 flex flex-col justify-center">
-  <h2 class="grow text-xl md:text-2xl font-bold underline my-1 md:my-2 text-center ps-7"><%= @plan.name %>当日のルート</h2>
+  <h2 class="grow text-xl md:text-2xl font-bold underline mt-1 md:mt-2 text-center ps-7"><%= @plan.name %>当日のルート</h2>
+  <p class="grow text-lg md:text-xl font-bold underline mb-1 md:mb-2 text-center ps-7">（スポットを並び替えてルートを再検索できます）</p>
 
   <!-- 地図の表示 -->
   <div id="map" class="border w-full h-[250px] md:h-[400px] mt-1"></div>
@@ -9,7 +10,6 @@
 
   <!-- 一覧ページボタン --> 
   <div class="flex justify-center mt-3">
-    <button id="re-search-button">再検索</button>
     <%= link_to 'プラン詳細', plan_path(@plan), class:"text-base-content btn btn-accent btn-sm md:btn-lg" %>
   </div>
 </article>
