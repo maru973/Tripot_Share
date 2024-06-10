@@ -8,7 +8,7 @@ class CoursesController < ApplicationController
 
   def create
     @plan = Plan.find(params[:plan_id])
-    @course = @plan.courses.build(course_params)
+    @course = @plan.create_course(course_params)
     @start_location = Spot.find_or_initialize_by(name: @course.start_location)
     @end_location = Spot.find_or_initialize_by(name: @course.end_location)
     
