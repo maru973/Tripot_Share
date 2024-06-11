@@ -39,22 +39,24 @@
           </tbody>
         </table>
       </div>
-      <% if plan.course.present? %>
-        <div class="flex justify-center pt-2">
-          <%= link_to "このプランのルートを確認", course_path(plan.course), class:"text-base-content btn btn-primary btn-sm md:btn-lg", data: { turbo: false } %>
-        <div>
-      <% else %>
-        <div data-controller="modal">
+      <% if current_user.present? && current_user.member?(plan.id) %>
+        <% if plan.course.present? %>
           <div class="flex justify-center pt-2">
-            <%= render template: 'courses/new' %>
-            <%= link_to new_plan_course_path(plan), data: { action: "click->modal#open", turbo_frame: "course" }, class:"text-base-content btn btn-primary btn-sm md:btn-lg", data: { action: "click->modal#open", turbo_frame: "course" } do %>
-              <span class="material-symbols-outlined">
-                route
-              </span>
-              ルート作成
-            <% end %>
+            <%= link_to "このプランのルートを確認", course_path(plan.course), class:"text-base-content btn btn-primary btn-sm md:btn-lg", data: { turbo: false } %>
+          <div>
+        <% else %>
+          <div data-controller="modal">
+            <div class="flex justify-center pt-2">
+              <%= render template: 'courses/new' %>
+              <%= link_to new_plan_course_path(plan), data: { action: "click->modal#open", turbo_frame: "course" }, class:"text-base-content btn btn-primary btn-sm md:btn-lg", data: { action: "click->modal#open", turbo_frame: "course" } do %>
+                <span class="material-symbols-outlined">
+                  route
+                </span>
+                ルート作成
+              <% end %>
+            </div>
           </div>
-        </div>
+        <% end %>
       <% end %>
     </div>
     <% users.each do |user| %>
