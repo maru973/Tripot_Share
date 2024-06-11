@@ -52,19 +52,23 @@ class CoursesController < ApplicationController
 
   def show
     @course = Course.find(params[:id])
-    @start_location = Spot.find_by(name: @course.start_location)
-    @end_location = Spot.find_by(name: @course.end_location)
+    if current_user.member?(@plan.id)
+      @start_location = Spot.find_by(name: @course.start_location)
+      @end_location = Spot.find_by(name: @course.end_location)
 
-    @spot_subscribers = {}
+      @spot_subscribers = {}
 
-    spot_ids = @spot_points.keys
-    spots = Spot.where(id: spot_ids)
-    @ranking_spots = Spot.joins(:planned_spots)
-      .where(id: spot_ids, planned_spots: { plan_id: @plan.id })
-      .order('planned_spots.row_order')
+      spot_ids = @spot_points.keys
+      spots = Spot.where(id: spot_ids)
+      @ranking_spots = Spot.joins(:planned_spots)
+        .where(id: spot_ids, planned_spots: { plan_id: @plan.id })
+        .order('planned_spots.row_order')
 
-    @ranking_spots.each do |spot|
-      @spot_subscribers[spot.id] = User.joins(:planned_spots).where(planned_spots: { plan_id: @plan.id, spot_id: spot.id })
+      @ranking_spots.each do |spot|
+        @spot_subscribers[spot.id] = User.joins(:planned_spots).where(planned_spots: { plan_id: @plan.id, spot_id: spot.id })
+      end
+    else
+      redirect_to plan_path(@plan), alert: 'あなたはこのプランのメンバーではないためこのページは開けません'
     end
   end
 
