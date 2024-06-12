@@ -9,19 +9,21 @@ class CoursesController < ApplicationController
   def create
     @plan = Plan.find(params[:plan_id])
     @course = @plan.create_course(course_params)
-    @start_location = Spot.find_or_initialize_by(name: @course.start_location)
-    @end_location = Spot.find_or_initialize_by(name: @course.end_location)
+    @start_location_results = Geocoder.search(@course.start_location)
+    @end_location_results = Geocoder.search(@course.end_location)
+    @start_location = Spot.find_or_initialize_by(place_id: @start_location_results.first.place_id)
+    @end_location = Spot.find_or_initialize_by(place_id: @end_location_results.first.place_id)
     
     if @course.start_location.present? && @start_location.new_record?
-      results = Geocoder.search(@course.start_location)
-      @latlng = results.first.coordinates
+      @latlng =  @start_location_results.first.coordinates
+      @start_location.place_id = @start_location_results.first.place_id
+      @start_location.name = course_params[:start_location]
       @start_location.latitude = @latlng[0]
       @start_location.longitude = @latlng[1]
-      @start_location.address = results.first.address
-      spot_details = @start_location.get_spot_details(@course.start_location)
+      @start_location.address =  @start_location_results.first.address
+      spot_details = @start_location.get_spot_details(@start_location.place_id)
 
       if spot_details
-        @start_location.place_id = spot_details[:place_id]
         @start_location.opening_hours = spot_details[:opening_hours].split(",").join("\n") if spot_details[:opening_hours].present?
         @start_location.website = spot_details[:website]
         @start_location.phone_number = spot_details[:phone_number]
@@ -30,15 +32,15 @@ class CoursesController < ApplicationController
     end
 
     if @course.end_location.present? && @end_location.new_record?
-      results = Geocoder.search(@course.end_location)
-      @latlng = results.first.coordinates
+      @latlng = @end_location_results.first.coordinates
+      @end_location.place_id = @end_location_results.first.place_id
+      @end_location.name = course_params[:end_location]
       @end_location.latitude = @latlng[0]
       @end_location.longitude = @latlng[1]
-      @end_location.address = results.first.address
-      spot_details = @end_location.get_spot_details(@course.end_location)
+      @end_location.address = @end_location_results.first.address
+      spot_details = @end_location.get_spot_details(@end_place_id)
 
       if spot_details
-        @end_location.place_id = spot_details[:place_id]
         @end_location.opening_hours = spot_details[:opening_hours].split(",").join("\n") if spot_details[:opening_hours].present?
         @end_location.website = spot_details[:website]
         @end_location.phone_number = spot_details[:phone_number]

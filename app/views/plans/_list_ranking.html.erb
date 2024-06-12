@@ -20,6 +20,7 @@
     <div class="hidden py-4 px-4 border bg-base-100 rounded-box rounded-tl-none" data-tabs-target="panel">
       <div class="overflow-auto h-[400px] w-[300px] md:w-[1300px] mx-auto">
         <table class="table table-sm md:table-md table-pin-rows table-pin-cols">
+          <% if ranking_spots.present? %>
           <thead>
             <tr>
               <th class="md:w-[100px]"></th>
@@ -37,13 +38,16 @@
               <% end %>
             <% end %>
           </tbody>
+          <% else %>
+            <p class="whitespace-nowrap text-sm md:text-lg md:text-center p-4 md:p-10">右上の追加メニューからランキング投票を<br class="md:hidden" />して行きたい順にランキングをつけよう！</p>
+          <% end %>
         </table>
       </div>
       <% if current_user.present? && current_user.member?(plan.id) %>
         <% if plan.course.present? %>
           <div class="flex justify-center pt-2">
             <%= link_to "このプランのルートを確認", course_path(plan.course), class:"text-base-content btn btn-primary btn-sm md:btn-lg", data: { turbo: false } %>
-          <div>
+          </div>
         <% else %>
           <div data-controller="modal">
             <div class="flex justify-center pt-2">
