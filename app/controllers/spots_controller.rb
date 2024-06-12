@@ -15,14 +15,14 @@ class SpotsController < ApplicationController
           @place_id = results.first.place_id
           @spot = Spot.find_or_initialize_by(place_id: @place_id)
           if @spot.new_record?
+            @spot.place_id = @place_id
             @spot.name = spot_params[:name]
             @spot.latitude = @latlng[0]
             @spot.longitude = @latlng[1]
             @spot.address = results.first.address
 
-            spot_details = @spot.get_spot_details(spot_params[:name])
+            spot_details = @spot.get_spot_details(@place_id)
             if spot_details
-              @spot.place_id = spot_details[:place_id]
               @spot.opening_hours = spot_details[:opening_hours].split(",").join("\n") if spot_details[:opening_hours].present?
               @spot.website = spot_details[:website]
               @spot.phone_number = spot_details[:phone_number]

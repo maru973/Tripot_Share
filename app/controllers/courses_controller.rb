@@ -9,15 +9,15 @@ class CoursesController < ApplicationController
   def create
     @plan = Plan.find(params[:plan_id])
     @course = @plan.create_course(course_params)
-    @start_location = Spot.find_or_initialize_by(name: @course.start_location)
+    @start_location_results = Geocoder.search(@course.start_location)
+    @start_location = Spot.find_or_initialize_by(place_id: @start_location_results.first.place_id)
     @end_location = Spot.find_or_initialize_by(name: @course.end_location)
     
     if @course.start_location.present? && @start_location.new_record?
-      results = Geocoder.search(@course.start_location)
-      @latlng = results.first.coordinates
+      @latlng =  @start_location_results.first.coordinates
       @start_location.latitude = @latlng[0]
       @start_location.longitude = @latlng[1]
-      @start_location.address = results.first.address
+      @start_location.address =  @start_location_results.first.address
       spot_details = @start_location.get_spot_details(@course.start_location)
 
       if spot_details
