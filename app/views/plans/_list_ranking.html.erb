@@ -43,7 +43,7 @@
         <% if plan.course.present? %>
           <div class="flex justify-center pt-2">
             <%= link_to "このプランのルートを確認", course_path(plan.course), class:"text-base-content btn btn-primary btn-sm md:btn-lg", data: { turbo: false } %>
-          <div>
+          </div>
         <% else %>
           <div data-controller="modal">
             <div class="flex justify-center pt-2">
