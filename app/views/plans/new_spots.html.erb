@@ -72,7 +72,7 @@
           
         });
 
-        const contentString = '<div id="infowindow"><%= j render 'spots/modal', spot: spot %></div>';
+        const contentString = '<div><%= j render 'spots/modal', spot: spot %></div>';
     
         let infowindow = new google.maps.InfoWindow({
           content: contentString,
