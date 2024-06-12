@@ -8,3 +8,25 @@
     </div>
   <% end %>
 </div>
+
+<script>
+  function initAutocomplete() {
+    const input = document.getElementById("pac-input");
+    const options = {
+      fields: ["address_components", "name"],
+    };
+    const autocomplete = new google.maps.places.Autocomplete(input, options);
+    autocomplete.bindTo("bounds", map);
+
+    autocomplete.addListener("place_changed", function() {
+      const place = autocomplete.getPlace();
+      if (!place.name || !place.name.length) {
+        return; // 名前がない場合や長さが0の場合は処理しない
+      }
+      // 太字の部分（スポット名）だけを取得してフォームにセット
+      const spotName = place.name;
+      document.getElementById("spot_name_input").value = spotName;
+    });
+  }
+  initAutocomplete();
+</script>
