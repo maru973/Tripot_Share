@@ -109,7 +109,7 @@
           glyph: glyphImg,
           
         });
-        const contentString = '<div><%= j render 'spots/modal', spot: spot %></div>';
+        const contentString = '<div id="infowindow"><%= j render 'spots/modal', spot: spot %></div>';
     
         let infowindow = new google.maps.InfoWindow({
           content: contentString,
@@ -132,13 +132,26 @@
         });
 
         // リストのスポット名をクリックするとマップの情報ウィンドウが開く
-        let open_infowindow = document.getElementById('open-infowindow-<%= spot.id %>')
-        open_infowindow.addEventListener('click', () => {
-          infowindow.open({
-            anchor: marker,
-            map,
+        let open_infowindow = document.getElementById('infowindow-<%= spot.id %>')
+        if (open_infowindow) {
+          open_infowindow.addEventListener('click', () => {
+            infowindow.open({
+              anchor: marker,
+              map,
+            });
           });
-        });
+        }
+
+        let rank_infowindow = document.getElementById('rank-infowindow-<%= spot.id %>')
+        if (rank_infowindow) {
+          rank_infowindow.addEventListener('click', () => {
+            infowindow.open({
+              anchor: marker,
+              map,
+            });
+          });
+        }
+
 
         // ウィンドウ以外の場所をクリックしてウィンドウを閉じる処理
         google.maps.event.addListener(map, 'click', function() {
