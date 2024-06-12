@@ -109,6 +109,12 @@
           glyph: glyphImg,
           
         });
+        const contentString = '<div><%= j render 'spots/modal', spot: spot %></div>';
+    
+        let infowindow = new google.maps.InfoWindow({
+          content: contentString,
+          ariaLabel: '<%= spot.name %>',
+        });
 
         let marker = new google.maps.marker.AdvancedMarkerElement({
           map: map,
@@ -117,6 +123,27 @@
         });
         marker.id = <%= spot.id %>;
         markers.push(marker);
+
+        marker.addListener("click", () => {
+          infowindow.open({
+            anchor: marker,
+            map,
+          });
+        });
+
+        // リストのスポット名をクリックするとマップの情報ウィンドウが開く
+        let open_infowindow = document.getElementById('open-infowindow-<%= spot.id %>')
+        open_infowindow.addEventListener('click', () => {
+          infowindow.open({
+            anchor: marker,
+            map,
+          });
+        });
+
+        // ウィンドウ以外の場所をクリックしてウィンドウを閉じる処理
+        google.maps.event.addListener(map, 'click', function() {
+          infowindow.close();
+        });
       })();
     <% end %>
   }

@@ -1,7 +1,10 @@
 <tr id="spot-<%= spot.id %>">
   <td><%= index + 1 %></td>
   <td>  
-    <%= render 'spots/modal', spot: spot %>
+    <div id="open-infowindow-<%= spot.id %>" class="link link-hover">
+      <div class="text-md md:text-lg"><%= spot.name %></div>
+      <div class="text-xs md:text-sm opacity-50 truncate"><%= spot.address %></div>
+    </div>
   </td>
   <td>
       <div class="avatar hover:brightness-75">
