@@ -55,6 +55,26 @@
   <!-- 地図の表示 -->
   <div id="map" class="border w-full h-[250px] md:h-[400px] mt-1"></div>
 
+  <!-- 初回のみのモーダル -->
+  <div id="myModal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-80">
+      <span id="closeModal" class="float-right cursor-pointer material-symbols-outlined">
+        close
+      </span>
+      <p>作成したプランに早速メンバーを招待しよう！</p>
+      <p>下のリンク作成ボタンを押して招待リンクを作成して、旅行メンバーに送って招待しよう。</p>
+      <%= turbo_frame_tag "invite-link" do %>
+        <% if @invite_link.present? %>
+          <%= render template: 'plans/invitation' %>
+        <% else %>
+          <div class="flex justify-center">
+            <%= button_to "リンクを生成", invitation_plan_path(params[:id]), class:"text-base-content btn btn-accent btn-sm md:btn-md" %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
   <!-- 登録済みリスト -->
   <%= render 'list_ranking', users: @users, user_spots: @user_spots, plan: @plan, spot_points: @spot_points, ranking_spots: @ranking_spots, spot_subscribers: @spot_subscribers, spot_counter: @spot_counter %>
 
@@ -78,6 +98,25 @@
   let markers = [];
 
   const baseUrl = '<%= request.base_url %>';
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const modalShown = localStorage.getItem('explanationModal');
+    if (!modalShown) {
+      showModal();
+    }
+  });
+
+  function showModal() {
+    const modal = document.getElementById('myModal');
+    modal.classList.remove('hidden');
+    // モーダルが表示された後にローカルストレージに値を設定
+    localStorage.setItem('explanationModal', 'true');
+  }
+
+  document.getElementById('closeModal').addEventListener('click', function() {
+    const modal = document.getElementById('myModal');
+    modal.classList.add('hidden');
+  });
 
   // マップの初期化設定
   function initMap() {
