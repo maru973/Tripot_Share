@@ -50,14 +50,20 @@
 
       directionsService.route(request, function(result, status) {
         if (status === 'OK') {
-          directionsRenderer.setDirections(result);
-          console.log(result);
+          console.log(result.routes[0].legs[6]);
+          result.routes[0].legs[0].start_address = '出発地：<%= j render 'spots/modal', spot: @start_location %>';
+          result.routes[0].legs[6].end_address = '到着地：<%= j render 'spots/modal', spot: @end_location %>';
+
+          <% @ranking_spots.each_with_index do |spot, index| %>
+            result.routes[0].legs[<%= index + 1 %>].start_address = '<%= j render 'spots/modal', spot: spot %>';
+          <% end %>  
 
           // place_idの配列を抽出
           const placeIds = result.geocoded_waypoints.map(waypoint => waypoint.place_id);
 
           console.log(placeIds);
 
+          directionsRenderer.setDirections(result);
           // RailsにPOSTリクエストを送信
           fetch('/courses/<%= @course.id %>/create_position', {
             method: 'POST',
@@ -81,13 +87,12 @@
     }
 
     const isFirstLoad = sessionStorage.getItem('first_load');
+    const initialWayPoints = JSON.parse('<%= raw @ranking_spots.map { |spot| { place_id: spot.place_id } }.to_json %>').map(spot => ({ location: { placeId: spot.place_id } }));
 
     if (isFirstLoad) {
-      const initialWayPoints = JSON.parse('<%= raw @ranking_spots.map { |spot| { place_id: spot.place_id } }.to_json %>').map(spot => ({ location: { placeId: spot.place_id } }));
       searchRoute(initialWayPoints, true); // 初回ロード時は最適化を有効
       sessionStorage.removeItem('first_load');
     } else {
-      const initialWayPoints = JSON.parse('<%= raw @ranking_spots.map { |spot| { place_id: spot.place_id } }.to_json %>').map(spot => ({ location: { placeId: spot.place_id } }));
       searchRoute(initialWayPoints, false); // 最適化を無効
     }
 
