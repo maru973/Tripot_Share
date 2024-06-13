@@ -1,6 +1,6 @@
 <article class="pb-4 flex flex-col justify-center">
   <div class="flex items-center">
-    <h2 class="grow text-xl md:text-2xl font-bold underline my-1 md:my-2 text-center ps-16 md:ps-7"><%= @plan.name %></h2>
+    <h2 class="grow text-xl md:text-2xl font-bold underline my-1 md:my-2 text-center ps-16 md:ps-10"><%= @plan.name %></h2>
 
     <% if current_user.present? && current_user.member?(@plan.id) %>
       <div class="twitter mx-3 lg:tooltip" data-tip="Xに投稿する">
