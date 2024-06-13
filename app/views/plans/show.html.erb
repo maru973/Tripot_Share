@@ -1,6 +1,6 @@
 <article class="pb-4 flex flex-col justify-center">
   <div class="flex items-center">
-    <h2 class="grow text-xl md:text-2xl font-bold underline my-1 md:my-2 text-center ps-16 md:ps-10"><%= @plan.name %></h2>
+    <h2 class="grow text-xl md:text-2xl font-bold underline my-1 md:my-2 text-center ps-12 md:ps-10"><%= @plan.name %></h2>
 
     <% if current_user.present? && current_user.member?(@plan.id) %>
       <div class="twitter mx-3 lg:tooltip" data-tip="Xに投稿する">
@@ -56,13 +56,19 @@
   <div id="map" class="border w-full h-[250px] md:h-[400px] mt-1"></div>
 
   <!-- 初回のみのモーダル -->
-  <div id="myModal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
-    <div class="bg-white p-6 rounded-lg shadow-lg w-80">
+  <div id="explanationModal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
+    <div class="bg-white p-6 rounded-lg shadow-lg">
       <span id="closeModal" class="float-right cursor-pointer material-symbols-outlined">
         close
       </span>
-      <p>作成したプランに早速メンバーを招待しよう！</p>
-      <p>下のリンク作成ボタンを押して招待リンクを作成して、旅行メンバーに送って招待しよう。</p>
+      <h2 class="text-lg md:text-xl font-bold mb-1 md:mb-4 underline text-center">プランに早速メンバーを<br class="md:hidden" />招待しよう！</h2>
+      <p>下のボタンを押して作成された招待リンクから、旅行メンバーをプランに招待できます。</p>
+      <p class="mb-3 text-sm md:text-base">※招待メールを送信したい場合は右上にある
+        <span class="material-symbols-outlined" style= "font-size: 18px;">
+          add_box
+        </span>
+        から「メンバー招待」を選択して、メールを送信してください。
+      </p>
       <%= turbo_frame_tag "invite-link" do %>
         <% if @invite_link.present? %>
           <%= render template: 'plans/invitation' %>
@@ -72,6 +78,14 @@
           </div>
         <% end %>
       <% end %>
+      <div class="divider"></div> 
+      <div class="twitter my-5 flex justify-center">
+        <%= link_to "https://twitter.com/intent/tweet?url=#{plan_url(@plan)}&text=#{@plan.name}を作成しました！&hashtags=TripotShare", target: '_blank', class: "btn btn-sm md:btn-md" do %>
+          <i class="fa-brands fa-square-x-twitter fa-xl"></i>
+          投稿する
+        <% end %>
+      </div>
+      <p class="text-center">※Xに投稿ではメンバーの招待はできません。開発者が喜びます。</p>
     </div>
   </div>
 
@@ -107,7 +121,7 @@
   });
 
   function showModal() {
-    const modal = document.getElementById('myModal');
+    const modal = document.getElementById('explanationModal');
     modal.classList.remove('hidden');
     // モーダルが表示された後にローカルストレージに値を設定
     localStorage.setItem('explanationModal', 'true');
