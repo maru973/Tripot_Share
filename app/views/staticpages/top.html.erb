@@ -9,13 +9,15 @@
 
   <p class="text-xs md:text-lg text-base-content text-opacity-70 m-3">Tripot Shareはメンバーと行きたい場所を共有して、<br class="md:hidden"/>もっと気軽にオリジナルな旅行プランをつくることが<br class="md:hidden" />できるサービスです。</p>
 
-  <div class="flex flex-col justify-center md:mr-8">
+  <div class="flex justify-between my-4 md:my-8 gap-x-4">
     <% if signed_in? %>
       <%= link_to "プランをつくってみる", new_plan_path, class:"text-base-content btn btn-accent md:btn-lg mb-5" %>
     <% else %>
+      <%= link_to 'ゲストログイン', users_guest_sign_in_path, class:"text-base-content btn btn-active btn-ghost md:btn-lg", data: {turbo_method: :post} %>
       <%= link_to "プランをつくってみる", new_user_registration_path, class:"text-base-content btn btn-accent md:btn-lg" %>
-      <%= link_to 'ゲストログイン', users_guest_sign_in_path, class:"text-base-content btn md:btn-lg my-5", data: {turbo_method: :post} %>
     <% end %>
+  </div>
+  <div class="flex flex-col justify-center md:mr-8">
     <%= link_to "みんなのプランをみる", plans_path, class:"text-base-content btn btn-primary md:btn-lg" %>
   </div>
 
@@ -70,7 +72,7 @@
     </div>
 
     <div class="mt-10 md:mt-0 md:w-1/2">
-      <h2 class="text-2xl font-bold underline my-4">作ったプランにメンバー招待！</h2>
+      <h2 class="text-2xl font-bold underline my-4">つくったプランにメンバー招待！</h2>
       <div class="rounded-box bg-base-100 md:w-[400px] md:h-[550px]">
         <p class="text-lg pt-3 text-center">招待メール or 招待リンクを選択可能</p>
         <p class="pb-2 text-center">(ゲストユーザーは招待機能を使えません。)</p>
@@ -83,8 +85,8 @@
     <div class="mt-10 md:mt-0 md:w-1/2">
       <h2 class="text-2xl font-bold underline my-4">マイプランを一括管理！</h2>
       <div class="rounded-box bg-base-100 md:w-[400px] md:h-[550px]">
-        <p class="text-lg py-3 text-center"></p>
-        <%= image_tag "index.png", alt: "MyPlan", class:"p-7 md:ml-3 h-[530px]" %>
+        <p class="text-lg py-3 text-center">他の人がつくったプランも参考にできる</p>
+        <%= image_tag "index.png", alt: "MyPlan", class:"p-5 md:ml-5 h-[500px]" %>
       </div>
     </div>
 
@@ -108,7 +110,7 @@
     </div>
   </div>
 
-  <div class="flex justify-center md:mr-5">
+  <div class="flex justify-center md:mr-6">
     <% if signed_in? %>
       <%= link_to "さっそくつくってみる", new_plan_path, class:"text-base-content btn btn-accent md:btn-lg m-5" %>
     <% else %>
