@@ -1,23 +1,27 @@
-<div class="flex flex-col justify-center items-center m-3">
+<article class="flex flex-col justify-center items-center m-3 md:m-0">
   <div class="bg-info w-full">
     <div class="pt-4 md:pt-8 text-center">
       <h1 class="text-lg md:text-3xl text-base-content text-opacity-80">私たちだけの旅行プラン、</h1>
-      <h1 class="text-2xl md:text-4xl font-black">もっと気軽に。もっと楽しく。</h1>
+      <h1 class="text-2xl md:text-4xl font-black ps-3">もっと気軽に。もっと楽しく。</h1>
     </div>
     <%= image_tag "Tripot Share.jpg", alt: "Top", class:"mx-auto w-[200px] h-[200px] md:w-[400px] md:h-[400px] pr-4" %>
   </div>
 
   <p class="text-xs md:text-lg text-base-content text-opacity-70 m-3">Tripot Shareはメンバーと行きたい場所を共有して、<br class="md:hidden"/>もっと気軽にオリジナルな旅行プランをつくることが<br class="md:hidden" />できるサービスです。</p>
 
-  <% if signed_in? %>
-    <%= link_to "プランをつくってみる", new_plan_path, class:"text-base-content btn btn-primary btn-sm md:btn-lg" %>
-  <% else %>
-    <%= link_to "プランをつくってみる", new_user_registration_path, class:"text-base-content btn btn-primary btn-sm md:btn-lg" %>
-  <% end %>
-  <div class="flex justify-center mt-6 gap-5">
-    <%= link_to "みんなのプランをみる", plans_path, class:"text-base-content btn btn-accent btn-sm md:btn-lg" %>
-    <%= link_to 'ゲストログイン', users_guest_sign_in_path, class:"text-base-content btn btn-success btn-sm md:btn-lg", data: {turbo_method: :post} %>
-  </div> 
+    <% if signed_in? %>
+      <div class="flex flex-col justify-center md:mr-8">
+        <%= link_to "プランをつくってみる", new_plan_path, class:"text-base-content btn btn-accent md:btn-lg my-5" %>
+      </div>
+    <% else %>
+      <div class="flex justify-between my-4 md:my-8 gap-x-4 md:mr-8">
+        <%= link_to 'ゲストログイン', users_guest_sign_in_path, class:"text-base-content btn btn-active btn-ghost md:btn-lg", data: {turbo_method: :post} %>
+        <%= link_to "プランをつくる", new_user_registration_path, class:"text-base-content btn btn-accent md:btn-lg" %>
+      </div>
+    <% end %>
+  <div class="flex flex-col justify-center md:mr-8">
+    <%= link_to "みんなのプランをみる", plans_path, class:"text-base-content btn btn-primary md:btn-lg" %>
+  </div>
 
   <div class="m-6 pt-4 md:pt-8 w-full md:w-9/12">
     <p class="md:text-2xl underline font-bold">旅行計画立てる時こんなことはないですか？</p>
@@ -34,7 +38,7 @@
     </div>
   <div>
 
-  <div class="flex justify-center ml-36 md:ml-52">
+  <div class="flex justify-center ml-36 md:ml-60">
     <div class="grid text-base-content text-opacity-70">
       <span class="material-symbols-outlined" style= "font-size: 40px;">
         stat_minus_3
@@ -49,60 +53,70 @@
     <p class="mt-3 text-sm md:text-2xl pt-5 md:pl-2">Tripot Shareなら・・・</p>
   </div>
 
-  <div class="flex flex-col justify-center items-center md:mr-8">
-    <div class="carousel mt-10 w-[350px] md:w-[400px] gap-x-8">
-      <div id="item1" class="carousel-item w-full">
-        <div class="flex flex-col">
-          <p class="text-sm md:text-lg text-center pb-3">プランごとにいきたい場所を登録できる！</p>
-          <div class="mockup-phone">
-            <div class="camera"></div> 
-            <div class="display bg-white">
-              <div class="artboard artboard-demo phone-1">
-                <%= image_tag "plan_new.gif", alt: "PlanNew" %>
-              </div>
-            </div>
+
+  <div class="md:flex md:justify-center md:gap-x-60 md:mt-10">
+    <div class="md:w-1/2">
+      <h2 class="text-2xl font-bold underline my-4">プランごとにスポット登録！</h2>
+      <div class="carousel rounded-box bg-base-100 gap-x-8 md:w-[400px] h-[550px]">
+        <div class="carousel-item w-full">
+          <div class="flex flex-col p-5">
+            <p class="text-lg pb-2">1. プラン名と場所、日程を入力</p>
+            <%= image_tag "plan_new.png", alt: "PlanNew", class:"w-[350px] h-[470px]" %>
           </div>
-        </div>
-      </div> 
-      <div id="item2" class="carousel-item w-full">
-        <div class="flex flex-col">
-        <p class="text-sm md:text-lg text-center pb-3">メンバーを招待していきたい場所を共有できる！</p>
-        <div class="mockup-phone">
-          <div class="camera"></div> 
-          <div class="display bg-white">
-            <div class="artboard artboard-demo phone-1">
-              <%= image_tag "invitation.gif", alt: "Invitation" %>
-            </div>
+        </div> 
+        <div class="carousel-item w-full">
+          <div class="flex flex-col p-5">
+            <p class="text-lg pb-2">2. スポット名を入力</p>
+            <%= image_tag "spot_new.gif", alt: "SpotNew", class:"w-[350px] h-[470px]" %>
           </div>
-        </div>
-        </div>
-      </div>  
-      <div id="item3" class="carousel-item w-full">
-        <div class="flex flex-col">
-          <p class="text-sm md:text-lg text-center pb-3">マイプランを一括管理できる！</p>
-          <div class="mockup-phone">
-            <div class="camera"></div> 
-            <div class="display bg-white">
-              <div class="artboard artboard-demo phone-1">
-                <%= image_tag "index.png", alt: "MyIndex" %>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> 
-    </div> 
-    <div class="flex justify-center w-full py-2 gap-2 md:pr-7">
-      <a href="#item1" class="btn btn-xs rounded-3xl">1</a> 
-      <a href="#item2" class="btn btn-xs rounded-3xl">2</a> 
-      <a href="#item3" class="btn btn-xs rounded-3xl">3</a> 
+        </div> 
+      </div>
+    </div>
+
+    <div class="mt-10 md:mt-0 md:w-1/2">
+      <h2 class="text-2xl font-bold underline my-4">つくったプランにメンバー招待！</h2>
+      <div class="rounded-box bg-base-100 md:w-[400px] md:h-[550px]">
+        <p class="text-lg pt-3 text-center">招待メール or 招待リンクを選択可能</p>
+        <p class="pb-2 text-center">(ゲストユーザーは招待機能を使えません。)</p>
+        <%= image_tag "invitation.gif", alt: "Invitation", class:"p-7 md:ml-2 h-[480px]" %>
+      </div>
     </div>
   </div>
-  <div class="flex justify-center mt-3 md:mr-16">
+
+  <div class="md:flex md:justify-center md:gap-x-60 md:mt-10">
+    <div class="mt-10 md:mt-0 md:w-1/2">
+      <h2 class="text-2xl font-bold underline my-4">マイプランを一括管理！</h2>
+      <div class="rounded-box bg-base-100 md:w-[400px] md:h-[550px]">
+        <p class="text-lg py-3 text-center">他の人がつくったプランも参考にできる</p>
+        <%= image_tag "index.png", alt: "MyPlan", class:"p-5 md:ml-5 h-[500px]" %>
+      </div>
+    </div>
+
+    <div class="mt-10 md:mt-0 md:w-1/2">
+      <h2 class="text-2xl font-bold underline my-4">ルートを自動生成！</h2>
+      <div class="carousel rounded-box bg-base-100 gap-x-8 md:w-[400px] h-[550px]">
+        <div class="carousel-item w-full">
+          <div class="flex flex-col p-5">
+            <p class="text-lg py-3 text-center">メンバーの行きたい度合いを集計して、<br />６位までのランキングを作成</p>
+            <%= image_tag "ranking.gif", alt: "Ranking", class:"p-5" %>
+          </div>
+        </div> 
+        <div class="carousel-item w-full">
+          <div class="flex flex-col p-5">
+            <p class="text-lg pt-2 text-center">ランキングをもとに最適なルート生成</p>
+            <p class="pb-1 text-center">(並び替えて再検索もできます。)</p>
+            <%= image_tag "course.gif", alt: "Course", class:"p-5 md:ml-5 h-[450px]" %>
+          </div>
+        </div> 
+      </div>
+    </div>
+  </div>
+
+  <div class="flex justify-center md:mr-6">
     <% if signed_in? %>
-      <%= link_to "さっそく使ってみる", new_plan_path, class:"text-base-content btn btn-accent btn-sm md:btn-lg" %>
+      <%= link_to "さっそくつくってみる", new_plan_path, class:"text-base-content btn btn-accent md:btn-lg m-5" %>
     <% else %>
-      <%= link_to "さっそく使ってみる", new_user_registration_path, class:"text-base-content btn btn-accent btn-sm md:btn-lg" %>
+      <%= link_to "さっそくつくってみる", new_user_registration_path, class:"text-base-content btn btn-accent md:btn-lg m-5" %>
     <% end %>
-  </div> 
-    
-</div>
+  </div>    
+</article>

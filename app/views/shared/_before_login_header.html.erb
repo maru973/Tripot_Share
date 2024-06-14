@@ -6,9 +6,26 @@
   <div>
     <ul class="flex justify-end menu menu-horizontal md:m-2">
       <li class="hidden md:block link link-hover"><%= link_to "みんなのプランをみる", plans_path %></li>
-      <li class="link link-hover" ><%= link_to "アカウント登録", new_user_registration_path %></li>
-      <li class="link link-hover"><%= link_to "ログイン", new_user_session_path %></li>
+      <li class="hidden md:block link link-hover" ><%= link_to "アカウント登録", new_user_registration_path %></li>
+      <li class="hidden md:block link link-hover"><%= link_to "ログイン", new_user_session_path %></li>
+      <li class="md:hidden">
+        <div class="dropdown dropdown-bottom dropdown-end">
+          <div tabindex="0" role="button">
+            <!-- スマホ画面ではハンバーガーメニュー -->
+            <div>
+              <span class="material-symbols-outlined">
+                menu
+              </span>
+            </div>
+
+          </div>
+          <ul tabindex="0" class="border dropdown-content z-[1] menu mt-2shadow bg-base-100 rounded-box w-40">
+            <li class="link link-hover"><%= link_to "みんなのプラン", plans_path %></li>
+            <li class="link link-hover" ><%= link_to "アカウント登録", new_user_registration_path %></li>
+            <li class="link link-hover"><%= link_to "ログイン", new_user_session_path %></li>
+          </ul>
+        </div>
+      </li>
     </ul>
   </div>
-
 </header>
