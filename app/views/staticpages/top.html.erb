@@ -2,7 +2,7 @@
   <div class="bg-info w-full">
     <div class="pt-4 md:pt-8 text-center">
       <h1 class="text-lg md:text-3xl text-base-content text-opacity-80">私たちだけの旅行プラン、</h1>
-      <h1 class="text-2xl md:text-4xl font-black">もっと気軽に。もっと楽しく。</h1>
+      <h1 class="text-2xl md:text-4xl font-black ps-3">もっと気軽に。もっと楽しく。</h1>
     </div>
     <%= image_tag "Tripot Share.jpg", alt: "Top", class:"mx-auto w-[200px] h-[200px] md:w-[400px] md:h-[400px] pr-4" %>
   </div>
@@ -10,14 +10,12 @@
   <p class="text-xs md:text-lg text-base-content text-opacity-70 m-3">Tripot Shareはメンバーと行きたい場所を共有して、<br class="md:hidden"/>もっと気軽にオリジナルな旅行プランをつくることが<br class="md:hidden" />できるサービスです。</p>
 
   <% if signed_in? %>
-    <%= link_to "プランをつくってみる", new_plan_path, class:"text-base-content btn btn-primary btn-sm md:btn-lg" %>
+    <%= link_to "プランをつくってみる", new_plan_path, class:"text-base-content btn btn-accent btn-sm md:btn-lg mb-3" %>
   <% else %>
-    <%= link_to "プランをつくってみる", new_user_registration_path, class:"text-base-content btn btn-primary btn-sm md:btn-lg" %>
+    <%= link_to "プランをつくってみる", new_user_registration_path, class:"text-base-content btn btn-accent btn-sm md:btn-lg" %>
+    <%= link_to 'ゲストログイン', users_guest_sign_in_path, class:"text-base-content btn btn-success btn-sm md:btn-lg my-3", data: {turbo_method: :post} %>
   <% end %>
-  <div class="flex justify-center mt-6 gap-5">
-    <%= link_to "みんなのプランをみる", plans_path, class:"text-base-content btn btn-accent btn-sm md:btn-lg" %>
-    <%= link_to 'ゲストログイン', users_guest_sign_in_path, class:"text-base-content btn btn-success btn-sm md:btn-lg", data: {turbo_method: :post} %>
-  </div> 
+  <%= link_to "みんなのプランをみる", plans_path, class:"text-base-content btn btn-primary btn-sm md:btn-lg" %>
 
   <div class="m-6 pt-4 md:pt-8 w-full md:w-9/12">
     <p class="md:text-2xl underline font-bold">旅行計画立てる時こんなことはないですか？</p>
