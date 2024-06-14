@@ -52,7 +52,9 @@ export default class extends Controller {
 
   // 順番を即時反映するメソッド
   updateOrder() {
+    // コードからすべてのtrタグを取得
     const rows = this.element.querySelectorAll('tr');
+    // 取得したtrタグの中からクラス名がorderのコードのみ取得
     const validRows = Array.from(rows).filter(row => row.querySelector('.order'));
     validRows.forEach((row, index) => {
       const orderCell = row.querySelector('.order');
