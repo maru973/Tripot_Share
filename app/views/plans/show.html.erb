@@ -1,18 +1,17 @@
 <article class="pb-4 flex flex-col justify-center">
   <div class="flex items-center">
-    <h2 class="grow text-xl md:text-2xl font-bold underline my-1 md:my-2 text-center ps-7"><%= @plan.name %></h2>
-
+    <h2 class="grow text-xl md:text-2xl font-bold underline my-1 md:my-2 text-center ps-12 md:ps-10"><%= @plan.name %></h2>
 
     <% if current_user.present? && current_user.member?(@plan.id) %>
-      <div class="twitter mx-3 lg:tooltip" data-tip="Xに投稿する">
-        <%= link_to "https://twitter.com/intent/tweet?url=#{plan_url(@plan)}&text=#{@plan.name}を作成しました！&hashtags=TripotShare", target: '_blank' do %>
+      <div class="twitter mx-3 md:tooltip md:tooltip-left md:tooltip-accent" data-tip="Xに投稿する">
+        <%= link_to "https://twitter.com/intent/tweet?url=#{plan_url(@plan)}&text=#{@plan.name}のメンバーになりました！&hashtags=TripotShare", target: '_blank' do %>
           <i class="fa-brands fa-square-x-twitter fa-xl"></i>
         <% end %>
       </div>
       <!-- 追加メニュー -->
       <div class="flex-none dropdown dropdown-end">
         <div tabindex="0" role="button" class="pt-1 md:pr-5">
-          <div class="material-symbols-outlined">
+          <div class="material-symbols-outlined" style= "font-size: 38px;">
             add_box
           </div>
         </div>
@@ -50,11 +49,51 @@
           </li>
         </ul>
       </div>
+    <% else %>
+      <div class="twitter mx-3 md:tooltip md:tooltip-left md:tooltip-accent" data-tip="Xに投稿する">
+        <%= link_to "https://twitter.com/intent/tweet?url=#{plan_url(@plan)}&text=#{@plan.name}をみたよ！みんなもみてね！&hashtags=TripotShare", target: '_blank' do %>
+          <i class="fa-brands fa-square-x-twitter fa-xl"></i>
+        <% end %>
+      </div>
     <% end %>
   </div>
 
   <!-- 地図の表示 -->
   <div id="map" class="border w-full h-[250px] md:h-[400px] mt-1"></div>
+
+  <!-- 初回のみのモーダル -->
+  <div id="explanationModal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
+    <div class="bg-white p-6 rounded-lg shadow-lg">
+      <span id="closeModal" class="float-right cursor-pointer material-symbols-outlined">
+        close
+      </span>
+      <h2 class="text-lg md:text-xl font-bold mb-1 md:mb-4 underline text-center">プランに早速メンバーを<br class="md:hidden" />招待しよう！</h2>
+      <p>下のボタンを押して作成された招待リンクから、旅行メンバーをプランに招待できます。</p>
+      <p class="mb-3 text-sm md:text-base">※招待メールを送信したい場合は右上にある
+        <span class="material-symbols-outlined" style= "font-size: 18px;">
+          add_box
+        </span>
+        から「メンバー招待」を選択して、メールを送信してください。
+      </p>
+      <%= turbo_frame_tag "invite-link" do %>
+        <% if @invite_link.present? %>
+          <%= render template: 'plans/invitation' %>
+        <% else %>
+          <div class="flex justify-center">
+            <%= button_to "リンクを生成", invitation_plan_path(params[:id]), class:"text-base-content btn btn-accent btn-sm md:btn-md" %>
+          </div>
+        <% end %>
+      <% end %>
+      <div class="divider"></div> 
+      <div class="twitter my-5 flex justify-center">
+        <%= link_to "https://twitter.com/intent/tweet?url=#{plan_url(@plan)}&text=#{@plan.name}のメンバーになりました！&hashtags=TripotShare", target: '_blank', class: "btn btn-sm md:btn-md" do %>
+          <i class="fa-brands fa-square-x-twitter fa-xl"></i>
+          投稿する
+        <% end %>
+      </div>
+      <p class="text-center">※Xへの投稿ではメンバーの招待はできません。開発者が喜びます。</p>
+    </div>
+  </div>
 
   <!-- 登録済みリスト -->
   <%= render 'list_ranking', users: @users, user_spots: @user_spots, plan: @plan, spot_points: @spot_points, ranking_spots: @ranking_spots, spot_subscribers: @spot_subscribers, spot_counter: @spot_counter %>
@@ -74,11 +113,33 @@
 
 <script>
   // 他のファイルでも使用できるようにfunctionの外側で定義
-  let map
+  let map;
 
   let markers = [];
 
   const baseUrl = '<%= request.base_url %>';
+
+  // プランに参加しているメンバーが初めて詳細ページを開くとき、説明モーダルを表示
+  <% if current_user.present? && current_user.member?(@plan.id) %>
+    document.addEventListener('DOMContentLoaded', function() {
+      const modalShown = localStorage.getItem('explanationModal');
+      if (!modalShown) {
+        showModal();
+      }
+      function showModal() {
+        const modal = document.getElementById('explanationModal');
+        modal.classList.remove('hidden');
+        // モーダルが表示された後にローカルストレージに値を設定
+        localStorage.setItem('explanationModal', 'true');
+      }
+    });
+
+
+    document.getElementById('closeModal').addEventListener('click', function() {
+      const modal = document.getElementById('explanationModal');
+      modal.classList.add('hidden');
+    });
+  <% end %>
 
   // マップの初期化設定
   function initMap() {
