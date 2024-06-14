@@ -9,14 +9,16 @@
 
   <p class="text-xs md:text-lg text-base-content text-opacity-70 m-3">Tripot Shareはメンバーと行きたい場所を共有して、<br class="md:hidden"/>もっと気軽にオリジナルな旅行プランをつくることが<br class="md:hidden" />できるサービスです。</p>
 
-  <div class="flex justify-between my-4 md:my-8 gap-x-4">
     <% if signed_in? %>
-      <%= link_to "プランをつくってみる", new_plan_path, class:"text-base-content btn btn-accent md:btn-lg mb-5" %>
+      <div class="flex flex-col justify-center md:mr-8">
+        <%= link_to "プランをつくってみる", new_plan_path, class:"text-base-content btn btn-accent md:btn-lg my-5" %>
+      </div>
     <% else %>
-      <%= link_to 'ゲストログイン', users_guest_sign_in_path, class:"text-base-content btn btn-active btn-ghost md:btn-lg", data: {turbo_method: :post} %>
-      <%= link_to "プランをつくってみる", new_user_registration_path, class:"text-base-content btn btn-accent md:btn-lg" %>
+      <div class="flex justify-between my-4 md:my-8 gap-x-4 md:mr-8">
+        <%= link_to 'ゲストログイン', users_guest_sign_in_path, class:"text-base-content btn btn-active btn-ghost md:btn-lg", data: {turbo_method: :post} %>
+        <%= link_to "プランをつくる", new_user_registration_path, class:"text-base-content btn btn-accent md:btn-lg" %>
+      </div>
     <% end %>
-  </div>
   <div class="flex flex-col justify-center md:mr-8">
     <%= link_to "みんなのプランをみる", plans_path, class:"text-base-content btn btn-primary md:btn-lg" %>
   </div>
