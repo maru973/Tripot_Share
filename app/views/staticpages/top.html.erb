@@ -10,12 +10,12 @@
   <p class="text-xs md:text-lg text-base-content text-opacity-70 m-3">Tripot Shareはメンバーと行きたい場所を共有して、<br class="md:hidden"/>もっと気軽にオリジナルな旅行プランをつくることが<br class="md:hidden" />できるサービスです。</p>
 
   <% if signed_in? %>
-    <%= link_to "プランをつくってみる", new_plan_path, class:"text-base-content btn btn-accent btn-sm md:btn-lg mb-3" %>
+    <%= link_to "プランをつくってみる", new_plan_path, class:"text-base-content btn btn-accent md:btn-lg mb-3" %>
   <% else %>
-    <%= link_to "プランをつくってみる", new_user_registration_path, class:"text-base-content btn btn-accent btn-sm md:btn-lg" %>
-    <%= link_to 'ゲストログイン', users_guest_sign_in_path, class:"text-base-content btn btn-success btn-sm md:btn-lg my-3", data: {turbo_method: :post} %>
+    <%= link_to "プランをつくってみる", new_user_registration_path, class:"text-base-content btn btn-accent md:btn-lg" %>
+    <%= link_to 'ゲストログイン', users_guest_sign_in_path, class:"text-base-content btn md:btn-lg my-3", data: {turbo_method: :post} %>
   <% end %>
-  <%= link_to "みんなのプランをみる", plans_path, class:"text-base-content btn btn-primary btn-sm md:btn-lg" %>
+  <%= link_to "みんなのプランをみる", plans_path, class:"text-base-content btn btn-primary md:btn-lg" %>
 
   <div class="m-6 pt-4 md:pt-8 w-full md:w-9/12">
     <p class="md:text-2xl underline font-bold">旅行計画立てる時こんなことはないですか？</p>
@@ -48,21 +48,28 @@
   </div>
 
 
-    <h2 class="text-2xl md:text-2xl font-bold underline my-4">プランごとにスポットを登録！</h2>
-    <div class="carousel rounded-box bg-base-100 gap-x-8">
-      <div class="carousel-item w-full">
-        <div class="flex flex-col p-5">
-          <p class="text-lg pb-2">1.プラン名と場所、日程を入力</p>
-          <%= image_tag "plan_new.png", alt: "PlanNew", class:"w-[350px] h-[500px]" %>
-        </div>
-      </div> 
-      <div class="carousel-item w-full">
-        <div class="flex flex-col p-5">
-          <p class="text-lg pb-2">2.スポット名を入力</p>
-          <%= image_tag "spot_new.gif", alt: "SpotNew", class:"w-[350px] h-[500px]" %>
-        </div>
-      </div> 
-    </div>
+  <h2 class="text-2xl md:text-2xl font-bold underline my-4">プランごとにスポットを登録！</h2>
+  <div class="carousel rounded-box bg-base-100 gap-x-8 md:w-[400px]">
+    <div class="carousel-item w-full">
+      <div class="flex flex-col p-5">
+        <p class="text-lg pb-2">1.プラン名と場所、日程を入力</p>
+        <%= image_tag "plan_new.png", alt: "PlanNew", class:"w-[350px] h-[500px]" %>
+      </div>
+    </div> 
+    <div class="carousel-item w-full">
+      <div class="flex flex-col p-5">
+        <p class="text-lg pb-2">2.スポット名を入力</p>
+        <%= image_tag "spot_new.gif", alt: "SpotNew", class:"w-[350px] h-[500px]" %>
+      </div>
+    </div> 
+  </div>
+  <div class="flex justify-center m-3">
+    <% if signed_in? %>
+      <%= link_to "プランをつくってみる", new_plan_path, class:"text-base-content btn btn-accent md:btn-lg mb-3" %>
+    <% else %>
+      <%= link_to "プランをつくってみる", new_user_registration_path, class:"text-base-content btn btn-accent md:btn-lg" %>
+    <% end %>
+  </div>
 
   <div class="flex flex-col justify-center items-center md:mr-8">
     <div class="carousel mt-10 w-[350px] md:w-[400px] gap-x-8">
