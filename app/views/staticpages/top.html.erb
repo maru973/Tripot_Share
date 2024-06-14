@@ -1,4 +1,4 @@
-<div class="flex flex-col justify-center items-center m-3">
+<div class="flex flex-col justify-center items-center m-3 md:m-0">
   <div class="bg-info w-full">
     <div class="pt-4 md:pt-8 text-center">
       <h1 class="text-lg md:text-3xl text-base-content text-opacity-80">私たちだけの旅行プラン、</h1>
@@ -32,7 +32,7 @@
     </div>
   <div>
 
-  <div class="flex justify-center ml-36 md:ml-52">
+  <div class="flex justify-center ml-36 md:ml-60">
     <div class="grid text-base-content text-opacity-70">
       <span class="material-symbols-outlined" style= "font-size: 40px;">
         stat_minus_3
@@ -48,27 +48,58 @@
   </div>
 
 
-  <h2 class="text-2xl md:text-2xl font-bold underline my-4">プランごとにスポットを登録！</h2>
-  <div class="carousel rounded-box bg-base-100 gap-x-8 md:w-[400px]">
-    <div class="carousel-item w-full">
-      <div class="flex flex-col p-5">
-        <p class="text-lg pb-2">1.プラン名と場所、日程を入力</p>
-        <%= image_tag "plan_new.png", alt: "PlanNew", class:"w-[350px] h-[500px]" %>
+  <div class="md:flex md:justify-between md:gap-x-5">
+    <div>
+      <h2 class="text-2xl font-bold underline my-4">プランごとにスポット登録！</h2>
+      <div class="carousel rounded-box bg-base-100 gap-x-8 md:w-[400px] h-[580px]">
+        <div class="carousel-item w-full">
+          <div class="flex flex-col p-5">
+            <p class="text-lg pb-2">1. プラン名と場所、日程を入力</p>
+            <%= image_tag "plan_new.png", alt: "PlanNew", class:"w-[350px] h-[500px]" %>
+          </div>
+        </div> 
+        <div class="carousel-item w-full">
+          <div class="flex flex-col p-5">
+            <p class="text-lg pb-2">2. スポット名を入力</p>
+            <%= image_tag "spot_new.gif", alt: "SpotNew", class:"w-[350px] h-[500px]" %>
+          </div>
+        </div> 
       </div>
-    </div> 
-    <div class="carousel-item w-full">
-      <div class="flex flex-col p-5">
-        <p class="text-lg pb-2">2.スポット名を入力</p>
-        <%= image_tag "spot_new.gif", alt: "SpotNew", class:"w-[350px] h-[500px]" %>
+    </div>
+
+    <div class="mt-5 md:mt-0">
+      <h2 class="text-2xl font-bold underline my-4">作ったプランにメンバー招待！</h2>
+      <div class="rounded-box bg-base-100 md:w-[400px] md:h-[580px]">
+        <p class="text-lg py-3 text-center">招待メール or 招待リンクを選択できる</p>
+        <%= image_tag "invitation.gif", alt: "Invitation", class:"p-5" %>
       </div>
-    </div> 
+    </div>
+
+    <div class="mt-5 md:mt-0">
+      <h2 class="text-2xl font-bold underline my-4">マイプランを一括管理！</h2>
+      <div class="rounded-box bg-base-100 md:w-[400px] md:h-[580px]">
+        <p class="text-lg py-3 text-center"></p>
+        <%= image_tag "index.png", alt: "MyIndex", class:"p-5 w-[350px] h-[500px]" %>
+      </div>
+    </div>
   </div>
-  <div class="flex justify-center m-3">
+
+  <div class="flex justify-center">
     <% if signed_in? %>
-      <%= link_to "プランをつくってみる", new_plan_path, class:"text-base-content btn btn-accent md:btn-lg mb-3" %>
+      <%= link_to "プランをつくってみる", new_plan_path, class:"text-base-content btn btn-accent md:btn-lg m-3" %>
     <% else %>
-      <%= link_to "プランをつくってみる", new_user_registration_path, class:"text-base-content btn btn-accent md:btn-lg" %>
+      <%= link_to "プランをつくってみる", new_user_registration_path, class:"text-base-content btn btn-accent md:btn-lg m-3" %>
     <% end %>
+  </div>
+
+  <div class="md:grid md:grid-flow-col md:justify-stretch items-center">
+    <div class="mt-5 md:mt-0">
+      <h2 class="text-2xl font-bold underline my-4">マイプランを一括管理！</h2>
+      <div class="rounded-box bg-base-100 md:w-[400px] md:h-[580px]">
+        <p class="text-lg py-3 text-center"></p>
+        <%= image_tag "index.png", alt: "MyIndex", class:"p-5 w-[350px] h-[500px]" %>
+      </div>
+    </div>
   </div>
 
   <div class="flex flex-col justify-center items-center md:mr-8">
@@ -80,7 +111,7 @@
             <div class="camera"></div> 
             <div class="display bg-white">
               <div class="artboard artboard-demo phone-1">
-                <%= image_tag "plan_new.gif", alt: "PlanNew" %>
+
               </div>
             </div>
           </div>
