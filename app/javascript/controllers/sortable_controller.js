@@ -18,6 +18,7 @@ export default class extends Controller {
   }
  
   onEnd(evt) {
+    this.updateOrder();
     const body = { 
       row_order_position: evt.newIndex,
       spot_id: evt.item.dataset.spotId
@@ -47,5 +48,17 @@ export default class extends Controller {
     .catch(error => {
       console.error('There has been a problem with your fetch operation:', error);
     });
-  };
+  }
+
+  // 順番を即時反映するメソッド
+  updateOrder() {
+    const rows = this.element.querySelectorAll('tr');
+    const validRows = Array.from(rows).filter(row => row.querySelector('.order'));
+    validRows.forEach((row, index) => {
+      const orderCell = row.querySelector('.order');
+      if (orderCell) {
+        orderCell.textContent = String.fromCharCode(66 + index); // B, C, D, E, F, Gのみを使って設定
+      }
+    });
+  }
 }
