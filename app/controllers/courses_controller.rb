@@ -1,6 +1,4 @@
 class CoursesController < ApplicationController
-  before_action :point_calculate, only: [:show, :reserach_course]
-
   def new
     @plan = Plan.find(params[:plan_id])
     @course = Course.new
@@ -54,20 +52,16 @@ class CoursesController < ApplicationController
 
   def show
     @course = Course.find(params[:id])
+    @plan = @course.plan
     if current_user.member?(@plan.id)
       @start_location = Spot.find_by(name: @course.start_location)
       @end_location = Spot.find_by(name: @course.end_location)
-
       @spot_subscribers = {}
-
-      spot_ids = @spot_points.keys
-      spots = Spot.where(id: spot_ids)
-      @ranking_spots = Spot.joins(:planned_spots)
-        .where(id: spot_ids, planned_spots: { plan_id: @plan.id })
-        .order('planned_spots.row_order')
-
+      
+      get_ranking(@plan)
+      
       @ranking_spots.each do |spot|
-        @spot_subscribers[spot.id] = User.joins(:planned_spots).where(planned_spots: { plan_id: @plan.id, spot_id: spot.id })
+        @spot_subscribers[spot.id] = User.spot_subscriber(@plan.id, spot.id)
       end
     else
       redirect_to plan_path(@plan), alert: 'あなたはこのプランのメンバーではないためこのページは開けません'
@@ -96,12 +90,7 @@ class CoursesController < ApplicationController
   def reserach_course
     @course = Course.find(params[:id])
     @plan = @course.plan
-
-    spot_ids = @spot_points.keys
-    spots = Spot.where(id: spot_ids)
-    @ranking_spots = Spot.joins(:planned_spots)
-      .where(id: spot_ids, planned_spots: { plan_id: @plan.id })
-      .order('planned_spots.row_order')
+    get_ranking(@plan)
 
     render json: @ranking_spots.map { |spot| { place_id: spot.place_id } }
   end
@@ -119,14 +108,9 @@ class CoursesController < ApplicationController
     params.require(:course).permit(:start_location, :end_location)
   end
 
-  def point_calculate
-    @plan = Course.find(params[:id]).plan
-
-    @spot_points = SpotPoint.joins(:planned_spot)
-      .where(planned_spots: { plan_id: @plan.id })
-      .group('planned_spots.spot_id')
-      .order('SUM(point) DESC')
-      .limit(6)
-      .sum(:point)
+  def get_ranking(plan)
+    @spot_points = SpotPoint.ranking_spot_ids_with_point(plan.id)
+    spot_ids = @spot_points.keys
+    @ranking_spots = Spot.ranking_spots_in_order_of_course(plan.id, spot_ids)
   end
 end

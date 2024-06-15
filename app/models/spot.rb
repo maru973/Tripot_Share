@@ -3,7 +3,13 @@ class Spot < ApplicationRecord
   has_many :plans, through: :planned_spots
   has_many :users, through: :planned_spots
 
+  scope :user_spots, ->(plan_id, user_id) {
+    joins(:planned_spots).where(planned_spots: { plan_id: plan_id, user_id: user_id })
+  }
 
+  scope :ranking_spots_in_order_of_course, ->(plan_id, spot_ids) {
+    joins(:planned_spots).where(id: spot_ids, planned_spots: { plan_id: plan_id }).order('planned_spots.row_order')
+  }
 
   geocoded_by :address
   after_validation :geocode, if: ->(obj){ obj.address.present? and obj.address_changed? }

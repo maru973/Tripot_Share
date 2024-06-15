@@ -6,6 +6,10 @@ class User < ApplicationRecord
   has_many :spots, through: :planned_spots
   has_many :spot_points, dependent: :destroy
 
+  scope :spot_subscriber, ->(plan_id, spot_id) {
+    joins(:planned_spots).where(planned_spots: { plan_id: plan_id, spot_id: spot_id })
+  }
+
   mount_uploader :avatar, AvatarUploader
 
   attr_accessor :plan_id

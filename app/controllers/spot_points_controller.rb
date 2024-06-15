@@ -13,13 +13,13 @@ class SpotPointsController < ApplicationController
       @spot_points = {}
 
       @spots.each do |spot|
-        @spot_subscribers[spot.id] = User.joins(:planned_spots).where(planned_spots: { plan_id: @plan.id, spot_id: spot.id })
+        @spot_subscribers[spot.id] = User.spot_subscriber(@plan.id, spot.id)
         @planned_spot = PlannedSpot.find_by(plan_id: @plan.id, spot_id: spot.id)
         @spot_points[spot.id] = SpotPoint.find_or_create_by(user_id: current_user.id, planned_spot_id: @planned_spot.id)
       end
 
       @users.each do |user|
-        @user_spots[user.id] = Spot.joins(:planned_spots).where(planned_spots: { plan_id: @plan.id, user_id: user.id })
+        @user_spots[user.id] = Spot.user_spots(@plan.id, user.id)
       end
       @user = User.new
       @resource_name = @user.class.name.underscore

@@ -1,6 +1,5 @@
 class PlansController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[show index accept]
-  before_action :point_calculate, only: [:show]
 
   def index
     @q = Plan.ransack(params[:q])
@@ -46,12 +45,12 @@ class PlansController < ApplicationController
       
       # プランにスポットを登録したユーザーを取得
       @spots.each do |spot|
-        @spot_subscribers[spot.id] = User.joins(:planned_spots).where(planned_spots: { plan_id: @plan.id, spot_id: spot.id })
+        @spot_subscribers[spot.id] = User.spot_subscriber(@plan.id, spot.id)
       end
       
       # 各ユーザーのスポットをハッシュに入れる
       @users.each do |user|
-        @user_spots[user.id] = Spot.joins(:planned_spots).where(planned_spots: { plan_id: @plan.id, user_id: user.id })
+        @user_spots[user.id] = Spot.user_spots(@plan.id, user.id)
       end
     else
       redirect_to plan_path(@plan), alert: "あなたはこのプランのメンバーではないため、スポットの登録はできません"
@@ -60,6 +59,9 @@ class PlansController < ApplicationController
 
   def show
     @plan = Plan.find(params[:id])
+    # ポイントが高い順にデータを6個取り出す
+    @spot_points = SpotPoint.ranking_spot_ids_with_point(@plan.id)
+
     @location = Spot.find_by(name: @plan.location)
     @users = @plan.users
     @spots = @plan.spots
@@ -73,11 +75,11 @@ class PlansController < ApplicationController
     @ranking_spots = spot_ids.map { |id| spots.find { |spot| spot.id == id } }
 
     @spots.each do |spot|
-      @spot_subscribers[spot.id] = User.joins(:planned_spots).where(planned_spots: { plan_id: @plan.id, spot_id: spot.id })
+      @spot_subscribers[spot.id] = User.spot_subscriber(@plan.id, spot.id)
     end
 
     @users.each do |user|
-      @user_spots[user.id] = Spot.joins(:planned_spots).where(planned_spots: { plan_id: @plan.id, user_id: user.id })
+      @user_spots[user.id] = Spot.user_spots(@plan.id, user.id)
     end
 
     @user = User.new
@@ -153,17 +155,5 @@ class PlansController < ApplicationController
 
   def plan_params
     params.require(:plan).permit(:name, :start_date, :end_date, :invitation_token, :location)
-  end
-
-  def point_calculate
-    @plan = Plan.find(params[:id])
-
-    # ポイントが高い順にデータを10個取り出す
-    @spot_points = SpotPoint.joins(:planned_spot)
-      .where(planned_spots: { plan_id: @plan.id })
-      .group('planned_spots.spot_id')
-      .order('SUM(point) DESC')
-      .limit(6)
-      .sum(:point)
   end
 end
