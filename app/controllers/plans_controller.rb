@@ -51,7 +51,7 @@ class PlansController < ApplicationController
       
       # 各ユーザーのスポットをハッシュに入れる
       @users.each do |user|
-        @user_spots[user.id] = Spot.joins(:planned_spots).where(planned_spots: { plan_id: @plan.id, user_id: user.id })
+        @user_spots[user.id] = Spot.user_spots(@plan.id, user.id)
       end
     else
       redirect_to plan_path(@plan), alert: "あなたはこのプランのメンバーではないため、スポットの登録はできません"
@@ -77,7 +77,7 @@ class PlansController < ApplicationController
     end
 
     @users.each do |user|
-      @user_spots[user.id] = Spot.joins(:planned_spots).where(planned_spots: { plan_id: @plan.id, user_id: user.id })
+      @user_spots[user.id] = Spot.user_spots(@plan.id, user.id)
     end
 
     @user = User.new

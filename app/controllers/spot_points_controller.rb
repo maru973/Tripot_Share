@@ -19,7 +19,7 @@ class SpotPointsController < ApplicationController
       end
 
       @users.each do |user|
-        @user_spots[user.id] = Spot.joins(:planned_spots).where(planned_spots: { plan_id: @plan.id, user_id: user.id })
+        @user_spots[user.id] = Spot.user_spots(@plan.id, user.id)
       end
       @user = User.new
       @resource_name = @user.class.name.underscore
