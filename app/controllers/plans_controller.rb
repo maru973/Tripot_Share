@@ -60,7 +60,7 @@ class PlansController < ApplicationController
   def show
     @plan = Plan.find(params[:id])
     # ポイントが高い順にデータを6個取り出す
-    @spot_points = SpotPoint.ranking_spots_with_point(@plan.id)
+    @spot_points = SpotPoint.ranking_spot_ids_with_point(@plan.id)
 
     @location = Spot.find_by(name: @plan.location)
     @users = @plan.users

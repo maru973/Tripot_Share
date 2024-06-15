@@ -1,6 +1,4 @@
 class CoursesController < ApplicationController
-
-
   def new
     @plan = Plan.find(params[:plan_id])
     @course = Course.new
@@ -111,8 +109,8 @@ class CoursesController < ApplicationController
   end
 
   def get_ranking(plan)
-    @spot_points = SpotPoint.ranking_spots_with_point(plan.id)
+    @spot_points = SpotPoint.ranking_spot_ids_with_point(plan.id)
     spot_ids = @spot_points.keys
-    @ranking_spots = Spot.ranking_spots(plan.id, spot_ids)
+    @ranking_spots = Spot.ranking_spots_in_order_of_course(plan.id, spot_ids)
   end
 end

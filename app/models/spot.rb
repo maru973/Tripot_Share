@@ -7,7 +7,7 @@ class Spot < ApplicationRecord
     joins(:planned_spots).where(planned_spots: { plan_id: plan_id, user_id: user_id })
   }
 
-  scope :ranking_spots, ->(plan_id, spot_ids) {
+  scope :ranking_spots_in_order_of_course, ->(plan_id, spot_ids) {
     joins(:planned_spots).where(id: spot_ids, planned_spots: { plan_id: plan_id }).order('planned_spots.row_order')
   }
 
