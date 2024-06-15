@@ -18,36 +18,28 @@ export default class extends Controller {
   }
  
   onEnd(evt) {
-    this.updateOrder();
     const body = { 
       row_order_position: evt.newIndex,
       spot_id: evt.item.dataset.spotId
     }
+    console.log(body);
     fetch(evt.item.dataset.sortableUrl, {
-      method: 'PATCH',
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-        'Accept': 'text/vnd.turbo-stream.html'  // Turbo Streamのレスポンスを受け入れる
       },
       body: JSON.stringify(body)
     })
     .then(response => {
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error('ネットワークエラーです');
       }
-      return response.text();  // Turbo StreamはHTMLとして返される
-    })
-    .then(turboStream => {
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(turboStream, 'text/html');
-      doc.body.querySelectorAll('turbo-stream').forEach(stream => {
-        document.documentElement.appendChild(stream);
-      });
     })
     .catch(error => {
-      console.error('There has been a problem with your fetch operation:', error);
+      console.error('問題が起きてます:', error);
     });
+    this.updateOrder();
   }
 
   // 順番を即時反映するメソッド

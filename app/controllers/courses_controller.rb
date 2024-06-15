@@ -91,7 +91,7 @@ class CoursesController < ApplicationController
     @course = Course.find(params[:id])
     @plan = @course.plan
     get_ranking(@plan)
-
+    
     render json: @ranking_spots.map { |spot| { place_id: spot.place_id } }
   end
 
@@ -99,7 +99,7 @@ class CoursesController < ApplicationController
     plan = Course.find(params[:id]).plan
     spot = Spot.find(params[:spot_id])
     planned_spot = PlannedSpot.find_by(spot_id: spot.id, plan_id: plan.id)
-    planned_spot.update(row_order: params[:row_order_position])
+    planned_spot.update(row_order_position: params[:row_order_position])
   end
 
   private
