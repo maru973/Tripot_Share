@@ -1,6 +1,5 @@
 class PlansController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[show index accept]
-  before_action :point_calculate, only: [:show]
 
   def index
     @q = Plan.ransack(params[:q])
@@ -60,6 +59,9 @@ class PlansController < ApplicationController
 
   def show
     @plan = Plan.find(params[:id])
+    # ポイントが高い順にデータを6個取り出す
+    @spot_points = SpotPoint.ranking_spots_with_point(@plan.id)
+
     @location = Spot.find_by(name: @plan.location)
     @users = @plan.users
     @spots = @plan.spots
@@ -153,17 +155,5 @@ class PlansController < ApplicationController
 
   def plan_params
     params.require(:plan).permit(:name, :start_date, :end_date, :invitation_token, :location)
-  end
-
-  def point_calculate
-    @plan = Plan.find(params[:id])
-
-    # ポイントが高い順にデータを10個取り出す
-    @spot_points = SpotPoint.joins(:planned_spot)
-      .where(planned_spots: { plan_id: @plan.id })
-      .group('planned_spots.spot_id')
-      .order('SUM(point) DESC')
-      .limit(6)
-      .sum(:point)
   end
 end

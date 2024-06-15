@@ -7,6 +7,10 @@ class Spot < ApplicationRecord
     joins(:planned_spots).where(planned_spots: { plan_id: plan_id, user_id: user_id })
   }
 
+  scope :ranking_spots, ->(plan_id, spot_ids) {
+    joins(:planned_spots).where(id: spot_ids, planned_spots: { plan_id: plan_id }).order('planned_spots.row_order')
+  }
+
   geocoded_by :address
   after_validation :geocode, if: ->(obj){ obj.address.present? and obj.address_changed? }
 
