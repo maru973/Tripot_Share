@@ -46,7 +46,7 @@ class PlansController < ApplicationController
       
       # プランにスポットを登録したユーザーを取得
       @spots.each do |spot|
-        @spot_subscribers[spot.id] = User.joins(:planned_spots).where(planned_spots: { plan_id: @plan.id, spot_id: spot.id })
+        @spot_subscribers[spot.id] = User.spot_subscriber(@plan.id, spot.id)
       end
       
       # 各ユーザーのスポットをハッシュに入れる
@@ -73,7 +73,7 @@ class PlansController < ApplicationController
     @ranking_spots = spot_ids.map { |id| spots.find { |spot| spot.id == id } }
 
     @spots.each do |spot|
-      @spot_subscribers[spot.id] = User.joins(:planned_spots).where(planned_spots: { plan_id: @plan.id, spot_id: spot.id })
+      @spot_subscribers[spot.id] = User.spot_subscriber(@plan.id, spot.id)
     end
 
     @users.each do |user|

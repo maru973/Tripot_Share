@@ -67,7 +67,7 @@ class CoursesController < ApplicationController
         .order('planned_spots.row_order')
 
       @ranking_spots.each do |spot|
-        @spot_subscribers[spot.id] = User.joins(:planned_spots).where(planned_spots: { plan_id: @plan.id, spot_id: spot.id })
+        @spot_subscribers[spot.id] = User.spot_subscriber(@plan.id, spot.id)
       end
     else
       redirect_to plan_path(@plan), alert: 'あなたはこのプランのメンバーではないためこのページは開けません'
