@@ -9,7 +9,7 @@ class SpotsController < ApplicationController
           flash.now[:alert] = 'スポット名を入力してください'
           render turbo_stream: turbo_stream.prepend("flash", partial: "shared/flash_message")
         end
-      when (@spot = Spot.save_spot(spot_params)) == false
+      when (@spot = Spot.save_spot(spot_params[:name])) == false
         format.turbo_stream do
           flash.now[:alert] = 'スポットが見つかりませんでした'
           render turbo_stream: turbo_stream.prepend("flash", partial: "shared/flash_message")
