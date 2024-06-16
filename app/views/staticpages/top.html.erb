@@ -57,7 +57,7 @@
   <div class="md:flex md:justify-center md:gap-x-60 md:mt-10">
     <div class="md:w-1/2">
       <h2 class="text-2xl font-bold underline my-4">プランごとにスポット登録！</h2>
-      <div class="carousel rounded-box bg-base-100 gap-x-8 md:w-[400px] h-[550px]">
+      <div class="carousel rounded-box bg-base-100 gap-x-8 w-[400px] md:h-[550px]">
         <div class="carousel-item w-full">
           <div class="flex flex-col p-5">
             <p class="text-lg pb-2">1. プラン名と場所、日程を入力</p>
@@ -74,8 +74,8 @@
     </div>
 
     <div class="mt-10 md:mt-0 md:w-1/2">
-      <h2 class="text-2xl font-bold underline my-4">つくったプランにメンバー招待！</h2>
-      <div class="rounded-box bg-base-100 md:w-[400px] md:h-[550px]">
+      <h2 class="text-2xl font-bold underline my-4">プランにメンバー招待！</h2>
+      <div class="rounded-box bg-base-100 w-[400px] md:h-[550px]">
         <p class="text-lg pt-3 text-center">招待メール or 招待リンクを選択可能</p>
         <p class="pb-2 text-center">(ゲストユーザーは招待機能を使えません。)</p>
         <%= image_tag "invitation.gif", alt: "Invitation", class:"p-7 md:ml-2 h-[480px]" %>
@@ -86,7 +86,7 @@
   <div class="md:flex md:justify-center md:gap-x-60 md:mt-10">
     <div class="mt-10 md:mt-0 md:w-1/2">
       <h2 class="text-2xl font-bold underline my-4">マイプランを一括管理！</h2>
-      <div class="rounded-box bg-base-100 md:w-[400px] md:h-[550px]">
+      <div class="rounded-box bg-base-100 w-[400px] md:h-[550px] px-3">
         <p class="text-lg py-3 text-center">他の人がつくったプランも参考にできる</p>
         <%= image_tag "index.png", alt: "MyPlan", class:"p-5 md:ml-5 h-[500px]" %>
       </div>
@@ -94,10 +94,10 @@
 
     <div class="mt-10 md:mt-0 md:w-1/2">
       <h2 class="text-2xl font-bold underline my-4">ルートを自動生成！</h2>
-      <div class="carousel rounded-box bg-base-100 gap-x-8 md:w-[400px] h-[550px]">
+      <div class="carousel rounded-box bg-base-100 gap-x-8 w-[400px] h-[480px] md:h-[550px]">
         <div class="carousel-item w-full">
           <div class="flex flex-col p-5">
-            <p class="text-lg py-3 text-center">メンバーの行きたい度合いを集計して、<br />６位までのランキングを作成</p>
+            <p class="text-lg py-3 text-center">メンバーの行きたい度合いを集計して、６位までのランキングを作成</p>
             <%= image_tag "ranking.gif", alt: "Ranking", class:"p-5" %>
           </div>
         </div> 
