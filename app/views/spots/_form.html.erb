@@ -1,10 +1,10 @@
 <div id="spot-form">
   <%= form_with model: spot, url: plan_spots_path(plan) do |f|%>
-    <div class="flex mx-5 md:mx-20 my-3 border rounded-lg"> 
-      <%= f.text_field :name, id:"pac-input", class:"input input-sm md:input-lg w-full md:max-w-full rounded-none rounded-l-lg", placeholder:"スポット名を入力してね" %>
+    <div class="flex mx-5 md:mx-20 mt-3 border rounded-lg"> 
+      <%= f.text_field :name, id:"pac-input", class:"input md:input-lg w-full md:max-w-full rounded-none rounded-l-lg", placeholder:"スポット名を入力してね" %>
       <!-- JSコードで処理したスポット名だけを取得 -->
       <%= f.hidden_field :name, id: "spot_name_input" %>
-      <%= f.submit "登録", class:"text-base-content btn btn-secondary btn-sm md:btn-lg rounded-none rounded-r-lg" %>
+      <%= f.submit "登録", class:"text-base-content btn btn-secondary md:btn-lg rounded-none rounded-r-lg" %>
     </div>
   <% end %>
 </div>

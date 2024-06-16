@@ -5,7 +5,7 @@
         <ul class="list-reset flex">
           <% users.each do |user| %>
             <li class="mr-1" data-tabs-target="tab" data-action="click->tabs#change">
-              <a class="text-xs md:text-lg inline-block px-2 md:py-2 md:px-4 rounded-t-xl"><%= user.name %></a>
+              <a class="md:text-lg inline-block px-2 md:py-2 md:px-4 rounded-t-xl"><%= user.name %></a>
             </li>
           <% end %>
         </ul>
