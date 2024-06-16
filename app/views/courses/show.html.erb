@@ -54,7 +54,8 @@
         if (status === 'OK') {
           console.log(result.routes[0]);
           result.routes[0].legs[0].start_address = '出発地：<%= j render 'spots/modal', spot: @start_location %>';
-          result.routes[0].legs[6].end_address = '到着地：<%= j render 'spots/modal', spot: @end_location %>';
+          // 配列の一番最後を取得
+          result.routes[0].legs[result.routes[0].legs.length - 1].end_address = '到着地：<%= j render 'spots/modal', spot: @end_location %>';
 
           <% @ranking_spots.each_with_index do |spot, index| %>
             result.routes[0].legs[<%= index + 1 %>].start_address = '<%= j render 'spots/modal', spot: spot %>';
@@ -97,8 +98,6 @@
         location.reload(); // リストを更新するため、ページを再読み込み
         sessionStorage.removeItem('first_load'); // 最初のロード情報を削除
       };
-
-
     } else {
       searchRoute(initialWayPoints, false); // 最適化を無効
     }

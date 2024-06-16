@@ -15,15 +15,7 @@ class PlansController < ApplicationController
     @plan.owner_id = current_user.id
     if @plan.save
       @plan.users << current_user
-      @location = Spot.find_or_initialize_by(name: @plan.location)
-      if @location.new_record?
-        results = Geocoder.search(@plan.location)
-        @latlng = results.first.coordinates
-        @location.latitude = @latlng[0]
-        @location.longitude = @latlng[1]
-        @location.address = results.first.address
-        @location.save
-      end
+      save_location(@plan.location)
       redirect_to new_spots_plan_path(@plan), notice: t('defaults.flash_message.created', item: @plan.name)
     else
       flash.now[:alert] = t('defaults.flash_message.not_created', item: Plan.model_name.human)
@@ -133,7 +125,7 @@ class PlansController < ApplicationController
         session[:plan_id] = nil
         @plan.update(invitation_token: nil)
 
-        redirect_to plan_path(@plan), notice: t('defaults.flash_message.added', item: @plan.name)
+        redirect_to myplans_path, notice: t('defaults.flash_message.added', item: @plan.name)
 
       elsif user_signed_in? && current_user.member?(@plan.id)
         session[:plan_id] = nil
@@ -155,5 +147,17 @@ class PlansController < ApplicationController
 
   def plan_params
     params.require(:plan).permit(:name, :start_date, :end_date, :invitation_token, :location)
+  end
+
+  def save_location(location_name)
+    @location = Spot.find_or_initialize_by(name: location_name)
+    return unless @location.new_record?
+  
+    results = Geocoder.search(location_name)
+    @latlng = results.first.coordinates
+    @location.latitude = @latlng[0]
+    @location.longitude = @latlng[1]
+    @location.address = results.first.address
+    @location.save
   end
 end

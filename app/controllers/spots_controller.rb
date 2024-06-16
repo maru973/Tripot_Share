@@ -3,46 +3,25 @@ class SpotsController < ApplicationController
     @user = current_user
 
     respond_to do |format|
-      if spot_params[:name].blank?
+      case
+      when spot_params.blank? 
         format.turbo_stream do
           flash.now[:alert] = 'スポット名を入力してください'
           render turbo_stream: turbo_stream.prepend("flash", partial: "shared/flash_message")
         end
-      else
-        results = Geocoder.search(spot_params[:name])
-        if results.present?
-          @latlng = results.first.coordinates
-          @place_id = results.first.place_id
-          @spot = Spot.find_or_initialize_by(place_id: @place_id)
-          if @spot.new_record?
-            @spot.place_id = @place_id
-            @spot.name = spot_params[:name]
-            @spot.latitude = @latlng[0]
-            @spot.longitude = @latlng[1]
-            @spot.address = results.first.address
-
-            spot_details = @spot.get_spot_details(@place_id)
-            if spot_details
-              @spot.opening_hours = spot_details[:opening_hours].split(",").join("\n") if spot_details[:opening_hours].present?
-              @spot.website = spot_details[:website]
-              @spot.phone_number = spot_details[:phone_number]
-            end
-
-            @spot.save
-          end
-          @planned_spot = PlannedSpot.find_or_initialize_by(plan_id: params[:plan_id], spot_id: @spot.id)
-          if @planned_spot.new_record?
-            @planned_spot.user_id = current_user.id
-            @planned_spot.save
-            format.turbo_stream { flash.now[:notice] = "スポットを登録しました" }
-          end
-          format.turbo_stream { flash.now[:alert] = "そのスポットはすでにプランに登録されています" }
-        else
-          format.turbo_stream do
-            flash.now[:alert] = 'スポットが見つかりませんでした'
-            render turbo_stream: turbo_stream.prepend("flash", partial: "shared/flash_message")
-          end
+      when (@spot = Spot.save_spot(spot_params[:name])) == false
+        format.turbo_stream do
+          flash.now[:alert] = 'スポットが見つかりませんでした'
+          render turbo_stream: turbo_stream.prepend("flash", partial: "shared/flash_message")
         end
+      when @spot.present?
+        @planned_spot = PlannedSpot.find_or_initialize_by(plan_id: params[:plan_id], spot_id: @spot.id)
+        if @planned_spot.new_record?
+          @planned_spot.user_id = current_user.id
+          @planned_spot.save
+          format.turbo_stream { flash.now[:notice] = "スポットを登録しました" }
+        end
+        format.turbo_stream { flash.now[:alert] = "そのスポットはすでにプランに登録されています" }
       end
     end
   end
