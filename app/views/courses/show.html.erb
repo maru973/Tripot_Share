@@ -48,6 +48,8 @@
         waypoints: wayPoints // 経由地
       };
 
+      console.log(request);
+
       directionsService.route(request, function(result, status) {
         if (status === 'OK') {
           console.log(result.routes[0]);
@@ -91,7 +93,12 @@
 
     if (isFirstLoad) {
       searchRoute(initialWayPoints, true); // 初回ロード時は最適化を有効
-      sessionStorage.removeItem('first_load');
+      window.onload = function() {
+        location.reload(); // リストを更新するため、ページを再読み込み
+        sessionStorage.removeItem('first_load'); // 最初のロード情報を削除
+      };
+
+
     } else {
       searchRoute(initialWayPoints, false); // 最適化を無効
     }
