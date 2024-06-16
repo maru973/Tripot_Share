@@ -19,6 +19,9 @@ class Spot < ApplicationRecord
 
   def self.save_spot(location_name)
     results = Geocoder.search(location_name)
+
+    return false if results.empty? # resutlsが空ならfalseを返す
+
     spot = find_or_initialize_by(place_id: results.first.place_id)
 
     if spot.new_record?
