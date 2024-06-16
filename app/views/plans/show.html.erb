@@ -62,7 +62,7 @@
   <div id="map" class="border w-full h-[250px] md:h-[400px] mt-1"></div>
 
   <!-- 初回のみのモーダル -->
-  <div id="explanationModal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden z-[10]">
+  <div id="explanationModal" class="fixed w-full inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden z-[10]">
     <div class="bg-white p-6 rounded-lg shadow-lg">
       <span id="closeModal" class="float-right cursor-pointer material-symbols-outlined">
         close
@@ -80,13 +80,13 @@
           <%= render template: 'plans/invitation' %>
         <% else %>
           <div class="flex justify-center">
-            <%= button_to "リンクを生成", invitation_plan_path(params[:id]), class:"text-base-content btn btn-accent btn-sm md:btn-md" %>
+            <%= button_to "リンクを生成", invitation_plan_path(params[:id]), class:"text-base-content btn btn-accent" %>
           </div>
         <% end %>
       <% end %>
       <div class="divider"></div> 
       <div class="twitter my-5 flex justify-center">
-        <%= link_to "https://twitter.com/intent/tweet?url=#{plan_url(@plan)}&text=#{@plan.name}のメンバーになりました！&hashtags=TripotShare", target: '_blank', class: "btn btn-sm md:btn-md" do %>
+        <%= link_to "https://twitter.com/intent/tweet?url=#{plan_url(@plan)}&text=#{@plan.name}のメンバーになりました！&hashtags=TripotShare", target: '_blank', class: "btn" do %>
           <i class="fa-brands fa-square-x-twitter fa-xl"></i>
           投稿する
         <% end %>
@@ -101,11 +101,11 @@
   <!-- 削除ボタン -->
   <div class="flex justify-around mt-3">
     <% if current_user.present? && current_user.id === @plan.owner_id %>
-      <%= link_to t('.destroy'), plan_path(@plan), class:"text-base-content btn btn-error btn-sm md:btn-lg", data: {turbo_method: :delete, turbo_confirm: "#{@plan.name}を削除しますか" } %>
+      <%= link_to t('.destroy'), plan_path(@plan), class:"text-base-content btn btn-error md:btn-lg", data: {turbo_method: :delete, turbo_confirm: "#{@plan.name}を削除しますか" } %>
     <% end %>
 
     <!-- 一覧ページボタン --> 
-    <%= link_to t('.back_index'), plans_path, class:"text-base-content btn btn-accent btn-sm md:btn-lg" %>
+    <%= link_to t('.back_index'), plans_path, class:"text-base-content btn btn-accent md:btn-lg" %>
   </div>
 </article>
 

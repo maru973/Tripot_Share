@@ -5,15 +5,15 @@
         <ul class="list-reset flex">
           <% users.each do |user| %>
             <li class="mr-1" data-tabs-target="tab" data-action="click->tabs#change">
-              <a class="text-xs md:text-lg inline-block px-2 md:py-2 md:px-4 rounded-t-xl"><%= user.name %></a>
+              <a class="md:text-lg inline-block px-2 md:py-2 md:px-4 rounded-t-xl"><%= user.name %></a>
             </li>
           <% end %>
         </ul>
       </div>
     </div>
     <% users.each do |user| %>
-      <div class="hidden py-4 px-4 border bg-base-100 rounded-box rounded-tl-none" data-tabs-target="panel">
-        <div class="overflow-auto h-[400px] w-[300px] md:w-[1300px] mx-auto">
+      <div class="hidden p-4 border bg-base-100 rounded-box rounded-tl-none" data-tabs-target="panel">
+        <div class="overflow-auto h-[400px] w-[300px] sm:w-[600px] md:w-[700px] lg:w-[1000px] xl:w-[1200px] 2xl:w-[1500px] mx-auto">
           <table class="table table-sm md:table-md table-pin-rows table-pin-cols">
             <thead>
               <tr>
