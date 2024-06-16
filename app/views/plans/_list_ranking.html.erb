@@ -21,23 +21,23 @@
       <div class="overflow-auto h-[400px] w-[300px] md:w-[1300px] mx-auto">
         <table class="table table-sm md:table-md table-pin-rows table-pin-cols">
           <% if ranking_spots.present? %>
-          <thead>
-            <tr>
-              <th class="md:w-[100px]"></th>
-              <th>スポット名</th>
-              <th class="md:w-[100px]">登録者</th>
-              <th class="md:w-[100px]">みんなの行きたい度</th>
-              <th class="md:w-[100px]"></th>
-            </tr>
-          </thead>
-          <tbody id="ranking-table">
-            <% ranking_spots.each_with_index do |spot, index| %>
-              <% spot_point = spot_points.find { |spot_id, spot_point| spot_id == spot.id }&.last %>
-              <% spot_subscribers[spot.id].each do |user| %>
-                <%= render partial: 'spots/spot_rankig', locals: { spot: spot, plan: plan, user: user, spot_point: spot_point, spot_counter: spot_counter, index: index, tab_type: 'ranking' } %>
+            <thead>
+              <tr>
+                <th class="md:w-[100px]"></th>
+                <th>スポット名</th>
+                <th class="md:w-[100px]">登録者</th>
+                <th class="md:w-[100px]">みんなの行きたい度</th>
+                <th class="md:w-[100px]"></th>
+              </tr>
+            </thead>
+            <tbody id="ranking-table">
+              <% ranking_spots.each_with_index do |spot, index| %>
+                <% spot_point = spot_points.find { |spot_id, spot_point| spot_id == spot.id }&.last %>
+                <% spot_subscribers[spot.id].each do |user| %>
+                  <%= render partial: 'spots/spot_rankig', locals: { spot: spot, plan: plan, user: user, spot_point: spot_point, spot_counter: spot_counter, index: index, tab_type: 'ranking' } %>
+                <% end %>
               <% end %>
-            <% end %>
-          </tbody>
+            </tbody>
           <% else %>
             <p class="whitespace-nowrap text-sm md:text-lg md:text-center p-4 md:p-10">
               右上の
