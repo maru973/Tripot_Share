@@ -17,6 +17,28 @@ class Spot < ApplicationRecord
   # Spot.newされたら呼び出す
   after_initialize :set_google_client
 
+  def self.save_spot(location_name)
+    results = Geocoder.search(location_name)
+    spot = find_or_initialize_by(place_id: results.first.place_id)
+
+    if spot.new_record?
+      spot.name = location_name
+      spot.latitude = results.first.coordinates[0]
+      spot.longitude = results.first.coordinates[1]
+      spot.address = results.first.address
+
+      spot_details = spot.get_spot_details(spot.place_id)
+      if spot_details
+        spot.opening_hours = spot_details[:opening_hours].split(",").join("\n") if spot_details[:opening_hours].present?
+        spot.website = spot_details[:website]
+        spot.phone_number = spot_details[:phone_number]
+      end
+      spot.save
+    end
+
+    spot
+  end
+
   # place_idからスポットの詳細情報を取得する
   def get_spot_details(place_id)
     return nil unless place_id

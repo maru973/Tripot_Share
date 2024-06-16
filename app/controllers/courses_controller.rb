@@ -7,47 +7,16 @@ class CoursesController < ApplicationController
   def create
     @plan = Plan.find(params[:plan_id])
     @course = @plan.create_course(course_params)
-    @start_location_results = Geocoder.search(@course.start_location)
-    @end_location_results = Geocoder.search(@course.end_location)
-    @start_location = Spot.find_or_initialize_by(place_id: @start_location_results.first.place_id)
-    @end_location = Spot.find_or_initialize_by(place_id: @end_location_results.first.place_id)
-    
-    if @course.start_location.present? && @start_location.new_record?
-      @latlng =  @start_location_results.first.coordinates
-      @start_location.place_id = @start_location_results.first.place_id
-      @start_location.name = course_params[:start_location]
-      @start_location.latitude = @latlng[0]
-      @start_location.longitude = @latlng[1]
-      @start_location.address =  @start_location_results.first.address
-      spot_details = @start_location.get_spot_details(@start_location.place_id)
 
-      if spot_details
-        @start_location.opening_hours = spot_details[:opening_hours].split(",").join("\n") if spot_details[:opening_hours].present?
-        @start_location.website = spot_details[:website]
-        @start_location.phone_number = spot_details[:phone_number]
-      end
-      @start_location.save
+    unless @course.start_location.present? && @course.end_location.present?
+      return redirect_to plan_path(@plan), alert: 'ルートを作成できませんでした'
     end
 
-    if @course.end_location.present? && @end_location.new_record?
-      @latlng = @end_location_results.first.coordinates
-      @end_location.place_id = @end_location_results.first.place_id
-      @end_location.name = course_params[:end_location]
-      @end_location.latitude = @latlng[0]
-      @end_location.longitude = @latlng[1]
-      @end_location.address = @end_location_results.first.address
-      spot_details = @end_location.get_spot_details(@end_place_id)
-
-      if spot_details
-        @end_location.opening_hours = spot_details[:opening_hours].split(",").join("\n") if spot_details[:opening_hours].present?
-        @end_location.website = spot_details[:website]
-        @end_location.phone_number = spot_details[:phone_number]
-      end
-      @end_location.save
-    end
+    @start_location = Spot.save_spot(course_params[:start_location])
+    @end_location = Spot.save_spot(course_params[:end_location])
 
     @course.save
-    redirect_to course_path(@course), notice: 'コースを作成しました'
+    redirect_to course_path(@course), notice: 'ルートを作成しました'
   end
 
   def show
