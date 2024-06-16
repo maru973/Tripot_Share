@@ -133,7 +133,7 @@ class PlansController < ApplicationController
         session[:plan_id] = nil
         @plan.update(invitation_token: nil)
 
-        redirect_to plan_path(@plan), notice: t('defaults.flash_message.added', item: @plan.name)
+        redirect_to myplans_path, notice: t('defaults.flash_message.added', item: @plan.name)
 
       elsif user_signed_in? && current_user.member?(@plan.id)
         session[:plan_id] = nil
