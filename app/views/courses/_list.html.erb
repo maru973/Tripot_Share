@@ -51,7 +51,7 @@
           </table>
         </div>
           <div class="flex justify-center pt-2">
-            <button id="research-button" class="text-base-content btn btn-primary btn-sm md:btn-lg">再検索</button>
+            <%= link_to "再検索", course_path(course), id: "research-button", class: "text-base-content btn btn-primary btn-sm md:btn-lg", data: { turbo: false } %>
           </div>
       </div>
 

@@ -50,7 +50,7 @@
 
       directionsService.route(request, function(result, status) {
         if (status === 'OK') {
-          console.log(result.routes[0].legs[6]);
+          console.log(result.routes[0]);
           result.routes[0].legs[0].start_address = '出発地：<%= j render 'spots/modal', spot: @start_location %>';
           result.routes[0].legs[6].end_address = '到着地：<%= j render 'spots/modal', spot: @end_location %>';
 
