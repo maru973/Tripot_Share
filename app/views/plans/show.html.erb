@@ -101,11 +101,11 @@
   <!-- 削除ボタン -->
   <div class="flex justify-around mt-3">
     <% if current_user.present? && current_user.id === @plan.owner_id %>
-      <%= link_to t('.destroy'), plan_path(@plan), class:"text-base-content btn btn-error btn-sm md:btn-lg", data: {turbo_method: :delete, turbo_confirm: "#{@plan.name}を削除しますか" } %>
+      <%= link_to t('.destroy'), plan_path(@plan), class:"text-base-content btn btn-error md:btn-lg", data: {turbo_method: :delete, turbo_confirm: "#{@plan.name}を削除しますか" } %>
     <% end %>
 
     <!-- 一覧ページボタン --> 
-    <%= link_to t('.back_index'), plans_path, class:"text-base-content btn btn-accent btn-sm md:btn-lg" %>
+    <%= link_to t('.back_index'), plans_path, class:"text-base-content btn btn-accent md:btn-lg" %>
   </div>
 </article>
 

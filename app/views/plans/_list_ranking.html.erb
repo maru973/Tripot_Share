@@ -39,12 +39,12 @@
               <% end %>
             </tbody>
           <% else %>
-            <p class="whitespace-nowrap text-sm md:text-lg md:text-center p-4 md:p-10">
+            <p class="whitespace-nowrap text-sm md:text-lg sm:text-center p-4 md:p-10">
               右上の
               <span class="material-symbols-outlined" style= "font-size: 18px;">
                 add_box
               </span>
-              からランキング投票を<br class="md:hidden" />して行きたい順にランキングをつけよう！
+              からランキング投票を<br class="sm:hidden" />して行きたい順にランキングをつけよう！
             </p>
           <% end %>
         </table>
@@ -58,7 +58,7 @@
           <div data-controller="modal">
             <div class="flex justify-center pt-2">
               <%= render template: 'courses/new' %>
-              <%= link_to new_plan_course_path(plan), data: { action: "click->modal#open", turbo_frame: "course" }, class:"text-base-content btn btn-primary btn-sm md:btn-lg", data: { action: "click->modal#open", turbo_frame: "course" } do %>
+              <%= link_to new_plan_course_path(plan), data: { action: "click->modal#open", turbo_frame: "course" }, class:"text-base-content btn btn-primary md:btn-lg", data: { action: "click->modal#open", turbo_frame: "course" } do %>
                 <span class="material-symbols-outlined">
                   route
                 </span>
