@@ -6,10 +6,8 @@ class CoursesController < ApplicationController
 
   def create
     @plan = Plan.find(params[:plan_id])
-    
-    if course_params.blank?
-      return redirect_to plan_path(@plan), alert: 'ルートを作成できませんでした'
-    end
+
+    return redirect_to plan_path(@plan), alert: 'ルートを作成できませんでした' if course_params.blank?
     
     @start_location = Spot.save_spot(course_params[:start_location])
     @end_location = Spot.save_spot(course_params[:end_location])
