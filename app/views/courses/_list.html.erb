@@ -10,50 +10,49 @@
       </div>
     </div>
 
-      <div class="hidden p-4 border bg-base-100 rounded-box rounded-tl-none" data-tabs-target="panel">
-        <div class="overflow-auto h-[400px] w-[300px] sm:w-[600px] md:w-[700px] lg:w-[1000px] xl:w-[1200px] 2xl:w-[1500px] mx-auto">
-          <table class="table table-sm md:table-md table-pin-rows table-pin-cols">
-            <thead>
-              <tr>
-                <th class="md:w-[100px]"></th>
-                <th class="md:w-[100px]"></th>
-                <th>スポット名</th>
-                <th class="md:w-[100px]">登録者</th>
-              </tr>
-            </thead>
-            <tbody id="course-table" data-controller="sortable" data-sortable-handle-selector-value=".sortable-handle">
-              <tr id="start-location">
-                <td></td>
-                <td>A</td>
-                <td>  
-                  <%= render 'spots/modal', spot: start_location %>
-                </td>
-                <td>
-                  出発地
-                </td>
-              </tr>
-              <% ranking_spots.each_with_index do |spot, index| %>
-                <% spot_subscribers[spot.id].each do |user| %>
-                  <%= render partial: 'spot', locals: { spot: spot, plan: plan, user: user, course: course, rank: (66 + index).chr } %>
-                <% end %>
+    <div class="hidden p-4 border bg-base-100 rounded-box rounded-tl-none" data-tabs-target="panel">
+      <div class="overflow-auto h-[400px] w-[300px] sm:w-[600px] md:w-[700px] lg:w-[1000px] xl:w-[1200px] 2xl:w-[1500px] mx-auto">
+        <table class="table table-sm md:table-md table-pin-rows table-pin-cols">
+          <thead>
+            <tr>
+              <th class="md:w-[100px]"></th>
+              <th class="md:w-[100px]"></th>
+              <th>スポット名</th>
+              <th class="md:w-[100px]">登録者</th>
+            </tr>
+          </thead>
+          <tbody id="course-table" data-controller="sortable" data-sortable-handle-selector-value=".sortable-handle">
+            <tr id="start-location">
+              <td></td>
+              <td>A</td>
+              <td>  
+                <%= render 'spots/modal', spot: start_location %>
+              </td>
+              <td>
+                出発地
+              </td>
+            </tr>
+            <% ranking_spots.each_with_index do |spot, index| %>
+              <% spot_subscribers[spot.id].each do |user| %>
+                <%= render partial: 'spot', locals: { spot: spot, plan: plan, user: user, course: course, rank: (66 + index).chr } %>
               <% end %>
-              <tr id="end-location">
-                <td></td>
-                <td>H</td>
-                <td>  
-                  <%= render 'spots/modal', spot: end_location %>
-                </td>
-                <td>
-                  到着地
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-          <div class="flex justify-center pt-2">
-            <%= link_to "再検索", course_path(course), id: "research-button", class: "text-base-content btn btn-primary btn-sm md:btn-lg", data: { turbo: false } %>
-          </div>
+            <% end %>
+            <tr id="end-location">
+              <td></td>
+              <td><%= (66 + ranking_spots.size).chr %></td>
+              <td>  
+                <%= render 'spots/modal', spot: end_location %>
+              </td>
+              <td>
+                到着地
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-
+        <div class="flex justify-center pt-2">
+          <%= link_to "再検索", course_path(course), id: "research-button", class: "text-base-content btn btn-primary btn-sm md:btn-lg", data: { turbo: false } %>
+        </div>
+    </div>
   </div>
 </div>
