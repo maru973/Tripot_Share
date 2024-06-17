@@ -12,7 +12,7 @@
 
   <!-- 一覧ページボタン --> 
   <div class="flex justify-around mt-3">
-    <%= link_to "プラン詳細", plan_path(@plan), class:"text-base-content btn btn-accent md:btn-lg" %>
+    <%= link_to "プラン詳細", plan_path(@plan), class:"text-base-content btn btn-accent md:btn-lg", data: { turbo: false } %>
   </div>
 </article>
 
