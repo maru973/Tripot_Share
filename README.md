@@ -60,22 +60,23 @@ https://tripot-share.com/<br>
 
 | スポット登録 | スポット詳細情報 |
 | ---- | ---- |
-| 画像 | 画像 |
-| 説明 | 説明 |
+|　![094729461d286ded30c3b8b0f7dfdb76](https://github.com/maru973/Tripot_Share/assets/148407473/8d0258f6-d403-41b6-9f4e-6b08dc424683)　|　![71b154f289f439699a624b644b25969b](https://github.com/maru973/Tripot_Share/assets/148407473/11bebf74-91cd-44ef-98bd-a5c6eb1beae3)　|
+| スポットを入力するとオートコンプリートで入力候補を表示します。登録するとリストとマーカーが非同期で表示されます。 | それぞれのスポット名をクリックすると詳細情報がモーダルで表示されます。ℹ️をクリックすると現在の曜日が表示され、営業時間の確認を促すようにしました。 |
 
 <br>
 
 | プラン・スポット削除 | メンバー招待 |
 | ---- | ---- |
-| 画像 | 画像 |
-| 説明 | 説明 |
+| ![4ebc40b3981cfdf81ee1266cfcdf41c7](https://github.com/maru973/Tripot_Share/assets/148407473/6f8d2665-aa67-4314-b5f5-a8fc6ba66d52) | ![36eec3270f9a79f8893b719617c425d2](https://github.com/maru973/Tripot_Share/assets/148407473/6f89c2d2-889d-4a50-9ee6-c6bd15b98161) |
+|  | 説明 |
 
 <br>
 
 | ランキング投票 | ランキング |
 | ---- | ---- |
-| 画像 | 画像 |
+| ![a995ffe443a756d1384a48ae5f9441ed](https://github.com/maru973/Tripot_Share/assets/148407473/df5ac9bc-73f9-404a-88f3-9d00a0fe5dfa) | <img width="1440" alt="7d28a6f70841846294de841fc3a7408f" src="https://github.com/maru973/Tripot_Share/assets/148407473/fb342204-b64a-46db-825f-17355a2d48af"> |
 | 説明 | 説明 |
+
 
 <br>
 
@@ -88,7 +89,7 @@ https://tripot-share.com/<br>
 
 | 初回モーダル | ゲストログイン |
 | ---- | ---- |
-| 画像 | 画像 |
+| ![92642eb3f7c1706fcccf65bf700b435a](https://github.com/maru973/Tripot_Share/assets/148407473/e838b8e0-7adb-48f6-9ba0-13933a54c17e) | ![f1c35cb83f72480baeafbcfce3698a4a](https://github.com/maru973/Tripot_Share/assets/148407473/6dafa708-a2bd-4886-83aa-aa1d07d26daa) |
 | 説明 | 説明 |  
 
 ## ■ 今後の開発について
