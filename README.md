@@ -68,14 +68,14 @@ https://tripot-share.com/<br>
 | プラン・スポット削除 | メンバー招待 |
 | ---- | ---- |
 | ![4ebc40b3981cfdf81ee1266cfcdf41c7](https://github.com/maru973/Tripot_Share/assets/148407473/6f8d2665-aa67-4314-b5f5-a8fc6ba66d52) | ![36eec3270f9a79f8893b719617c425d2](https://github.com/maru973/Tripot_Share/assets/148407473/6f89c2d2-889d-4a50-9ee6-c6bd15b98161) |
-|  | 説明 |
+| スポット削除はturbo　streamを使用しました。意図していないものを削除してしまうことを防ぐため、詳細ページからのみプラン削除ができるようにしました。 | 各プランにメンバーを招待できます。招待メールを送信するかリンクを共有する方法から選択できます。招待リンクはボタンをクリックするとコピーができるようにしました。 |
 
 <br>
 
 | ランキング投票 | ランキング |
 | ---- | ---- |
-| ![a995ffe443a756d1384a48ae5f9441ed](https://github.com/maru973/Tripot_Share/assets/148407473/df5ac9bc-73f9-404a-88f3-9d00a0fe5dfa) | <img width="1440" alt="7d28a6f70841846294de841fc3a7408f" src="https://github.com/maru973/Tripot_Share/assets/148407473/fb342204-b64a-46db-825f-17355a2d48af"> |
-| 説明 | 説明 |
+| ![a995ffe443a756d1384a48ae5f9441ed](https://github.com/maru973/Tripot_Share/assets/148407473/df5ac9bc-73f9-404a-88f3-9d00a0fe5dfa) | <img width="1000" alt="7d28a6f70841846294de841fc3a7408f" src="https://github.com/maru973/Tripot_Share/assets/148407473/fb342204-b64a-46db-825f-17355a2d48af"> |
+| プランに登録した全スポットに対してメンバーはそれぞれ行きたい度合いを0~4ポイントの中から選択し投票をします。 | ポイントを自動集計し、上位６位までのスポットを詳細ページのランキングタブに表示します。 |
 
 
 <br>
@@ -90,7 +90,7 @@ https://tripot-share.com/<br>
 | 初回モーダル | ゲストログイン |
 | ---- | ---- |
 | ![92642eb3f7c1706fcccf65bf700b435a](https://github.com/maru973/Tripot_Share/assets/148407473/e838b8e0-7adb-48f6-9ba0-13933a54c17e) | ![f1c35cb83f72480baeafbcfce3698a4a](https://github.com/maru973/Tripot_Share/assets/148407473/6dafa708-a2bd-4886-83aa-aa1d07d26daa) |
-| 説明 | 説明 |  
+| 作成　or　参加したプランの詳細ページに遷移した最初の一回のみメンバー招待を促すモーダルを表示するようにしました。 | 会員登録なしでもゲストとしてログインできるようにしました。ゲストユーザーはアカウントの削除、編集、招待機能は使用できません。 |  
 
 ## ■ 今後の開発について
 ### リアルタイム編集機能の実現（action cable）
