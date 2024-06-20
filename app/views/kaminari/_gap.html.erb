@@ -6,5 +6,5 @@
     remote:        data-remote
 -%>
 <div class="page gap">
-  <%= t('views.pagination.truncate').html_safe, class: "join-item text-base-content btn-sm md:btn-md btn btn-disabled" %>
+  <%= content_tag(:span, t('views.pagination.truncate').html_safe, class: "join-item text-base-content btn-sm md:btn-md btn btn-disabled") %>
 </div>
