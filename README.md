@@ -135,5 +135,4 @@ https://www.figma.com/file/lBu251dgQyLeiJrADJ3aS6/Untitled?type=design&node-id=0
 <br>
 
 ## ■ ER図
-![卒業制作](https://github.com/maru973/Tripot_Share/assets/148407473/e29a7c15-6853-4f15-ba31-b38bf4ca78e6)
-
+![卒業制作 drawio](https://github.com/maru973/Tripot_Share/assets/148407473/700e491b-545b-4eec-875a-0d4ce333c03e)
