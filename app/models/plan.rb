@@ -32,11 +32,11 @@ class Plan < ApplicationRecord
   def dates_check
     case
     when start_date.present? && end_date.present? && start_date > end_date
-      errors.add(:start_date, '旅行終了日より前の日付に設定してください')
+      errors.add(:start_date, 'は旅行終了日より前の日付に設定してください')
     when start_date.present? && start_date < Date.today
-      errors.add(:start_date, '今日以降の日付に設定してください')
+      errors.add(:start_date, 'は今日以降の日付に設定してください')
     when end_date.present? && end_date < Date.today
-      errors.add(:end_date, '今日以降の日付に設定してください')
+      errors.add(:end_date, 'は今日以降の日付に設定してください')
     end
   end
 
