@@ -63,6 +63,11 @@ group :development do
   gem 'letter_opener_web'
 end
 
+group :test do
+  gem 'capybara'
+  gem 'selenium-webdriver'
+end
+
 gem 'cssbundling-rails'
 gem 'jsbundling-rails'
 gem 'devise'
