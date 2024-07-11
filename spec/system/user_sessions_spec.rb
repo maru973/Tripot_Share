@@ -34,7 +34,15 @@ RSpec.describe "UserSessions", type: :system do
     end
   end
 
-  it 'ログアウトができること' do
-    
+  context 'ログアウト' do
+    before do
+      login_as(user)
+    end
+
+    it 'ログアウトができること' do
+      click_on('ログアウト')
+      Capybara.assert_current_path("/", ignore_query: true)
+      expect(page).to have_content('ログアウトしました'), 'フラッシュメッセージ「ログアウトしました」が表示されていません'
+    end
   end
 end
