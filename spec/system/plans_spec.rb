@@ -23,6 +23,7 @@ RSpec.describe "Plans", type: :system do
         }.to change { Plan.count }.by(1)
         plan = Plan.last
         Capybara.assert_current_path("/plans/#{plan.id}/new_spots", ignore_query: true)
+        expect(current_path).to eq("/plans/#{plan.id}/new_spots"), 'プラン新規作成に成功した時、スポット登録ページにリダイレクトされていません'
         expect(page).to have_content("#{plan.name}を作成しました"), 'フラッシュメッセージ「#{プラン名}を作成しました」が表示されていません'
         expect(page).to have_content('スポット登録'), '「スポット登録」の文言が表示されていません'
       end
@@ -39,6 +40,10 @@ RSpec.describe "Plans", type: :system do
 
     context '未ログイン' do
       it 'ログインページにリダイレクトされること' do
+        visit '/plans/new'
+        Capybara.assert_current_path('/users/sign_in', ignore_query: true)
+        expect(current_path).to eq('/users/sign_in'), '未ログイン時に、プラン新規作成画面にアクセスした際に、ログインページにリダイレクトされていません'
+        expect(page).to have_content('ログインもしくはアカウント登録してください'), 'フラッシュメッセージ「ログインもしくはアカウント登録してください」が表示されていません'
       end
     end
   end
