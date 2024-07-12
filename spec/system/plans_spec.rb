@@ -28,6 +28,12 @@ RSpec.describe "Plans", type: :system do
       end
 
       it 'プラン作成ができないこと' do
+        expect { 
+          fill_in 'プラン名', with: 'プラン１'
+          click_button '作成'
+        }.to change { Plan.count }.by(0)
+        expect(page).to have_content('プランを作成出来ませんでした'), 'フラッシュメッセージ「プランを作成出来ませんでした」が表示されていません'
+        expect(page).to have_content('旅行先の都道府県名を入力してください'), 'エラーメッセージ「旅行先の都道府県名を入力してください」が表示されていません'
       end
     end
 
