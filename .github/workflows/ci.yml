@@ -18,7 +18,7 @@ jobs:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: password
           POSTGRES_DB: app_test
-          GOOGLEMAPS_API_KEY: ${{seacrets.GOOGLEMAPS_API_KEY}}
+          GOOGLEMAPS_API_KEY: ${{secrets.GOOGLEMAPS_API_KEY}}
           
     steps:
       - name: Checkout code
