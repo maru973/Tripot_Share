@@ -1,6 +1,8 @@
 name: Rspec
+
 on:
   push:
+
 jobs:
   rspec:
     runs-on: ubuntu-latest
@@ -20,11 +22,13 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.2.2
           bundler-cache: true
+
       - name: Cache node modules
         uses: actions/cache@v3
         with:
@@ -32,10 +36,14 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-node-
+
       - name: Bundler and gem install
         run: |
           gem install bundler
           bundle install
+      
+      - name: Precompile assets
+        run: bundle exec rails assets:precompile RAILS_ENV=test
 
       - name: Database create and migrate
         run: |
