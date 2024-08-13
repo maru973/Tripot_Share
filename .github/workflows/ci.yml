@@ -9,6 +9,7 @@ jobs:
     defaults:
       run:
         working-directory: .
+        
     services:
       db:
         image: postgres:latest
