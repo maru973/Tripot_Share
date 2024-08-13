@@ -9,7 +9,7 @@ jobs:
     defaults:
       run:
         working-directory: .
-        
+
     services:
       db:
         image: postgres:latest
@@ -20,6 +20,7 @@ jobs:
           POSTGRES_PASSWORD: password
           POSTGRES_DB: app_test
           GOOGLEMAPS_API_KEY: ${{secrets.GOOGLEMAPS_API_KEY}}
+          GOOGLE_MAP_ID: ${{secrets.GOOGLE_MAP_ID}}
           
     steps:
       - name: Checkout code
