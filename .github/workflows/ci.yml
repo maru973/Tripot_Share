@@ -19,8 +19,6 @@ jobs:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: password
           POSTGRES_DB: app_test
-          GOOGLEMAPS_API_KEY: ${{secrets.GOOGLEMAPS_API_KEY}}
-          GOOGLE_MAP_ID: ${{secrets.GOOGLE_MAP_ID}}
           
     steps:
       - name: Checkout code
@@ -55,3 +53,6 @@ jobs:
 
       - name: Run rspec
         run: bundle exec rspec
+        env:
+          GOOGLEMAPS_API_KEY: ${{secrets.GOOGLEMAPS_API_KEY}}
+          GOOGLE_MAP_ID: ${{secrets.GOOGLE_MAP_ID}}
