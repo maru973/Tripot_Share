@@ -7,6 +7,31 @@ RSpec.describe "Plans", type: :system do
 
   let(:user) { create(:user) }
 
+  describe 'みんなのプラン一覧' do
+    it 'ヘッダーリンクからみんなのプラン一覧ページに遷移すること' do
+    end
+
+    context 'プランが1件もない場合' do
+      it 'プランがない文言が表示されること' do
+      end
+    end
+
+    context 'プランがある場合' do
+      it '一覧が表示されること' do
+      end
+    end
+
+    context 'プランが6件以下の場合' do
+      it 'ページングが表示されないこと' do
+      end
+    end
+
+    context 'プランが7件以上の場合' do
+      it 'ページングが表示されること' do
+      end
+    end
+  end
+
   describe 'プラン作成' do
     context 'ログイン済み' do
       before do
