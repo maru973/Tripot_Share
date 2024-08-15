@@ -9,6 +9,11 @@ RSpec.describe "Plans", type: :system do
 
   describe 'みんなのプラン一覧' do
     it 'ヘッダーリンクからみんなのプラン一覧ページに遷移すること' do
+      visit '/users/sign_in'
+      click_on 'みんなのプランをみる'
+      Capybara.assert_current_path('/plans', ignore_query: true)
+      expect(current_path).to eq('/plans'), 'ヘッダーのリンクをクリックしてもみんなのプラン一覧ページに遷移できません'
+      expect(page).to have_content('みんなのプラン'), '「みんなのプラン」の文言が表示されていません'
     end
 
     context 'プランが1件もない場合' do
