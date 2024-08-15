@@ -6,6 +6,51 @@ RSpec.describe "Plans", type: :system do
   end
 
   let(:user) { create(:user) }
+  let(:plan) { create(:plan) }
+
+  describe 'みんなのプラン一覧' do
+    it 'ヘッダーリンクからみんなのプラン一覧ページに遷移すること' do
+      visit '/users/sign_in'
+      click_on 'みんなのプランをみる'
+      Capybara.assert_current_path('/plans', ignore_query: true)
+      expect(current_path).to eq('/plans'), 'ヘッダーのリンクをクリックしてもみんなのプラン一覧ページに遷移できません'
+      expect(page).to have_content('みんなのプラン'), '「みんなのプラン」の文言が表示されていません'
+    end
+
+    context 'プランが1件もない場合' do
+      it 'プランがない文言が表示されること' do
+        visit '/plans'
+        expect(page).to have_content('プランがありません'), '「プランがありません」の文言が表示されていません'
+      end
+    end
+
+    context 'プランがある場合' do
+      it '一覧が表示されること' do
+        plan
+        visit '/plans'
+        expect(page).to have_content(plan.name), 'みんなのプランページにプラン名が表示されていません'
+        expect(page).to have_content(plan.location), 'みんなのプランページに行き先が表示されていません'
+        expect(page).to have_content(plan.start_date), 'みんなのプランページに出発日が表示されていません'
+        expect(page).to have_content(plan.end_date), 'みんなのプランページに到着日が表示されていません'
+      end
+    end
+
+    context 'プランが6件以下の場合' do
+      let!(:plan) { create_list(:plan, 6, owner: user) }
+      it 'ページングが表示されないこと' do
+        visit '/plans'
+        expect(page).not_to have_selector('.pagination')
+      end
+    end
+
+    context 'プランが7件以上の場合' do
+      let!(:plan) { create_list(:plan, 7, owner: user) }
+      it 'ページングが表示されること' do
+        visit '/plans'
+        expect(page).to have_selector('.pagination'), 'プランが7件以上ある場合にページネーションが表示されていません'
+      end
+    end
+  end
 
   describe 'プラン作成' do
     context 'ログイン済み' do
