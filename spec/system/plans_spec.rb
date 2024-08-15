@@ -18,6 +18,8 @@ RSpec.describe "Plans", type: :system do
 
     context 'プランが1件もない場合' do
       it 'プランがない文言が表示されること' do
+        visit '/plans'
+        expect(page).to have_content('プランがありません'), '「プランがありません」の文言が表示されていません'
       end
     end
 
