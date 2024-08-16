@@ -6,7 +6,7 @@ RSpec.describe "Plans", type: :system do
   end
 
   let(:user) { create(:user) }
-  let(:plan) { create(:plan) }
+  let(:plan) { create(:plan, owner: user) }
 
   describe 'みんなのプラン一覧' do
     it 'ヘッダーリンクからみんなのプラン一覧ページに遷移すること' do
@@ -36,7 +36,7 @@ RSpec.describe "Plans", type: :system do
     end
 
     context 'プランが6件以下の場合' do
-      let!(:plan) { create_list(:plan, 6, owner: user) }
+      let!(:plans) { create_list(:plan, 6, owner: user) }
       it 'ページングが表示されないこと' do
         visit '/plans'
         expect(page).not_to have_selector('.pagination')
@@ -44,13 +44,68 @@ RSpec.describe "Plans", type: :system do
     end
 
     context 'プランが7件以上の場合' do
-      let!(:plan) { create_list(:plan, 7, owner: user) }
+      let!(:plans) { create_list(:plan, 7, owner: user) }
       it 'ページングが表示されること' do
         visit '/plans'
         expect(page).to have_selector('.pagination'), 'プランが7件以上ある場合にページネーションが表示されていません'
       end
     end
   end
+
+  describe 'マイプラン' do
+    context 'ログイン済み' do
+      let!(:plan) { create(:plan, owner: user) }
+      before do
+        login_as(user)
+        visit '/plans'
+        find(".dropdown-bottom").click
+        click_link 'マイプラン'
+      end
+
+      it 'ヘッダーリンクからマイプランページに遷移すること' do
+        find(".dropdown-bottom").click
+        click_link 'マイプラン'
+        Capybara.assert_current_path('/myplans', ignore_query: true)
+        expect(current_path).to eq('/myplans'), 'ヘッダーのリンクをクリックしてもマイプランページに遷移できません'
+        expect(page).to have_content('マイプラン'), '「マイプラン」の文言が表示されていません'
+      end
+
+      context 'プランが1件もない場合' do
+        it 'プランがない文言が表示されること' do
+          visit '/myplans'
+          expect(page).to have_content('プランがありません'), '「プランがありません」の文言が表示されていません'
+        end
+      end
+  
+      context 'プランがある場合' do
+        it '一覧が表示されること' do
+          puts page.body
+          expect(page).to have_content(plan.name), 'マイプランページにプラン名が表示されていません'
+          expect(page).to have_content(plan.location), 'マイプランページに行き先が表示されていません'
+          expect(page).to have_content(plan.start_date), 'マイプランページに出発日が表示されていません'
+          expect(page).to have_content(plan.end_date), 'マイプランページに到着日が表示されていません'
+        end
+      end
+  
+      context 'プランが6件以下の場合' do
+        let!(:plans) { create_list(:plan, 6, owner: user) }
+        it 'ページングが表示されないこと' do
+          visit '/myplans'
+          expect(page).not_to have_selector('.pagination')
+        end
+      end
+  
+      context 'プランが7件以上の場合' do
+        let!(:plans) { create_list(:plan, 7, owner: user) }
+        it 'ページングが表示されること' do
+          visit '/myplans'
+          expect(page).to have_selector('.pagination'), 'プランが7件以上ある場合にページネーションが表示されていません'
+        end
+      end
+    end
+  end
+
+
 
   describe 'プラン作成' do
     context 'ログイン済み' do
