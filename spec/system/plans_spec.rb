@@ -106,10 +106,10 @@ RSpec.describe "Plans", type: :system do
     end
 
     context '未ログイン' do
-      it 'マイプランページに遷移できないこと' do
+      it 'ログインページにリダイレクトされること' do
         visit '/myplans'
-        expect(current_path).to eq('/users/sign_in'), 'ログイン画面に遷移できていません'
-        expect(page).to have_content('ログインもしくはアカウント登録してください'), 'ログインを促すフラッシュメッセージが表示されていません'
+        expect(current_path).to eq('/users/sign_in'), '未ログイン時に、プラン新規作成画面にアクセスした際に、ログインページにリダイレクトされていません'
+        expect(page).to have_content('ログインもしくはアカウント登録してください'), 'フラッシュメッセージ「ログインもしくはアカウント登録してください」が表示されていません'
       end
     end
   end
@@ -150,7 +150,6 @@ RSpec.describe "Plans", type: :system do
     context '未ログイン' do
       it 'ログインページにリダイレクトされること' do
         visit '/plans/new'
-        Capybara.assert_current_path('/users/sign_in', ignore_query: true)
         expect(current_path).to eq('/users/sign_in'), '未ログイン時に、プラン新規作成画面にアクセスした際に、ログインページにリダイレクトされていません'
         expect(page).to have_content('ログインもしくはアカウント登録してください'), 'フラッシュメッセージ「ログインもしくはアカウント登録してください」が表示されていません'
       end
