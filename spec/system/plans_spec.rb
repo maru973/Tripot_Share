@@ -106,6 +106,14 @@ RSpec.describe "Plans", type: :system do
         end
       end
     end
+
+    context '未ログイン' do
+      it 'マイプランページに遷移できないこと' do
+        visit '/myplans'
+        expect(current_path).to eq('/users/sign_in'), 'ログイン画面に遷移できていません'
+        expect(page).to have_content('ログインもしくはアカウント登録してください'), 'ログインを促すフラッシュメッセージが表示されていません'
+      end
+    end
   end
 
 
