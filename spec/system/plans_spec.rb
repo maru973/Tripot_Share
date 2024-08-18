@@ -12,7 +12,6 @@ RSpec.describe "Plans", type: :system do
     it 'ヘッダーリンクからみんなのプラン一覧ページに遷移すること' do
       visit '/users/sign_in'
       click_on 'みんなのプランをみる'
-      Capybara.assert_current_path('/plans', ignore_query: true)
       expect(current_path).to eq('/plans'), 'ヘッダーのリンクをクリックしてもみんなのプラン一覧ページに遷移できません'
       expect(page).to have_content('みんなのプラン'), '「みんなのプラン」の文言が表示されていません'
     end
@@ -65,7 +64,6 @@ RSpec.describe "Plans", type: :system do
       it 'ヘッダーリンクからマイプランページに遷移すること' do
         find(".dropdown-bottom").click
         click_link 'マイプラン'
-        Capybara.assert_current_path('/myplans', ignore_query: true)
         expect(current_path).to eq('/myplans'), 'ヘッダーのリンクをクリックしてもマイプランページに遷移できません'
         expect(page).to have_content('マイプラン'), '「マイプラン」の文言が表示されていません'
       end
