@@ -79,7 +79,7 @@ RSpec.describe "Plans", type: :system do
   
       context 'プランがある場合' do
         it '一覧が表示されること' do
-          puts page.body
+          Member.create(user: user, plan: plan)
           expect(page).to have_content(plan.name), 'マイプランページにプラン名が表示されていません'
           expect(page).to have_content(plan.location), 'マイプランページに行き先が表示されていません'
           expect(page).to have_content(plan.start_date), 'マイプランページに出発日が表示されていません'
@@ -90,6 +90,7 @@ RSpec.describe "Plans", type: :system do
       context 'プランが6件以下の場合' do
         let!(:plans) { create_list(:plan, 6, owner: user) }
         it 'ページングが表示されないこと' do
+          plans.each { |plan| Member.create(user: user, plan: plan) }
           visit '/myplans'
           expect(page).not_to have_selector('.pagination')
         end
@@ -98,6 +99,7 @@ RSpec.describe "Plans", type: :system do
       context 'プランが7件以上の場合' do
         let!(:plans) { create_list(:plan, 7, owner: user) }
         it 'ページングが表示されること' do
+          plans.each { |plan| Member.create(user: user, plan: plan) }
           visit '/myplans'
           expect(page).to have_selector('.pagination'), 'プランが7件以上ある場合にページネーションが表示されていません'
         end
