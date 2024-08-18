@@ -80,6 +80,7 @@ RSpec.describe "Plans", type: :system do
       context 'プランがある場合' do
         it '一覧が表示されること' do
           Member.create(user: user, plan: plan)
+          visit '/myplans'
           expect(page).to have_content(plan.name), 'マイプランページにプラン名が表示されていません'
           expect(page).to have_content(plan.location), 'マイプランページに行き先が表示されていません'
           expect(page).to have_content(plan.start_date), 'マイプランページに出発日が表示されていません'
